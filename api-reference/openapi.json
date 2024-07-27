@@ -110,38 +110,6 @@
             }
           }
         }
-      },
-      "put": {
-        "summary": "Update a company",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Company"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Company updated successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Company"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "summary": "Delete a company",
-        "responses": {
-          "204": {
-            "description": "Company deleted successfully"
-          }
-        }
       }
     },
     "/companies/{tax_id}": {

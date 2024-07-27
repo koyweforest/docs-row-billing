@@ -1,15 +1,15 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "Row Billing",
   "logo": {
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
   },
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
-    "dark": "#0D9373",
+    "primary": "#00E5D1",
+    "light": "#00b0b8",
+    "dark": "#000066",
     "anchors": {
       "from": "#0D9373",
       "to": "#07C983"
@@ -18,34 +18,25 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:support@userow.com"
     }
   ],
   "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "name": "Home",
+    "url": "https://userow.com/billing"
   },
   "tabs": [
     {
       "name": "API Reference",
-      "url": "api-reference"
+      "url": "api-reference",
+      "openapi": "/api-reference/openapi.json"
     }
   ],
   "anchors": [
     {
       "name": "Documentation",
       "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
-    },
-    {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
-    },
-    {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
+      "url": "https://row.mintlify.app/"
     }
   ],
   "navigation": [
@@ -53,19 +44,8 @@
       "group": "Get Started",
       "pages": [
         "introduction",
-        "quickstart",
-        "development"
-      ]
-    },
-    {
-      "group": "Essentials",
-      "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
+        "new-standard",
+        "documents"
       ]
     },
     {
@@ -77,9 +57,65 @@
     {
       "group": "Endpoint Examples",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        {
+          "group": "Authentication",
+          "pages": [
+            "api-reference/endpoint/authenticate-and-receive-a-bearer-token"
+          ]
+        },
+        {
+          "group": "Companies",
+          "pages": [
+            "api-reference/endpoint/get-a-paginated-list-of-companies",
+            "api-reference/endpoint/create-a-new-company",
+            "api-reference/endpoint/get-a-specific-company",
+            "api-reference/endpoint/update-a-specific-company",
+            "api-reference/endpoint/create-a-company-with-a-specific-tax-id",
+            "api-reference/endpoint/delete-a-specific-company",
+            "api-reference/endpoint/get-payment-info-for-a-company",
+            "api-reference/endpoint/get-contacts-for-a-company"
+          ]
+        },
+        {
+          "group": "Documents",
+          "pages": [
+            "api-reference/endpoint/get-a-paginated-list-of-documents",
+            "api-reference/endpoint/create-a-new-document",
+            "api-reference/endpoint/get-a-specific-document",
+            "api-reference/endpoint/update-a-specific-document",
+            "api-reference/endpoint/delete-a-specific-document"
+          ]
+        },
+        {
+          "group": "Products",
+          "pages": [
+            "api-reference/endpoint/get-a-paginated-list-of-products",
+            "api-reference/endpoint/create-a-new-product",
+            "api-reference/endpoint/get-a-specific-product",
+            "api-reference/endpoint/update-a-specific-product",
+            "api-reference/endpoint/delete-a-specific-product"
+          ]
+        },
+        {
+          "group": "Document Types",
+          "pages": [
+            "api-reference/endpoint/get-all-available-document-types"
+          ]
+        },
+        {
+          "group": "Inbox",
+          "pages": [
+            "api-reference/endpoint/get-a-paginated-list-of-received-documents",
+            "api-reference/endpoint/get-a-specific-received-document"
+          ]
+        },
+        {
+          "group": "Transfers",
+          "pages": [
+            "api-reference/endpoint/create-a-new-document-transfer",
+            "api-reference/endpoint/get-transfer-status"
+          ]
+        }
       ]
     }
   ],
