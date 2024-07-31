@@ -59,6 +59,20 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "tax_id_type",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "tax_id_code",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -72,7 +86,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/Company"
+                        "$ref": "#/components/schemas/CompanyResponse"
                       }
                     },
                     "total": {
@@ -127,12 +141,12 @@
         ]
       }
     },
-    "/companies/{tax_id}": {
+    "/companies/{company_id}": {
       "get": {
         "summary": "Get a specific company",
         "parameters": [
           {
-            "name": "tax_id",
+            "name": "company_id",
             "in": "path",
             "required": true,
             "schema": {
@@ -158,51 +172,11 @@
           }
         ]
       },
-      "post": {
-        "summary": "Create a company with a specific tax ID",
-        "parameters": [
-          {
-            "name": "tax_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Company"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Company created successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Company"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
       "put": {
         "summary": "Update a specific company",
         "parameters": [
           {
-            "name": "tax_id",
+            "name": "company_id",
             "in": "path",
             "required": true,
             "schema": {
@@ -242,7 +216,7 @@
         "summary": "Delete a specific company",
         "parameters": [
           {
-            "name": "tax_id",
+            "name": "company_id",
             "in": "path",
             "required": true,
             "schema": {
@@ -262,12 +236,47 @@
         ]
       }
     },
-    "/companies/{tax_id}/payment_info": {
+    "/companies/{company_id}/billing_data": {
       "get": {
-        "summary": "Get payment info for a company",
+        "summary": "Get billing data for a specific company",
         "parameters": [
           {
-            "name": "tax_id",
+            "name": "company_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Company/properties/billing_data/items"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/documents/{document_id}/payment_info": {
+      "get": {
+        "summary": "Get payment info for a specific document",
+        "parameters": [
+          {
+            "name": "document_id",
             "in": "path",
             "required": true,
             "schema": {
@@ -294,12 +303,12 @@
         ]
       }
     },
-    "/companies/{tax_id}/contacts": {
+    "/companies/{company_id}/contacts": {
       "get": {
-        "summary": "Get contacts for a company",
+        "summary": "Get contacts for a specific company",
         "parameters": [
           {
-            "name": "tax_id",
+            "name": "company_id",
             "in": "path",
             "required": true,
             "schema": {
@@ -313,7 +322,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Contacts"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Company/properties/contacts/items"
+                  }
                 }
               }
             }
@@ -347,14 +359,28 @@
             }
           },
           {
-            "name": "issuer_tax_id",
+            "name": "issuer_tax_id_code",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "receiver_tax_id",
+            "name": "issuer_tax_id_type",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "receiver_tax_id_code",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "receiver_tax_id_type",
             "in": "query",
             "schema": {
               "type": "string"
@@ -414,7 +440,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/Document"
+                        "$ref": "#/components/schemas/SimplifiedDocument"
                       }
                     },
                     "total": {
@@ -925,6 +951,113 @@
             "bearerAuth": []
           }
         ]
+      },
+      "put": {
+        "summary": "Accept or reject a document",
+        "parameters": [
+          {
+            "name": "document_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "document_status": {
+                    "type": "string",
+                    "enum": ["accepted", "rejected"]
+                  }
+                },
+                "required": ["document_status"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Document status updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Document"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status or document not found"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/price_lists": {
+      "get": {
+        "summary": "Get a paginated list of price lists",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Price"
+                      }
+                    },
+                    "total": {
+                      "type": "integer"
+                    },
+                    "page": {
+                      "type": "integer"
+                    },
+                    "per_page": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
   "/transfers": {
@@ -999,6 +1132,63 @@
           }
         ]
       }
+    },
+    "/taxes": {
+      "get": {
+        "summary": "Get a paginated list of taxes",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Tax"
+                      }
+                    },
+                    "total": {
+                      "type": "integer"
+                    },
+                    "page": {
+                      "type": "integer"
+                    },
+                    "per_page": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
     }
 },
 "components": {
@@ -1051,6 +1241,20 @@
           }
         }
       },
+      "CompanyResponse": {
+        "type": "object",
+        "properties": {
+          "basic_info": {
+            "$ref": "#/components/schemas/Company/properties/basic_info"
+          },
+          "tax_id_type": {
+            "type": "string"
+          },
+          "tax_id_code": {
+            "type": "string"
+          }
+        }
+      },
       "Company": {
         "type": "object",
         "properties": {
@@ -1067,190 +1271,179 @@
             "required": ["company_id", "name"]
           },
           "billing_data": {
-            "type": "object",
-            "properties": {
-              "company_billing_id": {
-                "type": "string"
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "company_billing_id": {
+                  "type": "string"
+                },
+                "tax_id_type": {
+                  "type": "string"
+                },
+                "tax_id_code": {
+                  "type": "string"
+                },
+                "legal_name": {
+                  "type": "string"
+                },
+                "address_street": {
+                  "type": "string"
+                },
+                "address_number": {
+                  "type": "string"
+                },
+                "address_unit_number": {
+                  "type": "string"
+                },
+                "address_county": {
+                  "type": "string"
+                },
+                "address_city": {
+                  "type": "string"
+                },
+                "address_postalcode": {
+                  "type": "string"
+                },
+                "country_id": {
+                  "type": "string"
+                }
               },
-              "tax_id_type": {
-                "type": "string"
-              },
-              "tax_id_code": {
-                "type": "string"
-              },
-              "legal_name": {
-                "type": "string"
-              },
-              "address_street": {
-                "type": "string"
-              },
-              "address_number": {
-                "type": "string"
-              },
-              "address_unit_number": {
-                "type": "string"
-              },
-              "address_county": {
-                "type": "string"
-              },
-              "address_city": {
-                "type": "string"
-              },
-              "address_postalcode": {
-                "type": "string"
-              },
-              "country_id": {
-                "type": "string"
-              }
-            },
-            "required": ["company_billing_id", "tax_id_type", "tax_id_code", "legal_name", "address_street", "address_number", "address_city", "country_id"]
+              "required": ["company_billing_id", "tax_id_type", "tax_id_code", "legal_name", "address_street", "address_number", "address_city", "country_id"]
+            }
           },
           "contacts": {
-            "type": "object",
-            "properties": {
-              "company_contact_id": {
-                "type": "string"
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "company_contact_id": {
+                  "type": "string"
+                },
+                "first_name": {
+                  "type": "string"
+                },
+                "middle_name": {
+                  "type": "string"
+                },
+                "last_name_primary": {
+                  "type": "string"
+                },
+                "last_name_secondary": {
+                  "type": "string"
+                },
+                "phone": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string",
+                  "format": "email"
+                }
               },
-              "first_name": {
-                "type": "string"
-              },
-              "middle_name": {
-                "type": "string"
-              },
-              "last_name_primary": {
-                "type": "string"
-              },
-              "last_name_secondary": {
-                "type": "string"
-              },
-              "phone": {
-                "type": "string"
-              },
-              "email": {
-                "type": "string",
-                "format": "email"
-              }
-            },
-            "required": ["company_contact_id", "first_name", "last_name_primary", "phone", "email"]
+              "required": ["company_contact_id", "first_name", "last_name_primary", "phone", "email"]
+            }
           }
         }
       },
       "PaymentInfo": {
         "type": "object",
         "properties": {
-          "payment_methods": {
+          "tax_id_code": {
+            "type": "string"
+          },
+          "tax_id_type": {
+            "type": "string"
+          },
+          "legalname": {
+            "type": "string"
+          },
+          "addresses": {
             "type": "array",
             "items": {
               "type": "object",
               "properties": {
-                "type": {
+                "id": {
+                  "type": "integer"
+                },
+                "address": {
                   "type": "string"
                 },
-                "tax_id": {
+                "district": {
                   "type": "string"
                 },
-                "legalname": {
+                "city": {
                   "type": "string"
-                },
-                "addresses": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer"
-                      },
-                      "address": {
-                        "type": "string"
-                      },
-                      "district": {
-                        "type": "string"
-                      },
-                      "city": {
-                        "type": "string"
-                      },
-                      "phone": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                },
-                "activities": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string"
-                      },
-                      "line_code": {
-                        "type": "string"
-                      },
-                      "line_description": {
-                        "type": "string"
-                      },
-                      "subline_code": {
-                        "type": "string"
-                      },
-                      "subline_description": {
-                        "type": "string"
-                      },
-                      "activity_code": {
-                        "type": "string"
-                      },
-                      "activity_description": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                },
-                "details": {
-                  "type": "object",
-                  "properties": {
-                    "account_number": {
-                      "type": "string"
-                    },
-                    "routing_number": {
-                      "type": "string"
-                    },
-                    "bank_name": {
-                      "type": "string"
-                    },
-                    "swift_code": {
-                      "type": "string"
-                    }
-                  }
-                }
-              },
-              "required": ["tax_id", "legalname"]
-            }
-          }
-        }
-      },
-      "Contacts": {
-        "type": "object",
-        "properties": {
-          "contacts": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string"
-                },
-                "email": {
-                  "type": "string",
-                  "format": "email"
                 },
                 "phone": {
                   "type": "string"
                 }
               }
             }
+          },
+          "activities": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "line_code": {
+                  "type": "string"
+                },
+                "line_description": {
+                  "type": "string"
+                },
+                "subline_code": {
+                  "type": "string"
+                },
+                "subline_description": {
+                  "type": "string"
+                },
+                "activity_code": {
+                  "type": "string"
+                },
+                "activity_description": {
+                  "type": "string"
+                }
+              }
+            }
           }
+        },
+        "required": ["tax_id_code", "tax_id_type", "legalname"]
+      },
+      "Contacts": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "company_contact_id": {
+              "type": "string"
+            },
+            "first_name": {
+              "type": "string"
+            },
+            "middle_name": {
+              "type": "string"
+            },
+            "last_name_primary": {
+              "type": "string"
+            },
+            "last_name_secondary": {
+              "type": "string"
+            },
+            "phone": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string",
+              "format": "email"
+            }
+          },
+          "required": ["company_contact_id", "first_name", "last_name_primary", "phone", "email"]
         }
       },
-      "Document": {
+      "SimplifiedDocument": {
         "type": "object",
         "properties": {
           "document_id": {
@@ -1259,6 +1452,64 @@
           "header": {
             "type": "object",
             "properties": {
+              "document_type_id": {
+                "type": "string"
+              },
+              "document_type": {
+                "type": "string"
+              },
+              "number": {
+                "type": "string"
+              },
+              "issue_date": {
+                "type": "string",
+                "format": "date"
+              },
+              "issuer_tax_id_code": {
+                "type": "string"
+              },
+              "issuer_tax_id_type": {
+                "type": "string"
+              },
+              "receiver_tax_id_code": {
+                "type": "string"
+              },
+              "receiver_tax_id_type": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              }
+            }
+          },
+          "total": {
+            "type": "object",
+            "properties": {
+              "net_amount": {
+                "type": "string"
+              },
+              "vat_amount": {
+                "type": "string"
+              },
+              "total_amount": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "Document": {
+        "type": "object",
+        "properties": {
+          "header": {
+            "type": "object",
+            "properties": {
+              "document_id": {
+                "type": "string"
+              },
+              "document_type_id": {
+                "type": "string"
+              },
               "document_type": {
                 "type": "string"
               },
@@ -1344,7 +1595,13 @@
               "declaration_year": {
                 "type": "string"
               },
-              "status": {
+              "document_status": {
+                "type": "string"
+              },
+              "payment_status": {
+                "type": "string"
+              },
+              "sending_status": {
                 "type": "string"
               },
               "taxbureau_send_id": {
@@ -1355,20 +1612,44 @@
                 "format": "date"
               }
             },
-            "required": ["document_type", "document_type_taxbureau", "number", "issue_date", "issuer_tax_id_type", "issuer_tax_id_code", "issuer_legalname", "issuer_address", "issuer_city", "issuer_country_id", "receiver_tax_id_type", "receiver_tax_id_code", "receiver_legalname", "receiver_address", "receiver_city", "receiver_country_id", "status"]
+            "required": [
+              "document_id",
+              "document_type",
+              "document_type_taxbureau",
+              "number",
+              "issue_date",
+              "issuer_tax_id_type",
+              "issuer_tax_id_code",
+              "issuer_legalname",
+              "issuer_address",
+              "issuer_city",
+              "issuer_country_id",
+              "receiver_tax_id_type",
+              "receiver_tax_id_code",
+              "receiver_legalname",
+              "receiver_address",
+              "receiver_city",
+              "receiver_country_id",
+              "document_status",
+              "payment_status",
+              "sending_status"
+            ]
           },
           "details": {
             "type": "array",
             "items": {
               "type": "object",
               "properties": {
+                "product_id": {
+                  "type": "string"
+                },
                 "quantity": {
                   "type": "string"
                 },
                 "sku": {
                   "type": "string"
                 },
-                "measure": {
+                "unit_measure": {
                   "type": "string"
                 },
                 "detail": {
@@ -1377,14 +1658,31 @@
                 "unit_price": {
                   "type": "string"
                 },
-                "vat_apply": {
-                  "type": "string"
+                "taxes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "tax_id": {
+                        "type": "string"
+                      },
+                      "tax_type": {
+                        "type": "string"
+                      },
+                      "tax_value": {
+                        "type": "string"
+                      },
+                      "tax_amount": {
+                        "type": "string"
+                      }
+                    }
+                  }
                 },
                 "modifier_percentage": {
                   "type": "string"
                 }
               },
-              "required": ["quantity", "measure", "detail", "unit_price"]
+              "required": ["product_id", "quantity", "unit_measure", "detail", "unit_price"]
             }
           },
           "references": {
@@ -1426,6 +1724,9 @@
                 "modifier_type": {
                   "type": "string"
                 },
+                "modifier_type_id": {
+                  "type": "string"
+                },
                 "value": {
                   "type": "string"
                 },
@@ -1434,6 +1735,26 @@
                 },
                 "detail": {
                   "type": "string"
+                },
+                "taxes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "tax_id": {
+                        "type": "string"
+                      },
+                      "tax_type": {
+                        "type": "string"
+                      },
+                      "tax_value": {
+                        "type": "string"
+                      },
+                      "tax_amount": {
+                        "type": "string"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -1516,35 +1837,87 @@
                 "price_list_name": {
                   "type": "string"
                 },
-                "vat_applies": {
-                  "type": "string"
-                },
                 "price_net": {
-                  "type": "string"
-                },
-                "price_vat": {
-                  "type": "string"
-                },
-                "price_other_taxes": {
-                  "type": "string"
-                },
-                "other_taxes_id": {
                   "type": "string"
                 },
                 "price_total": {
                   "type": "string"
                 },
-                "sale_commision": {
+                "sale_commission": {
                   "type": "string"
                 },
                 "currency_id": {
                   "type": "string"
+                },
+                "taxes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "tax_id": {
+                        "type": "string"
+                      },
+                      "tax_type": {
+                        "type": "string"
+                      },
+                      "tax_value": {
+                        "type": "string"
+                      },
+                      "tax_amount": {
+                        "type": "string"
+                      }
+                    }
+                  }
                 }
               }
             }
           }
         },
         "required": ["product_id", "name", "model", "brand", "status", "sku", "type", "invoicing_details", "long_details", "barcode", "unit"]
+      },
+      "Price": {
+        "type": "object",
+        "properties": {
+          "price_list_id": {
+            "type": "string"
+          },
+          "price_list_name": {
+            "type": "string"
+          },
+          "price_net": {
+            "type": "string"
+          },
+          "price_total": {
+            "type": "string"
+          },
+          "sale_commission": {
+            "type": "string"
+          },
+          "currency_id": {
+            "type": "string"
+          },
+          "taxes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "tax_id": {
+                  "type": "string"
+                },
+                "tax_type": {
+                  "type": "string"
+                },
+                "tax_value": {
+                  "type": "string"
+                },
+                "tax_amount": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "required": ["price_list_id", "price_list_name", "price_net", "price_total", "currency_id"]
       },
       "Transfer": {
         "type": "object",
@@ -1577,14 +1950,38 @@
           "name": {
             "type": "string"
           },
-          "issued_received": {
-            "type": "string"
+          "is_issued": {
+            "type": "boolean"
           },
           "country_id": {
             "type": "string"
           }
         },
-        "required": ["document_type_id", "name", "issued_received", "country_id"]
+        "required": ["document_type_id", "name", "is_issued", "country_id"]
+      },
+      "Tax": {
+        "type": "object",
+        "properties": {
+          "tax_id": {
+            "type": "string"
+          },
+          "tax_type": {
+            "type": "string"
+          },
+          "tax_value": {
+            "type": "string"
+          },
+          "tax_amount": {
+            "type": "string"
+          },
+          "country_code": {
+            "type": "string"
+          },
+          "country_name": {
+            "type": "string"
+          }
+        },
+        "required": ["tax_id", "tax_type", "tax_value", "tax_amount", "country_code", "country_name"]
       }
     }
   }

@@ -69,10 +69,9 @@
             "api-reference/endpoint/create-a-new-company",
             "api-reference/endpoint/get-a-specific-company",
             "api-reference/endpoint/update-a-specific-company",
-            "api-reference/endpoint/create-a-company-with-a-specific-tax-id",
             "api-reference/endpoint/delete-a-specific-company",
-            "api-reference/endpoint/get-payment-info-for-a-company",
-            "api-reference/endpoint/get-contacts-for-a-company"
+            "api-reference/endpoint/get-contacts-for-a-specific-company",
+            "api-reference/endpoint/get-billing-data-for-a-specific-company"
           ]
         },
         {
@@ -82,7 +81,8 @@
             "api-reference/endpoint/create-a-new-document",
             "api-reference/endpoint/get-a-specific-document",
             "api-reference/endpoint/update-a-specific-document",
-            "api-reference/endpoint/delete-a-specific-document"
+            "api-reference/endpoint/delete-a-specific-document",
+            "api-reference/endpoint/get-payment-info-for-a-specific-document"
           ]
         },
         {
@@ -92,7 +92,8 @@
             "api-reference/endpoint/create-a-new-product",
             "api-reference/endpoint/get-a-specific-product",
             "api-reference/endpoint/update-a-specific-product",
-            "api-reference/endpoint/delete-a-specific-product"
+            "api-reference/endpoint/delete-a-specific-product",
+            "api-reference/endpoint/get-a-paginated-list-of-price-lists"
           ]
         },
         {
@@ -105,7 +106,8 @@
           "group": "Inbox",
           "pages": [
             "api-reference/endpoint/get-a-paginated-list-of-received-documents",
-            "api-reference/endpoint/get-a-specific-received-document"
+            "api-reference/endpoint/get-a-specific-received-document",
+            "api-reference/endpoint/accept-or-reject-a-document"
           ]
         },
         {
@@ -113,6 +115,12 @@
           "pages": [
             "api-reference/endpoint/create-a-new-document-transfer",
             "api-reference/endpoint/get-transfer-status"
+          ]
+        },
+        {
+          "group": "Taxes",
+          "pages": [
+            "api-reference/endpoint/get-a-paginated-list-of-taxes"
           ]
         }
       ]
