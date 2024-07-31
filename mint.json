@@ -97,12 +97,6 @@
           ]
         },
         {
-          "group": "Document Types",
-          "pages": [
-            "api-reference/endpoint/get-all-available-document-types"
-          ]
-        },
-        {
           "group": "Inbox",
           "pages": [
             "api-reference/endpoint/get-a-paginated-list-of-received-documents",
@@ -118,9 +112,11 @@
           ]
         },
         {
-          "group": "Taxes",
+          "group": "Utils",
           "pages": [
-            "api-reference/endpoint/get-a-paginated-list-of-taxes"
+            "api-reference/endpoint/get-a-paginated-list-of-taxes",
+            "api-reference/endpoint/get-all-available-document-types",
+            "api-reference/endpoint/get-a-paginated-list-of-countries"
           ]
         }
       ]

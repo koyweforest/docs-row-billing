@@ -338,6 +338,63 @@
         ]
       }
     },
+    "/countries": {
+      "get": {
+        "summary": "Get a paginated list of countries",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Country"
+                      }
+                    },
+                    "total": {
+                      "type": "integer"
+                    },
+                    "page": {
+                      "type": "integer"
+                    },
+                    "per_page": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/documents": {
       "get": {
         "summary": "Get a paginated list of documents",
@@ -1345,6 +1402,28 @@
           }
         }
       },
+      "Country": {
+        "type": "object",
+        "properties": {
+          "country_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "iso_code_2": {
+            "type": "string"
+          },
+          "iso_code_3": {
+            "type": "string"
+          },
+          "flag_icon_url": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "required": ["country_id", "name", "iso_code_2", "iso_code_3", "flag_icon_url"]
+      },
       "PaymentInfo": {
         "type": "object",
         "properties": {
@@ -1974,14 +2053,14 @@
           "tax_amount": {
             "type": "string"
           },
-          "country_code": {
+          "country_id": {
             "type": "string"
           },
           "country_name": {
             "type": "string"
           }
         },
-        "required": ["tax_id", "tax_type", "tax_value", "tax_amount", "country_code", "country_name"]
+        "required": ["tax_id", "tax_type", "tax_value", "tax_amount", "country_id", "country_name"]
       }
     }
   }
