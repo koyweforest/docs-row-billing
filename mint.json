@@ -70,8 +70,30 @@
             "api-reference/endpoint/get-a-specific-company",
             "api-reference/endpoint/update-a-specific-company",
             "api-reference/endpoint/delete-a-specific-company",
-            "api-reference/endpoint/get-contacts-for-a-specific-company",
-            "api-reference/endpoint/get-billing-data-for-a-specific-company"
+            {
+              "group": "Billing Data",
+              "pages": [
+                "api-reference/endpoint/get-billing-data-for-a-specific-company",
+                "api-reference/endpoint/add-new-billing-data-to-a-specific-company",
+                "api-reference/endpoint/update-specific-billing-data-for-a-company",
+                "api-reference/endpoint/delete-specific-billing-data-for-a-company"
+              ]
+            },
+            {
+              "group": "Payment Info",
+              "pages": [
+                "api-reference/endpoint/get-payment-info-for-a-specific-document"
+              ]
+            },
+            {
+              "group": "Contacts",
+              "pages": [
+                "api-reference/endpoint/get-contacts-for-a-specific-company",
+                "api-reference/endpoint/add-a-new-contact-to-a-specific-company",
+                "api-reference/endpoint/update-a-specific-contact-for-a-company",
+                "api-reference/endpoint/delete-a-specific-contact-for-a-company"
+              ]
+            }
           ]
         },
         {
@@ -82,18 +104,30 @@
             "api-reference/endpoint/get-a-specific-document",
             "api-reference/endpoint/update-a-specific-document",
             "api-reference/endpoint/delete-a-specific-document",
-            "api-reference/endpoint/get-payment-info-for-a-specific-document"
+            "api-reference/endpoint/get-payment-info-for-a-specific-document",
+            "api-reference/endpoint/create-multiple-documents-in-batch",
+            "api-reference/endpoint/register-a-webhook-for-document-events"
           ]
         },
         {
           "group": "Products",
           "pages": [
-            "api-reference/endpoint/get-a-paginated-list-of-products",
+            "api-reference/endpoint/retrieve-a-list-of-products",
             "api-reference/endpoint/create-a-new-product",
-            "api-reference/endpoint/get-a-specific-product",
+            "api-reference/endpoint/retrieve-a-specific-product",
             "api-reference/endpoint/update-a-specific-product",
             "api-reference/endpoint/delete-a-specific-product",
-            "api-reference/endpoint/get-a-paginated-list-of-price-lists"
+            "api-reference/endpoint/bulk-update-products-or-prices"
+          ]
+        },
+        {
+          "group": "Price Lists",
+          "pages": [
+            "api-reference/endpoint/retrieve-a-list-of-price-lists",
+            "api-reference/endpoint/create-a-new-price-list",
+            "api-reference/endpoint/retrieve-a-specific-price-list",
+            "api-reference/endpoint/update-a-specific-price-list",
+            "api-reference/endpoint/delete-a-specific-price-list"
           ]
         },
         {
