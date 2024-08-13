@@ -2709,9 +2709,37 @@
                 "price_total": {
                   "type": "number",
                   "description": "Total price"
+                },
+                "currency_id": {
+                  "type": "string",
+                  "description": "Currency ID according to currency table"
+                },
+                "sales_comission_percentage": {
+                  "type": "number",
+                  "description": "Sales commission percentage"
+                },
+                "taxes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "tax_type_id": {
+                        "type": "integer",
+                        "description": "Tax ID according to table"
+                      },
+                      "tax_percentage": {
+                        "type": "number",
+                        "description": "Percentage if the tax is applied by percentage"
+                      },
+                      "tax_amount": {
+                        "type": "number",
+                        "description": "Total tax amount according to the full net amount"
+                      }
+                    }
+                  }
                 }
               },
-              "required": ["price_list_id"]
+              "required": ["price_list_id", "currency_id"]
             }
           }
         },
@@ -2727,37 +2755,9 @@
           "price_list_name": {
             "type": "string",
             "description": "Name of the price list, e.g., wholesale, retail"
-          },
-          "currency_id": {
-            "type": "string",
-            "description": "Currency ID according to currency table"
-          },
-          "sales_comission_percentage": {
-            "type": "number",
-            "description": "Sales commission percentage"
-          },
-          "taxes": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "tax_type_id": {
-                  "type": "integer",
-                  "description": "Tax ID according to table"
-                },
-                "tax_percentage": {
-                  "type": "number",
-                  "description": "Percentage if the tax is applied by percentage"
-                },
-                "tax_amount": {
-                  "type": "number",
-                  "description": "Total tax amount according to the full net amount"
-                }
-              }
-            }
           }
         },
-        "required": ["price_list_id", "price_list_name", "currency_id"]
+        "required": ["price_list_id", "price_list_name"]
       },
       "Transfer": {
         "type": "object",
