@@ -80,12 +80,6 @@
               ]
             },
             {
-              "group": "Payment Info",
-              "pages": [
-                "api-reference/endpoint/get-payment-info-for-a-specific-document"
-              ]
-            },
-            {
               "group": "Contacts",
               "pages": [
                 "api-reference/endpoint/get-contacts-for-a-specific-company",
@@ -106,7 +100,13 @@
             "api-reference/endpoint/delete-a-specific-document",
             "api-reference/endpoint/get-payment-info-for-a-specific-document",
             "api-reference/endpoint/create-multiple-documents-in-batch",
-            "api-reference/endpoint/register-a-webhook-for-document-events"
+            "api-reference/endpoint/register-a-webhook-for-document-events",
+            {
+              "group": "Payment Info",
+              "pages": [
+                "api-reference/endpoint/get-payment-info-for-a-specific-document"
+              ]
+            }
           ]
         },
         {
