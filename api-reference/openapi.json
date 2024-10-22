@@ -1560,7 +1560,7 @@
         ]
       }
     },
-    "/inbox": {
+    "/inbox_documents": {
       "get": {
         "summary": "Get a paginated list of received documents",
         "parameters": [
@@ -1641,7 +1641,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/SimplifiedDocument"
+                        "$ref": "#/components/schemas/InboxDocument"
                       }
                     },
                     "total": {
@@ -2258,6 +2258,136 @@
           "required": ["company_contact_id", "first_name", "last_name_primary", "phone", "email"]
         }
       },
+      "InboxDocument": {
+        "type": "object",
+        "properties": {
+          "inbox_document_id": {
+            "type": "number",
+            "description": "Inbox document ID."
+          },
+          "email_subject": {
+            "type": "string",
+            "description": "The subject line of the email."
+          },
+          "sender_email": {
+            "type": "string",
+            "description": "The email address of the sender."
+          },
+          "document_date": {
+            "type": "string",
+            "format": "date",
+            "description": "The date when the document was created or issued."
+          },
+          "receive_date": {
+            "type": "string",
+            "format": "date",
+            "description": "The date when the document was received."
+          },
+          "inbox_document_status": {
+            "type": "number",
+            "description": "The current status of the document in the inbox."
+          },
+          "document_id": {
+            "type": "number",
+            "description": "The identifier assigned to the created document."
+          },
+          "issuer_name": {
+            "type": "string",
+            "description": "Issuer name."
+          },
+          "issuer_tax_id_code": {
+            "type": "string",
+            "description": "Tax ID code according to tax id table. Required when the document requires the receiver to be specified."
+          },
+          "issuer_tax_id_type": {
+            "type": "string",
+            "description": "Tax ID type according to tax id table. Required when the document requires the receiver to be specified."
+          },
+          "document_type_id": {
+            "type": "number",
+            "description": "Document type ID according to document type table."
+          },
+          "document_type_taxbureau": {
+            "type": "string",
+            "description": "Type of document at the tax bureau."
+          },
+          "document_number": {
+            "type": "number",
+            "description": "A unique number assigned to the document."
+          },
+          "account_id": {
+            "type": "number",
+            "description": "Account ID."
+          },
+          "purchase_order": {
+            "type": "string",
+            "description": "The identifier for the purchase order."
+          },
+          "reception_confirmation_status": {
+            "type": "number",
+            "description": "Indicates the status of the reception confirmation for the document."
+          },
+          "reception_confirmation_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date when the reception of the document was confirmed."
+          },
+          "receiver_tax_id_code": {
+            "type": "string",
+            "description": "The tax identification code of the document receiver."
+          },
+          "receiver_tax_id_type": {
+            "type": "string",
+            "description": "Tax ID type according to tax id table. Required when the document requires the receiver to be specified."
+          },
+          "document_approval_status": {
+            "type": "number",
+            "description": "Indicates the current approval status of the document."
+          },
+          "document_approval_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date on which the document was approved."
+          },
+          "product_receipt_status": {
+            "type": "number",
+            "description": "Indicates the current status of the product receipt."
+          },
+          "product_receipt_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date on which the product was received."
+          },
+          "product_receipt_location": {
+            "type": "string",
+            "description": "The location where the product was received."
+          },
+          "net_amount": {
+            "type": "string",
+            "description": "Total of all net values from each of the detail lines."
+          },
+          "exempt_amount": {
+            "type": "string",
+            "description": "Total of all exempt values from each of the detail lines."
+          },
+          "vat_amount": {
+            "type": "string",
+            "description": "Total value added tax."
+          },
+          "total_amount": {
+            "type": "string",
+            "description": "Document grand total"
+          },
+          "document_xml": {
+            "type": "string",
+            "description": "Base64 encoded XML"
+          },
+          "document_pdf": {
+            "type": "string",
+            "description": "Base64 encoded PDF"
+          }
+        }
+      },
       "SimplifiedDocument": {
         "type": "object",
         "properties": {
@@ -2321,53 +2451,73 @@
             "properties": {
               "document_type_id": {
                 "type": "string",
-                "description": "Document type ID according to document type table",
+                "description": "Document type ID according to document type table.",
                 "example": "invoice"
               },
-              "document_reference": {
+              "document_type_taxbureau": {
                 "type": "string",
-                "description": "If not entered, an automatic number will be assigned according to the document type."
+                "description": "Type of document at the tax bureau."
+              },
+              "number": {
+                "type": "integer",
+                "description": "Document number."
+              },
+              "issued_received": {
+                "type": "integer",
+                "description": "Document received."
+              },
+              "taxbureau_validation_status": {
+                "type": "integer",
+                "description": "Document status at the tax bureau."
               },
               "issue_date": {
                 "type": "string",
                 "format": "date",
-                "description": "Document date"
+                "description": "Document issue date."
+              },
+              "account_id": {
+                "type": "integer",
+                "description": "Account ID."
+              },
+              "issuer_tax_id_code": {
+                "type": "string",
+                "description": "Tax ID code according to tax id table. Required when the document requires the receiver to be specified."
               },
               "issuer_tax_id_type": {
                 "type": "string",
                 "description": "Tax ID type according to tax id table. Required when the document requires the receiver to be specified."
               },
-              "issuer_tax_id_code": {
-                "type": "string",
-                "description": "Entered according to the type"
-              },
-              "issuer_legalname": {
+              "issuer_legal_name": {
                 "type": "string",
                 "description": "Issuer legal name"
               },
               "issuer_address": {
                 "type": "string",
-                "description": "Required for invoices"
+                "description": "Issuer address"
               },
-              "issuer_district": {
+              "issuer_location_id": {
                 "type": "string",
-                "description": "Required for invoices"
+                "description": "Identifier for the location of the document issuer"
+              },
+              "issuer_state_id": {
+                "type": "string",
+                "description": "Identifier for the state of the document issuer"
               },
               "issuer_city": {
                 "type": "string",
-                "description": "Required for invoices"
+                "description": "Identifier for the city of the document issuer"
               },
               "issuer_phone": {
                 "type": "string",
-                "description": "Required for invoices"
-              },
-              "issuer_activity": {
-                "type": "string",
-                "description": "Required for invoices"
+                "description": "Issuer phone number"
               },
               "issuer_country_id": {
                 "type": "string",
-                "description": "Country ID according to ID table"
+                "description": "Identifier for the country of the document issuer"
+              },
+              "issuer_activity": {
+                "type": "string",
+                "description": "Represents the activity or business operation of the document issuer"
               },
               "receiver_tax_id_type": {
                 "type": "string",
@@ -2375,7 +2525,7 @@
               },
               "receiver_tax_id_code": {
                 "type": "string",
-                "description": "Entered according to the type"
+                "description": "The tax identification code of the document receiver"
               },
               "receiver_legalname": {
                 "type": "string",
@@ -2383,23 +2533,27 @@
               },
               "receiver_address": {
                 "type": "string",
-                "description": "Required for invoices"
+                "description": "Required address"
               },
-              "receiver_district": {
+              "receiver_location_id": {
                 "type": "string",
-                "description": "Required for invoices"
+                "description": "The location code of the document receiver"
+              },
+              "receiver_state_id": {
+                "type": "string",
+                "description": "The state identification code of the document receiver"
               },
               "receiver_city": {
                 "type": "string",
-                "description": "Required for invoices"
+                "description": "The city of the document receiver"
               },
               "receiver_phone": {
                 "type": "string",
-                "description": "Required for invoices"
+                "description": "The phone of the document receiver"
               },
               "receiver_activity": {
                 "type": "string",
-                "description": "Required for invoices"
+                "description": "The activity of the document receiver"
               },
               "receiver_country_id": {
                 "type": "string",
@@ -2425,7 +2579,7 @@
                 "type": "number",
                 "description": "Tax period where the documents should be accounted"
               },
-              "status": {
+              "document_status": {
                 "type": "number",
                 "description": "0 = draft 1= document_issued 2=document sent to counterparty 3 = document accepted by counterparty"
               },
@@ -2475,25 +2629,29 @@
                   "type": "number",
                   "description": "Quantity of this product or service included in this line"
                 },
-                "measuring_unit": {
+                "unit_measure": {
                   "type": "string",
                   "description": "Unit that this line is measured in"
                 },
-                "description": {
+                "line_description": {
                   "type": "string",
                   "description": "Short description to be included in the invoice as line title. Max 100 chars"
                 },
                 "long_description": {
                   "type": "string",
-                  "description": "Long description to be included below the description"
+                  "description": "Long description to be included in the invoice as line title. Max 100 chars"
                 },
                 "unit_price": {
                   "type": "number",
                   "description": "Price per unit"
                 },
-                "net_amount": {
+                "vat_status": {
                   "type": "number",
-                  "description": "Quantity multiplied by price per unit and rounded according to local rounding laws"
+                  "description": "Identify if it has value added tax."
+                },
+                "modifier_amount": {
+                  "type": "number",
+                  "description": ""
                 },
                 "total_taxes": {
                   "type": "number",
@@ -2532,105 +2690,44 @@
               "required": ["quantity", "description", "unit_price", "net_amount", "total_amount_line"]
             }
           },
-          "references": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "document_id": {
-                  "type": "string",
-                  "description": "ID of the document you are referencing"
-                },
-                "document_type_id": {
-                  "type": "number",
-                  "description": "Document type ID according to document type table"
-                },
-                "document_reference": {
-                  "type": "string",
-                  "description": "Referenced document identifier"
-                },
-                "issue_date": {
-                  "type": "string",
-                  "format": "date",
-                  "description": "This field should be issued when you are referencing an external document, such as a contract, purchase order or other."
-                },
-                "reference_type": {
-                  "type": "number",
-                  "description": "1 = cancel 2 = correct text 3 = correct amount 4 = comment 5 = reference to external document"
-                },
-                "description": {
-                  "type": "string",
-                  "description": "Description of the reference"
-                }
-              }
-            }
-          },
-          "global_modifiers": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "modifier_percentage": {
-                  "type": "number",
-                  "description": "Modifier percentage over the net amount. Can be a positive or negative number. Only to be entered if a percentage is to be used"
-                },
-                "modifier_amount": {
-                  "type": "number",
-                  "description": "Modifier amount over the net amount. It should match the percentage if it was entered."
-                },
-                "description": {
-                  "type": "string",
-                  "description": "Description of the modifier"
-                }
-              },
-              "required": ["modifier_amount"]
-            }
-          },
           "totals": {
             "type": "object",
             "properties": {
+              "exempt_amount": {
+                "type": "number",
+                "description": "Total of all exempt values from each of the detail lines."
+              },
               "net_amount": {
                 "type": "number",
-                "description": "Total of all net detail lines and modifiers"
+                "description": "Total of all net values from each of the detail lines."
               },
-              "tax_amount": {
+              "vat_amount": {
                 "type": "number",
-                "description": "Total of all taxes"
+                "description": "Total value added tax."
+              },
+              "other_taxes_amount": {
+                "type": "number",
+                "description": "Total of all other taxes"
               },
               "total_amount": {
                 "type": "number",
                 "description": "Document grand total"
-              },
-              "taxes": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "tax_type_id": {
-                      "type": "string",
-                      "description": "Tax ID according to table"
-                    },
-                    "tax_percentage": {
-                      "type": "number",
-                      "description": "Percentage if the tax is applied by percentage."
-                    },
-                    "tax_amount": {
-                      "type": "number",
-                      "description": "Total tax amount according to the full net amount of this detail line. Should match percentage if entered"
-                    }
-                  }
-                }
               }
             },
             "required": ["net_amount", "tax_amount", "total_amount"]
           },
-          "document_xml": {
-            "type": "string",
-            "description": "Base64 encoded XML"
-          },
-          "document_pdf": {
-            "type": "string",
-            "description": "Base64 encoded PDF"
+          "electronic_document": {
+            "type": "object",
+            "properties": {
+              "document_xml": {
+                "type": "string",
+                "description": "Base64 encoded XML"
+              },
+              "document_pdf": {
+                "type": "string",
+                "description": "Base64 encoded PDF"
+              }
+            }
           }
         }
       },
