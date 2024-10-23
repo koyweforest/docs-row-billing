@@ -33,690 +33,6 @@
         }
       }
     },
-    "/companies": {
-      "get": {
-        "summary": "Get a paginated list of companies",
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "default": 1
-            }
-          },
-          {
-            "name": "per_page",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "default": 10
-            }
-          },
-          {
-            "name": "name",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "tax_id_type",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "tax_id_code",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/CompanyResponse"
-                      }
-                    },
-                    "total": {
-                      "type": "integer"
-                    },
-                    "page": {
-                      "type": "integer"
-                    },
-                    "per_page": {
-                      "type": "integer"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "post": {
-        "summary": "Create a new company",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Company"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Company created successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Company"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/companies/{company_id}": {
-      "get": {
-        "summary": "Get a specific company",
-        "parameters": [
-          {
-            "name": "company_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Company"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "put": {
-        "summary": "Update a specific company",
-        "parameters": [
-          {
-            "name": "company_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Company"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Company updated successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Company"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "delete": {
-        "summary": "Delete a specific company",
-        "parameters": [
-          {
-            "name": "company_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Company deleted successfully"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/companies/{company_id}/billing_data": {
-      "get": {
-        "summary": "Get billing data for a specific company",
-        "parameters": [
-          {
-            "name": "company_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Company/properties/billing_data/items"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "post": {
-        "summary": "Add new billing data to a specific company",
-        "parameters": [
-          {
-            "name": "company_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Company/properties/billing_data/items"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Billing data created successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Company/properties/billing_data/items"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request - invalid input or validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "example": "Invalid Billing data"
-                    },
-                    "details": {
-                      "type": "string",
-                      "example": "Name is required"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found - resource does not exist",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "example": "Resource not found"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/companies/{company_id}/billing_data/{billing_data_id}": {
-      "put": {
-        "summary": "Update specific billing data for a company",
-        "parameters": [
-          {
-            "name": "company_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "billing_data_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Company/properties/billing_data/items"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Billing data updated successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Company/properties/billing_data/items"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Billing data not found"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "delete": {
-        "summary": "Delete specific billing data for a company",
-        "parameters": [
-          {
-            "name": "company_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "billing_data_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Billing data deleted successfully"
-          },
-          "404": {
-            "description": "Billing data not found"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/documents/{document_id}/payment_info": {
-      "get": {
-        "summary": "Get payment info for a specific document",
-        "parameters": [
-          {
-            "name": "document_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PaymentInfo"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/companies/{company_id}/contacts": {
-      "get": {
-        "summary": "Get contacts for a specific company",
-        "parameters": [
-          {
-            "name": "company_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Company/properties/contacts/items"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "post": {
-        "summary": "Add a new contact to a specific company",
-        "parameters": [
-          {
-            "name": "company_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Contacts/items"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Contact created successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Contacts/items"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request - invalid input or validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "example": "Invalid contact data"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found - resource does not exist",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "example": "Resource not found"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/companies/{company_id}/contacts/{contact_id}": {
-      "put": {
-        "summary": "Update a specific contact for a company",
-        "parameters": [
-          {
-            "name": "company_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "contact_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Contacts/items"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Contact updated successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Contacts/items"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Contact not found"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "delete": {
-        "summary": "Delete a specific contact for a company",
-        "parameters": [
-          {
-            "name": "company_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "contact_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Contact deleted successfully"
-          },
-          "404": {
-            "description": "Contact not found"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/countries": {
-      "get": {
-        "summary": "Get a paginated list of countries",
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "default": 1
-            }
-          },
-          {
-            "name": "per_page",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "default": 10
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Country"
-                      }
-                    },
-                    "total": {
-                      "type": "integer"
-                    },
-                    "page": {
-                      "type": "integer"
-                    },
-                    "per_page": {
-                      "type": "integer"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
     "/documents": {
       "get": {
         "summary": "Get a paginated list of documents",
@@ -1023,544 +339,7 @@
         ]
       }
     },
-    "/documents/batch": {
-      "post": {
-        "summary": "Create multiple documents in batch",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Document"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Documents created successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Document"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request - invalid input or validation error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "example": "Invalid document data"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Server error - unexpected error occurred",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string",
-                      "example": "Internal server error"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/products": {
-      "get": {
-        "summary": "Retrieve a list of products",
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "default": 1
-            }
-          },
-          {
-            "name": "per_page",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "default": 10
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A paginated list of products",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "total": {
-                      "type": "integer",
-                      "description": "Total number of items"
-                    },
-                    "page": {
-                      "type": "integer",
-                      "description": "Current page number"
-                    },
-                    "per_page": {
-                      "type": "integer",
-                      "description": "Number of items per page"
-                    },
-                    "items": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Product"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "post": {
-        "summary": "Create a new product",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Product"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Product created successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Product"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid input"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/products/{product_id}": {
-      "get": {
-        "summary": "Retrieve a specific product",
-        "parameters": [
-          {
-            "name": "product_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Product retrieved successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Product"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Product not found"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "put": {
-        "summary": "Update a specific product",
-        "parameters": [
-          {
-            "name": "product_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Product"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Product updated successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Product"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Product not found"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "delete": {
-        "summary": "Delete a specific product",
-        "parameters": [
-          {
-            "name": "product_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Product deleted successfully"
-          },
-          "404": {
-            "description": "Product not found"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/products/bulk_update": {
-      "put": {
-        "summary": "Bulk update products or prices",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/Product"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Products updated successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Product"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/price_lists": {
-      "get": {
-        "summary": "Retrieve a list of price lists",
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "default": 1
-            }
-          },
-          {
-            "name": "per_page",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "default": 10
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A paginated list of price lists",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "total": {
-                      "type": "integer",
-                      "description": "Total number of items"
-                    },
-                    "page": {
-                      "type": "integer",
-                      "description": "Current page number"
-                    },
-                    "per_page": {
-                      "type": "integer",
-                      "description": "Number of items per page"
-                    },
-                    "items": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/PriceList"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "post": {
-        "summary": "Create a new price list",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PriceList"
-              }
-            }
-          }
-        },
-        "responses": {
-          "201": {
-            "description": "Price list created successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PriceList"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid input"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/price_lists/{price_list_id}": {
-      "get": {
-        "summary": "Retrieve a specific price list",
-        "parameters": [
-          {
-            "name": "price_list_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Price list retrieved successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PriceList"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Price list not found"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "put": {
-        "summary": "Update a specific price list",
-        "parameters": [
-          {
-            "name": "price_list_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PriceList"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Price list updated successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PriceList"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Price list not found"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      },
-      "delete": {
-        "summary": "Delete a specific price list",
-        "parameters": [
-          {
-            "name": "price_list_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Price list deleted successfully"
-          },
-          "404": {
-            "description": "Price list not found"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/document_types": {
-      "get": {
-        "summary": "Get all available document types",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/DocumentType"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/inbox": {
+    "/inbox_documents": {
       "get": {
         "summary": "Get a paginated list of received documents",
         "parameters": [
@@ -1641,7 +420,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/SimplifiedDocument"
+                        "$ref": "#/components/schemas/InboxDocument"
                       }
                     },
                     "total": {
@@ -1666,7 +445,7 @@
         ]
       }
     },
-    "/inbox/{document_id}": {
+    "/inbox_documents/{document_id}": {
       "get": {
         "summary": "Get a specific received document",
         "parameters": [
@@ -1685,7 +464,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Document"
+                  "$ref": "#/components/schemas/InboxDocument"
                 }
               }
             }
@@ -1750,197 +529,7 @@
           }
         ]
       }
-    },
-  "/transfers": {
-    "post": {
-      "summary": "Create a new document transfer",
-      "requestBody": {
-        "required": true,
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "document_id": {
-                  "type": "string"
-                },
-                "receiver_company": {
-                  "$ref": "#/components/schemas/Company"
-                }
-              },
-              "required": ["document_id", "receiver_company"]
-            }
-          }
-        }
-      },
-      "responses": {
-        "201": {
-          "description": "Transfer created successfully",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Transfer"
-              }
-            }
-          }
-        }
-      },
-      "security": [
-        {
-          "bearerAuth": []
-        }
-      ]
     }
-  },
-  "/transfers/{transfer_id}": {
-    "get": {
-      "summary": "Get transfer status",
-      "parameters": [
-        {
-          "name": "transfer_id",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Successful response",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Transfer"
-              }
-            }
-          }
-        }
-      },
-      "security": [
-        {
-          "bearerAuth": []
-        }
-      ]
-    }
-  },
-  "/taxes": {
-    "get": {
-      "summary": "Get a paginated list of taxes",
-      "parameters": [
-        {
-          "name": "page",
-          "in": "query",
-          "schema": {
-            "type": "integer",
-            "default": 1
-          }
-        },
-        {
-          "name": "per_page",
-          "in": "query",
-          "schema": {
-            "type": "integer",
-            "default": 10
-          }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Successful response",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "data": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Tax"
-                    }
-                  },
-                  "total": {
-                    "type": "integer"
-                  },
-                  "page": {
-                    "type": "integer"
-                  },
-                  "per_page": {
-                    "type": "integer"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "security": [
-        {
-          "bearerAuth": []
-        }
-      ]
-    }
-  },
-  "/webhooks/documents": {
-    "post": {
-      "summary": "Register a webhook for document events",
-      "requestBody": {
-        "required": true,
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "url": {
-                  "type": "string",
-                  "format": "uri",
-                  "description": "The URL to send event notifications to",
-                  "example": "https://example.com/webhook"
-                },
-                "event_type": {
-                  "type": "string",
-                  "description": "The type of document event to listen for",
-                  "enum": ["created", "updated", "deleted", "status_changed"],
-                  "example": "status_changed"
-                }
-              },
-              "required": ["url", "event_type"]
-            }
-          }
-        }
-      },
-      "responses": {
-        "201": {
-          "description": "Webhook registered successfully"
-        },
-        "400": {
-          "description": "Bad request - invalid input or validation error",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "error": {
-                    "type": "string",
-                    "example": "Invalid input data"
-                  },
-                  "details": {
-                    "type": "string",
-                    "example": "Name is required"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "security": [
-        {
-          "bearerAuth": []
-        }
-      ]
-    }
-  }
 },
 "components": {
     "securitySchemes": {
@@ -2258,6 +847,136 @@
           "required": ["company_contact_id", "first_name", "last_name_primary", "phone", "email"]
         }
       },
+      "InboxDocument": {
+        "type": "object",
+        "properties": {
+          "inbox_document_id": {
+            "type": "number",
+            "description": "Inbox document ID."
+          },
+          "email_subject": {
+            "type": "string",
+            "description": "The subject line of the email."
+          },
+          "sender_email": {
+            "type": "string",
+            "description": "The email address of the sender."
+          },
+          "document_date": {
+            "type": "string",
+            "format": "date",
+            "description": "The date when the document was created or issued."
+          },
+          "receive_date": {
+            "type": "string",
+            "format": "date",
+            "description": "The date when the document was received."
+          },
+          "inbox_document_status": {
+            "type": "number",
+            "description": "The current status of the document in the inbox."
+          },
+          "document_id": {
+            "type": "number",
+            "description": "The identifier assigned to the created document."
+          },
+          "issuer_name": {
+            "type": "string",
+            "description": "Issuer name."
+          },
+          "issuer_tax_id_code": {
+            "type": "string",
+            "description": "Tax ID code according to tax id table. Required when the document requires the receiver to be specified."
+          },
+          "issuer_tax_id_type": {
+            "type": "string",
+            "description": "Tax ID type according to tax id table. Required when the document requires the receiver to be specified."
+          },
+          "document_type_id": {
+            "type": "number",
+            "description": "Document type ID according to document type table."
+          },
+          "document_type_taxbureau": {
+            "type": "string",
+            "description": "Type of document at the tax bureau."
+          },
+          "document_number": {
+            "type": "number",
+            "description": "A unique number assigned to the document."
+          },
+          "account_id": {
+            "type": "number",
+            "description": "Account ID."
+          },
+          "purchase_order": {
+            "type": "string",
+            "description": "The identifier for the purchase order."
+          },
+          "reception_confirmation_status": {
+            "type": "number",
+            "description": "Indicates the status of the reception confirmation for the document."
+          },
+          "reception_confirmation_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date when the reception of the document was confirmed."
+          },
+          "receiver_tax_id_code": {
+            "type": "string",
+            "description": "The tax identification code of the document receiver."
+          },
+          "receiver_tax_id_type": {
+            "type": "string",
+            "description": "Tax ID type according to tax id table. Required when the document requires the receiver to be specified."
+          },
+          "document_approval_status": {
+            "type": "number",
+            "description": "Indicates the current approval status of the document."
+          },
+          "document_approval_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date on which the document was approved."
+          },
+          "product_receipt_status": {
+            "type": "number",
+            "description": "Indicates the current status of the product receipt."
+          },
+          "product_receipt_date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date on which the product was received."
+          },
+          "product_receipt_location": {
+            "type": "string",
+            "description": "The location where the product was received."
+          },
+          "net_amount": {
+            "type": "string",
+            "description": "Total of all net values from each of the detail lines."
+          },
+          "exempt_amount": {
+            "type": "string",
+            "description": "Total of all exempt values from each of the detail lines."
+          },
+          "vat_amount": {
+            "type": "string",
+            "description": "Total value added tax."
+          },
+          "total_amount": {
+            "type": "string",
+            "description": "Document grand total"
+          },
+          "document_xml": {
+            "type": "string",
+            "description": "Base64 encoded XML"
+          },
+          "document_pdf": {
+            "type": "string",
+            "description": "Base64 encoded PDF"
+          }
+        }
+      },
       "SimplifiedDocument": {
         "type": "object",
         "properties": {
@@ -2321,53 +1040,73 @@
             "properties": {
               "document_type_id": {
                 "type": "string",
-                "description": "Document type ID according to document type table",
+                "description": "Document type ID according to document type table.",
                 "example": "invoice"
               },
-              "document_reference": {
+              "document_type_taxbureau": {
                 "type": "string",
-                "description": "If not entered, an automatic number will be assigned according to the document type."
+                "description": "Type of document at the tax bureau."
+              },
+              "document_number": {
+                "type": "integer",
+                "description": "Document number."
+              },
+              "issued_received": {
+                "type": "integer",
+                "description": "Document received."
+              },
+              "taxbureau_validation_status": {
+                "type": "integer",
+                "description": "Document status at the tax bureau."
               },
               "issue_date": {
                 "type": "string",
                 "format": "date",
-                "description": "Document date"
+                "description": "Document issue date."
+              },
+              "account_id": {
+                "type": "integer",
+                "description": "Account ID."
+              },
+              "issuer_tax_id_code": {
+                "type": "string",
+                "description": "Tax ID code according to tax id table. Required when the document requires the receiver to be specified."
               },
               "issuer_tax_id_type": {
                 "type": "string",
                 "description": "Tax ID type according to tax id table. Required when the document requires the receiver to be specified."
               },
-              "issuer_tax_id_code": {
-                "type": "string",
-                "description": "Entered according to the type"
-              },
-              "issuer_legalname": {
+              "issuer_legal_name": {
                 "type": "string",
                 "description": "Issuer legal name"
               },
               "issuer_address": {
                 "type": "string",
-                "description": "Required for invoices"
+                "description": "Issuer address"
               },
-              "issuer_district": {
+              "issuer_location_id": {
                 "type": "string",
-                "description": "Required for invoices"
+                "description": "Identifier for the location of the document issuer"
+              },
+              "issuer_state_id": {
+                "type": "string",
+                "description": "Identifier for the state of the document issuer"
               },
               "issuer_city": {
                 "type": "string",
-                "description": "Required for invoices"
+                "description": "Identifier for the city of the document issuer"
               },
               "issuer_phone": {
                 "type": "string",
-                "description": "Required for invoices"
-              },
-              "issuer_activity": {
-                "type": "string",
-                "description": "Required for invoices"
+                "description": "Issuer phone number"
               },
               "issuer_country_id": {
                 "type": "string",
-                "description": "Country ID according to ID table"
+                "description": "Identifier for the country of the document issuer"
+              },
+              "issuer_activity": {
+                "type": "string",
+                "description": "Represents the activity or business operation of the document issuer"
               },
               "receiver_tax_id_type": {
                 "type": "string",
@@ -2375,7 +1114,7 @@
               },
               "receiver_tax_id_code": {
                 "type": "string",
-                "description": "Entered according to the type"
+                "description": "The tax identification code of the document receiver"
               },
               "receiver_legalname": {
                 "type": "string",
@@ -2383,23 +1122,27 @@
               },
               "receiver_address": {
                 "type": "string",
-                "description": "Required for invoices"
+                "description": "Required address"
               },
-              "receiver_district": {
+              "receiver_location_id": {
                 "type": "string",
-                "description": "Required for invoices"
+                "description": "The location code of the document receiver"
+              },
+              "receiver_state_id": {
+                "type": "string",
+                "description": "The state identification code of the document receiver"
               },
               "receiver_city": {
                 "type": "string",
-                "description": "Required for invoices"
+                "description": "The city of the document receiver"
               },
               "receiver_phone": {
                 "type": "string",
-                "description": "Required for invoices"
+                "description": "The phone of the document receiver"
               },
               "receiver_activity": {
                 "type": "string",
-                "description": "Required for invoices"
+                "description": "The activity of the document receiver"
               },
               "receiver_country_id": {
                 "type": "string",
@@ -2425,7 +1168,7 @@
                 "type": "number",
                 "description": "Tax period where the documents should be accounted"
               },
-              "status": {
+              "document_status": {
                 "type": "number",
                 "description": "0 = draft 1= document_issued 2=document sent to counterparty 3 = document accepted by counterparty"
               },
@@ -2475,25 +1218,29 @@
                   "type": "number",
                   "description": "Quantity of this product or service included in this line"
                 },
-                "measuring_unit": {
+                "unit_measure": {
                   "type": "string",
                   "description": "Unit that this line is measured in"
                 },
-                "description": {
+                "line_description": {
                   "type": "string",
                   "description": "Short description to be included in the invoice as line title. Max 100 chars"
                 },
                 "long_description": {
                   "type": "string",
-                  "description": "Long description to be included below the description"
+                  "description": "Long description to be included in the invoice as line title. Max 100 chars"
                 },
                 "unit_price": {
                   "type": "number",
                   "description": "Price per unit"
                 },
-                "net_amount": {
+                "vat_status": {
                   "type": "number",
-                  "description": "Quantity multiplied by price per unit and rounded according to local rounding laws"
+                  "description": "Identify if it has value added tax."
+                },
+                "modifier_amount": {
+                  "type": "number",
+                  "description": ""
                 },
                 "total_taxes": {
                   "type": "number",
@@ -2532,105 +1279,44 @@
               "required": ["quantity", "description", "unit_price", "net_amount", "total_amount_line"]
             }
           },
-          "references": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "document_id": {
-                  "type": "string",
-                  "description": "ID of the document you are referencing"
-                },
-                "document_type_id": {
-                  "type": "number",
-                  "description": "Document type ID according to document type table"
-                },
-                "document_reference": {
-                  "type": "string",
-                  "description": "Referenced document identifier"
-                },
-                "issue_date": {
-                  "type": "string",
-                  "format": "date",
-                  "description": "This field should be issued when you are referencing an external document, such as a contract, purchase order or other."
-                },
-                "reference_type": {
-                  "type": "number",
-                  "description": "1 = cancel 2 = correct text 3 = correct amount 4 = comment 5 = reference to external document"
-                },
-                "description": {
-                  "type": "string",
-                  "description": "Description of the reference"
-                }
-              }
-            }
-          },
-          "global_modifiers": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "modifier_percentage": {
-                  "type": "number",
-                  "description": "Modifier percentage over the net amount. Can be a positive or negative number. Only to be entered if a percentage is to be used"
-                },
-                "modifier_amount": {
-                  "type": "number",
-                  "description": "Modifier amount over the net amount. It should match the percentage if it was entered."
-                },
-                "description": {
-                  "type": "string",
-                  "description": "Description of the modifier"
-                }
-              },
-              "required": ["modifier_amount"]
-            }
-          },
           "totals": {
             "type": "object",
             "properties": {
+              "exempt_amount": {
+                "type": "number",
+                "description": "Total of all exempt values from each of the detail lines."
+              },
               "net_amount": {
                 "type": "number",
-                "description": "Total of all net detail lines and modifiers"
+                "description": "Total of all net values from each of the detail lines."
               },
-              "tax_amount": {
+              "vat_amount": {
                 "type": "number",
-                "description": "Total of all taxes"
+                "description": "Total value added tax."
+              },
+              "other_taxes_amount": {
+                "type": "number",
+                "description": "Total of all other taxes"
               },
               "total_amount": {
                 "type": "number",
                 "description": "Document grand total"
-              },
-              "taxes": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "tax_type_id": {
-                      "type": "string",
-                      "description": "Tax ID according to table"
-                    },
-                    "tax_percentage": {
-                      "type": "number",
-                      "description": "Percentage if the tax is applied by percentage."
-                    },
-                    "tax_amount": {
-                      "type": "number",
-                      "description": "Total tax amount according to the full net amount of this detail line. Should match percentage if entered"
-                    }
-                  }
-                }
               }
             },
             "required": ["net_amount", "tax_amount", "total_amount"]
           },
-          "document_xml": {
-            "type": "string",
-            "description": "Base64 encoded XML"
-          },
-          "document_pdf": {
-            "type": "string",
-            "description": "Base64 encoded PDF"
+          "electronic_document": {
+            "type": "object",
+            "properties": {
+              "document_xml": {
+                "type": "string",
+                "description": "Base64 encoded XML"
+              },
+              "document_pdf": {
+                "type": "string",
+                "description": "Base64 encoded PDF"
+              }
+            }
           }
         }
       },
