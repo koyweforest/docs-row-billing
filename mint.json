@@ -69,16 +69,7 @@
             "api-reference/endpoint/create-a-new-document",
             "api-reference/endpoint/get-a-specific-document",
             "api-reference/endpoint/update-a-specific-document",
-            "api-reference/endpoint/delete-a-specific-document",
-            "api-reference/endpoint/get-payment-info-for-a-specific-document",
-            "api-reference/endpoint/create-multiple-documents-in-batch",
-            "api-reference/endpoint/register-a-webhook-for-document-events",
-            {
-              "group": "Payment Info",
-              "pages": [
-                "api-reference/endpoint/get-payment-info-for-a-specific-document"
-              ]
-            }
+            "api-reference/endpoint/delete-a-specific-document"
           ]
         },
         {
