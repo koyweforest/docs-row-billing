@@ -54,73 +54,52 @@
             }
           },
           {
-            "name": "issuer_tax_id_code",
+            "name": "issue_date_from",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "issuer_tax_id_type",
+            "name": "issue_date_to",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "receiver_tax_id_code",
+            "name": "taxbureau_sending_status",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "receiver_tax_id_type",
+            "name": "taxbureau_validation_status",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "receiver_name",
+            "name": "document_number",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "issuer_name",
+            "name": "document_type_id",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "amount_lte",
+            "name": "issued_received",
             "in": "query",
             "schema": {
               "type": "number"
-            }
-          },
-          {
-            "name": "amount_gte",
-            "in": "query",
-            "schema": {
-              "type": "number"
-            }
-          },
-          {
-            "name": "document_type",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "issued",
-            "in": "query",
-            "schema": {
-              "type": "boolean"
             }
           }
         ],
@@ -132,19 +111,39 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "data": {
+                    "_links": {
+                      "type": "object",
+                      "properties": {
+                        "self": {
+                          "type": "string"
+                        },
+                        "first": {
+                          "type": "string"
+                        },
+                        "last": {
+                          "type": "string"
+                        },
+                        "next": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "documents": {
                       "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/SimplifiedDocument"
                       }
                     },
-                    "total": {
+                    "page_count": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "total_items": {
                       "type": "integer"
                     },
                     "page": {
-                      "type": "integer"
-                    },
-                    "per_page": {
                       "type": "integer"
                     }
                   }
@@ -166,7 +165,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Document"
+                "$ref": "#/components/schemas/DocumentPost"
               }
             }
           }
@@ -983,61 +982,408 @@
           "document_id": {
             "type": "string"
           },
+          "account_id": {
+            "type": "string"
+          },
+          "taxbureau_sending_status": {
+            "type": "string"
+          },
+          "taxbureau_validation_status": {
+            "type": "string"
+          },
+          "issue_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "document_number": {
+            "type": "string"
+          },
+          "document_type_id": {
+            "type": "string"
+          },
+          "issuer_tax_id_code": {
+            "type": "string"
+          },
+          "issuer_tax_id_type": {
+            "type": "string"
+          },
+          "receiver_tax_id_code": {
+            "type": "string"
+          },
+          "receiver_tax_id_type": {
+            "type": "string"
+          },
+          "document_status": {
+            "type": "number"
+          },
+          "currency_id": {
+            "type": "number"
+          },
+          "issued_received": {
+            "type": "number"
+          },
+          "exempt_amount": {
+            "type": "string"
+          },
+          "net_amount": {
+            "type": "string"
+          },
+          "vat_amount": {
+            "type": "string"
+          },
+          "other_taxes_amount": {
+            "type": "string"
+          },
+          "total_amount": {
+            "type": "string"
+          },
+          "document_type_taxbureau": {
+            "type": "string"
+          }
+        }
+      },
+      "DocumentPost": {
+        "type": "object",
+        "properties": {
+          "options": {
+            "type": "object",
+            "properties": {
+              "template_id": {
+                "type": "integer",
+                "description": "It corresponds to the ID of the print template for the document. If not provided, the default template will be used. If provided and the template is not found, the default template will be used.",
+                "example": "1"
+              },
+              "gross_values": {
+                "type": "integer",
+                "description": "This field is only valid for electronic receipts (document_type_id = 39, Chile) and allows the values to be entered as gross amounts (including VAT) for the line items, with the total being directly calculated as the multiplication of the item prices by the quantities. The total calculated in this way will be slightly different from the one obtained by rounding the net amounts and calculating VAT on the net total. The amounts will be adjusted and saved as net values in Row, but respecting the rounding applied to the gross amounts.",
+                "example": "1"
+              },
+              "rounding_type": {
+                "type": "string",
+                "description": "You can input values as “net” or “gross”.\nRounding on gross values will calculate the total value for each line including VAT, and then adjust the document's VAT totals to match the final amount.\nRounding on net values will calculate the multiplications of net values line by line, and then apply the VAT to the total net amount to get the VAT and the total.",
+                "example": "net"
+              },
+              "company_web": {
+                "type": "string",
+                "description": "You can enter a website URL, which will replace the one registered in the ROW account data and will be reflected in the automatic email sent to the recipient. It must start with http:// or https://.",
+                "example": "https://billing.userow.com/"
+              },
+              "company_email": {
+                "type": "string",
+                "description": "You can enter an email, which will replace the one registered in the Row account data and will be reflected in the automatic email sent to the document recipient.",
+                "example": "email@email.com"
+              }
+            }
+          },
           "header": {
             "type": "object",
             "properties": {
               "document_type_id": {
-                "type": "string"
-              },
-              "document_type": {
-                "type": "string"
-              },
-              "number": {
-                "type": "string"
+                "type": "integer",
+                "description": "Document type ID according to document type table. In Chile : 33 = Factura electrónica\n34 = Factura exenta electrónica\n39 = Boleta electrónica\n41 = Boleta exenta electrónica\n52 = Guía de despacho electrónica\n56 = Nota de débito electrónica\n61 = Nota de crédito electrónica\n110 = factura exportación electrónica\n111 = nota de débito de exportación\nelectrónica\n112 = nota de crédito de exportación\nelectrónica",
+                "example": "33"
               },
               "issue_date": {
                 "type": "string",
-                "format": "date"
+                "format": "date",
+                "description": "Document issue date\nFormat: YYYY-MM-DD"
               },
-              "issuer_tax_id_code": {
-                "type": "string"
-              },
-              "issuer_tax_id_type": {
-                "type": "string"
+              "document_number": {
+                "type": "integer",
+                "description": "Allows defining the folio to be used for issuing the document. By default, this field should NOT be used, so the folio is automatically assigned by the sequence."
               },
               "receiver_tax_id_code": {
-                "type": "string"
+                "type": "string",
+                "description": "Required for invoices, credit notes, debit notes, named receipts, and exempt named receipts, and optional for other documents.\nRUT without dots, with a hyphen\nFormat: NNNNNNNN-X",
+                "example": "11111111-1"
               },
-              "receiver_tax_id_type": {
-                "type": "string"
+              "receiver_legal_name": {
+                "type": "string",
+                "description": "Required for invoices, credit notes, debit notes, named receipts, and exempt named receipts. Optional for other documents.\nLegal name of the document receiver."
               },
-              "status": {
-                "type": "string"
+              "receiver_address": {
+                "type": "string",
+                "description": "Required for invoices, credit notes, debit notes, named receipts, and exempt named receipts. Optional for other documents.\nAddress of the document receiver."
+              },
+              "receiver_district": {
+                "type": "string",
+                "description": "Required for invoices, credit notes, debit notes, named receipts, and exempt named receipts. Optional for other documents.\nDistrict of the document receiver."
+              },
+              "receiver_city": {
+                "type": "string",
+                "description": "Required for invoices, credit notes, debit notes, named receipts, and exempt named receipts. Optional for other documents.\nCity of the document receiver."
+              },
+              "receiver_phone": {
+                "type": "string",
+                "description": "Required for invoices, credit notes, debit notes, named receipts, and exempt named receipts. Optional for other documents.\nPhone of the document receiver."
+              },
+              "receiver_activity": {
+                "type": "string",
+                "description": "Required for invoices, credit notes, and debit notes.\nOptional for other documents.\nReceiver activity of the document receiver.\nNamed receipts should NOT include this field."
+              },
+              "receiver_country_id": {
+                "type": "integer",
+                "description": "Refers to the recipient's country. If not provided, the default is Chile. It is mainly used for export documents."
+              },
+              "payment_conditions": {
+                "type": "string",
+                "description": "Payment dates separated by commas\n0 = cash\n30 = 30 days\n0,30 = 50% cash, 50% in 30 days\n0,30,60 = 33% cash, 33% in 30 days, 34% in 60 days."
+              },
+              "receiver_email": {
+                "type": "string",
+                "description": "Email for document sending."
+              },
+              "seller_id": {
+                "type": "integer",
+                "description": "User ID (ROW) that will be assigned as the seller associated with the document."
+              },
+              "currency_id": {
+                "type": "integer",
+                "description": "Only for export documents.\nValid values according to the table in annexes."
+              },
+              "exchange_rate_value": {
+                "type": "integer",
+                "description": "Only when currency_id is defined and its value is not Chilean peso."
+              },
+              "service_indicator": {
+                "type": "integer",
+                "description": "It is optional to complete for export documents.\nValid values:\n1 = Invoice for periodic household services.\n2 = Invoice for other periodic services.\n3 = Service Invoice\n4 = Hospitality Services\n5 = International Land Transport Service"
+              },
+              "sale_modality": {
+                "type": "integer",
+                "description": "Only for export documents: optional.\nValid values:\n1 = Sale agreed\n2 = Under condition\n3 = Free consignment\n4 = Consignment with minimum sale\n9 = No payment"
+              },
+              "sale_clause": {
+                "type": "integer",
+                "description": "Only for export documents: optional.\nValid values:\n1 = CIF\n2 = CFR\n3 = EXW\n4 = FAS\n5 = FOB\n6 = S/CL\n9 = DDP\n10 = FCA\n11 = CPT\n12 = CIP\n17 = DAT\n18 = DAP\n8 = Other"
+              },
+              "guide_type": {
+                "type": "integer",
+                "description": "Required ONLY for dispatch guides.\n1 = Operation constitutes sale\n2 = Sales to be made\n3 = Consignments\n4 = Free delivery\n5 = Internal transfers\n6 = Other non-sale transfers\n7 = Return guide\n8 = Transfer for export (non-sale)\n9 = Sale for export"
+              },
+              "transfer_type": {
+                "type": "integer",
+                "description": "Required ONLY for dispatch guides that are not internal transfers.\n1 = Dispatch on behalf of the recipient\n2 = Dispatch on behalf of the issuer to recipient's facilities\n3 = Dispatch on behalf of the issuer to other facilities"
+              },
+              "branch_office_code": {
+                "type": "string",
+                "description": "This field should only be completed for companies that use branches.\nTo issue from the head office, this field should NOT be entered.\nThe code entered must correspond to the 'internal code' entered in ROW."
+              },
+              "observations": {
+                "type": "string",
+                "description": "Enter a observations."
+              },
+              "deployment_observations": {
+                "type": "integer",
+                "description": "0 = do not include remark in XML or PDF\n1 = include remark in XML and PDF\n2 = include remark in PDF and do NOT include in XML\n3 = include remark in XML and do NOT include in PDF\nIn all cases, regardless of its display, the remark will be saved in ROW and will be visible in the document details on facto.cl.\nIf this option is not entered, the default value is considered to be 1, which will display the remark in the XML and PDF."
+              },
+              "port_disembarkation": {
+                "type": "string",
+                "description": "Enter a port disembarkation."
+              },
+              "port_embarkation": {
+                "type": "string",
+                "description": "Enter a port embarkation."
+              },
+              "gross_weight": {
+                "type": "string",
+                "description": "Enter a shipping address."
+              },
+              "shipping_address": {
+                "type": "string",
+                "description": "Enter a gross weight."
+              }
+            },
+            "required": [
+              "document_type_id",
+              "issue_date",
+              "issuer_legalname",
+              "issuer_address",
+              "issuer_district",
+              "issuer_city",
+              "issuer_phone",
+              "issuer_activity",
+              "receiver_legalname",
+              "receiver_address",
+              "receiver_district",
+              "receiver_city",
+              "receiver_phone",
+              "receiver_activity",
+              "status",
+              "payment_conditions"
+            ]
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "detail": {
+                  "type": "object",
+                  "properties": {
+                    "quantity": {
+                      "type": "number",
+                      "format": "float",
+                      "description": "Quantity (can have up to 6 decimals, separate with a dot, not with a comma)."
+                    },
+                    "line_description": {
+                      "type": "string",
+                      "description": "Short description to be included in the invoice as line title. Max 100 chars."
+                    },
+                    "unit_price": {
+                      "type": "number",
+                      "format": "float",
+                      "description": "Unit price (can have up to 6 decimals, separate with a dot, not with a comma). If using the 'gross_values' option, it must be the value including VAT."
+                    },
+                    "long_description": {
+                      "type": "string",
+                      "description": "Allows adding an additional long description to the detail description for the document."
+                    },
+                    "unit_measure": {
+                      "type": "string",
+                      "description": "Unit that this line is measured in."
+                    },
+                    "vat_status": {
+                      "type": "boolean",
+                      "description": "0 = exempt from VAT\n1 = subject to VAT"
+                    },
+                    "discount_surcharge_amount": {
+                      "type": "number",
+                      "description": "Amount to discount or surcharge.\nIf it is a discount, use a negative value.\nIf this is used, do not use discount_or_surcharge_percentage."
+                    },
+                    "discount_surcharge_percentage": {
+                      "type": "number",
+                      "format": "float",
+                      "description": "Percentage to discount or surcharge. If it is a discount, use a negative value. If this is used, do not use discount_or_surcharge_amount."
+                    },
+                    "tax_code": {
+                      "type": "integer",
+                      "description": "Indicates the type of additional tax for this line.\nSee the annex tax table.\nNOT supported in the case of 'gross_values'."
+                    },
+                    "unit_tax_value": {
+                      "type": "integer",
+                      "format": "float",
+                      "description": "It should only be entered for taxes that require manual entry; it should not be entered if a tax code has not been selected."
+                    },
+                    "sku": {
+                      "type": "string",
+                      "description": "Allows entering the SKU of a product in Facto inventory. If the entered SKU exactly matches one in the inventory, the corresponding stock movement will be made upon issuing the document."
+                    }
+                  },
+                  "required": ["quantity", "line_description", "unit_price", "total_amount_line", "vat_status"]
+                }
               }
             }
           },
-          "total": {
-            "type": "object",
-            "properties": {
-              "net_amount": {
-                "type": "string"
-              },
-              "vat_amount": {
-                "type": "string"
-              },
-              "total_amount": {
-                "type": "string"
+          "references": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "reference": {
+                  "type": "object",
+                  "properties": {
+                    "reference_type": {
+                      "type": "integer",
+                      "description": "In Chile: 33 = Factura electrónica\n34 = Factura exenta electrónica\n39 = Boleta electrónica\n41 = Boleta exenta electrónica\nOtros documentos que no son documentos\ntributarios electrónicos: (debe usarse código\nreferencia = 5)\n801 = Orden de compra\n802 = Nota de pedido\n803 = Contrato\n804 = Resolución\n805 = Proceso ChileCompra\n806 = Ficha ChileCompra\n807 = DUS\n808 = B/L (Conocimiento de embarque)\n809 = AWB (Air Will Bill)\n810 = MIC/DTA\n811 = Carta de Porte\n812 = Resolución del SNA donde califica\nServicios de Exportación\n813 = Pasaporte\n814 = Certificado de Depósito Bolsa Prod.\nChile.\n815 = Vale de Prenda Bolsa Prod."
+                    },
+                    "reference_number": {
+                      "type": "string",
+                      "description": "Number of the referenced document. In the case of a global reference, it must be 0."
+                    },
+                    "reference_code": {
+                      "type": "integer",
+                      "description": "1 = cancel\n2 = correct text\n3 = correct quantity\n4 = set\n5 = reference to other non-tax documents\n6 = reference to dispatch guide\n7 = global reference to a type of document (allows reducing the amount for all documents of this type for this particular client)."
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Reference description."
+                    },
+                    "reference_date": {
+                      "type": "string",
+                      "format": "date",
+                      "description": "It should only be entered when using a reference that is not an electronic tax document. (YYYY-MM-DD)."
+                    }
+                  },
+                  "required": ["reference_type","reference_number","reference_code","description"]
+                }
               }
             }
+          },
+          "globals_discounts_surcharges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "global_discount_surcharge": {
+                  "type": "object",
+                  "properties": {
+                    "discount_surcharge_code": {
+                      "type": "string",
+                      "description": "DA = Global discount on taxable\nDE = Global discount on exempt\nRA = Global surcharge on taxable\nRE = Global surcharge on exempt"
+                    },
+                    "discount_surcharge_value": {
+                      "type": "integer",
+                      "format": "float",
+                      "description": "Value of the discount or surcharge."
+                    },
+                    "discount_surcharge_type": {
+                      "type": "string",
+                      "description": "$ = Value will be applied as an amount\n% = Value will be applied as a percentage of the amount"
+                    }
+                  },
+                  "required": ["discount_surcharge_code","discount_surcharge_value","discount_surcharge_type"]
+                }
+              }
+            }
+          },
+          "totals": {
+            "type": "object",
+            "properties": {
+              "vat_credit_construction_company": {
+                "type": "integer",
+                "description": "65% credit for construction companies. Article 21 of Decree Law No. 910/75.\nThis is the only code that operates in the opposite manner to the rest, as it is subtracted from the general VAT. It corresponds to VAT * 0.65.\nNOT supported in the case of 'gross_values' (Chile)."
+              },
+              "exempt_amount": {
+                "type": "integer",
+                "description": "Required, except in the case of gross values.\nTotal value of exempt items. It should NOT be entered if using the 'gross_values' option."
+              },
+              "net_amount": {
+                "type": "integer",
+                "description": "Required, except in the case of gross values.\nTotal value of taxable items. It should NOT be entered if using the 'gross_values' option."
+              },
+              "vat_amount": {
+                "type": "integer",
+                "description": "Required, except in the case of gross values.\nVAT according to taxable amount. It should NOT be entered if using the 'gross_values' option."
+              },
+              "other_taxes_amount": {
+                "type": "integer",
+                "description": "Sum of other taxes, can be negative if there are withholding taxes. NOT supported in the case of 'gross_values'."
+              },
+              "total_amount": {
+                "type": "integer",
+                "description": "Final value."
+              }
+            },
+            "required": ["exempt_amount", "net_amount", "vat_amount", "total_amount"]
           }
         }
       },
       "Document": {
         "type": "object",
         "properties": {
+          "document_id": {
+            "type": "string",
+            "description": "Document ID.",
+            "example": "invoice"
+          },
           "header": {
             "type": "object",
             "properties": {
+              "account_id": {
+                "type": "integer",
+                "description": "Account ID."
+              },
               "document_type_id": {
                 "type": "string",
                 "description": "Document type ID according to document type table.",
@@ -1064,10 +1410,6 @@
                 "format": "date",
                 "description": "Document issue date."
               },
-              "account_id": {
-                "type": "integer",
-                "description": "Account ID."
-              },
               "issuer_tax_id_code": {
                 "type": "string",
                 "description": "Tax ID code according to tax id table. Required when the document requires the receiver to be specified."
@@ -1084,39 +1426,35 @@
                 "type": "string",
                 "description": "Issuer address"
               },
-              "issuer_location_id": {
+              "issuer_district": {
                 "type": "string",
-                "description": "Identifier for the location of the document issuer"
-              },
-              "issuer_state_id": {
-                "type": "string",
-                "description": "Identifier for the state of the document issuer"
+                "description": "Identifier for the district of the document issuer"
               },
               "issuer_city": {
                 "type": "string",
                 "description": "Identifier for the city of the document issuer"
               },
-              "issuer_phone": {
-                "type": "string",
-                "description": "Issuer phone number"
-              },
               "issuer_country_id": {
                 "type": "string",
                 "description": "Identifier for the country of the document issuer"
+              },
+              "issuer_phone": {
+                "type": "string",
+                "description": "Issuer phone number"
               },
               "issuer_activity": {
                 "type": "string",
                 "description": "Represents the activity or business operation of the document issuer"
               },
-              "receiver_tax_id_type": {
-                "type": "string",
-                "description": "Tax ID type according to tax id table. Required when the document requires the receiver to be specified."
-              },
               "receiver_tax_id_code": {
                 "type": "string",
                 "description": "The tax identification code of the document receiver"
               },
-              "receiver_legalname": {
+              "receiver_tax_id_type": {
+                "type": "string",
+                "description": "Tax ID type according to tax id table. Required when the document requires the receiver to be specified."
+              },
+              "receiver_legal_name": {
                 "type": "string",
                 "description": "Receiver legal name"
               },
@@ -1124,17 +1462,17 @@
                 "type": "string",
                 "description": "Required address"
               },
-              "receiver_location_id": {
+              "receiver_district": {
                 "type": "string",
                 "description": "The location code of the document receiver"
-              },
-              "receiver_state_id": {
-                "type": "string",
-                "description": "The state identification code of the document receiver"
               },
               "receiver_city": {
                 "type": "string",
                 "description": "The city of the document receiver"
+              },
+              "receiver_country_id": {
+                "type": "string",
+                "description": "Country ID according to ID table"
               },
               "receiver_phone": {
                 "type": "string",
@@ -1144,13 +1482,13 @@
                 "type": "string",
                 "description": "The activity of the document receiver"
               },
-              "receiver_country_id": {
-                "type": "string",
-                "description": "Country ID according to ID table"
-              },
               "payment_conditions": {
                 "type": "string",
                 "description": "Payment due dates separated by comma. Example: 0 = same day, 30 = 30 days 0,30 = 50% on issuance date, 50% 30 days later, 0,30,60 = 33% on issuance, 33% 30 days, 34% 60 days"
+              },
+              "currency_id": {
+                "type": "number",
+                "description": "Currency ID according to currency table"
               },
               "transportation_doc_type": {
                 "type": "number",
@@ -1180,10 +1518,6 @@
                 "type": "string",
                 "format": "date",
                 "description": "Read only. Null if not sent to tax bureau"
-              },
-              "currency_id": {
-                "type": "number",
-                "description": "Currency ID according to currency table"
               }
             },
             "required": [
@@ -1210,25 +1544,17 @@
             "items": {
               "type": "object",
               "properties": {
-                "product_id": {
-                  "type": "string",
-                  "description": "Optional product identifier"
-                },
                 "quantity": {
                   "type": "number",
                   "description": "Quantity of this product or service included in this line"
-                },
-                "unit_measure": {
-                  "type": "string",
-                  "description": "Unit that this line is measured in"
                 },
                 "line_description": {
                   "type": "string",
                   "description": "Short description to be included in the invoice as line title. Max 100 chars"
                 },
-                "long_description": {
+                "unit_measure": {
                   "type": "string",
-                  "description": "Long description to be included in the invoice as line title. Max 100 chars"
+                  "description": "Unit that this line is measured in"
                 },
                 "unit_price": {
                   "type": "number",
@@ -1237,6 +1563,10 @@
                 "vat_status": {
                   "type": "number",
                   "description": "Identify if it has value added tax."
+                },
+                "long_description": {
+                  "type": "string",
+                  "description": "Long description to be included in the invoice as line title. Max 100 chars"
                 },
                 "modifier_amount": {
                   "type": "number",
