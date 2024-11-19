@@ -65,7 +65,8 @@
         {
           "group": "Accounts",
           "pages": [
-            ""
+            "api-reference/endpoint/create-a-new-account",
+            "api-reference/endpoint/get-a-specific-account"
           ]
         },
         {
