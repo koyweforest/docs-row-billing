@@ -33,6 +33,135 @@
         }
       }
     },
+    "/accounts": {
+      "post": {
+        "summary": "Create a new account",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountsPost"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Your account is successfully created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid input or validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "invalid input or validation error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid token or missing authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Invalid or expired token"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error - unexpected error occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/accounts/{account_id}": {
+      "get": {
+        "summary": "Get a specific account",
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "Account ID to be created"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountsResponseGet"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid input or validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "invalid input or validation error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/documents": {
       "get": {
         "summary": "Get a paginated list of documents",
@@ -1369,6 +1498,101 @@
           }
         }
       },
+      "AccountsPost": {
+          "type": "object",
+            "properties": {
+              "country_id": {
+                "type": "integer",
+                "description": "Country ID where the account is created, supported IDs are:\\\n253 = Chile\\\n89 = United States"
+              },
+              "contact_name": {
+                "type": "string",
+                "description": "Contact name associated with the account that will be created."
+              },
+              "contact_phone": {
+                "type": "string",
+                "description": "Contact phone associated with the account that will be created, format: \\\n+56xxxxxxxxx = Chile\\\n+1xxxxxxxxx = United States."
+              },
+              "admin_email": {
+                "type": "string",
+                "description": "Admin email associated with the account that will be created.\\\nValid for login."
+              },
+              "admin_password": {
+                "type": "string",
+                "description": "Admin password associated with the account that will be created.\\\nValid for login."
+              },
+              "registration_legal_name_company": {
+                "type": "string",
+                "description": "Legal name of the company being registered."
+              },
+              "registration_tax_id_code": {
+                "type": "string",
+                "description": "Tax ID code of the company being registered, format: \\\nxx.xxx.xxx-x for Chile"
+              },
+              "registration_tax_id_type": {
+                "type": "string",
+                "description": "Tax ID type of the company being registered, supported IDs are:\\\nCL-RUT = Chile\\\nUS-EIN = United States\\\nUS-SSN = United States"
+              },
+              "registration_company_size": {
+                "type": "string",
+                "description": "Size of the company being registered."
+              },
+              "registration_terms_of_use": {
+                "type": "integer",
+                "description": "Acceptance of the terms of use.\\\n1 = Accepted"
+              },
+              "registration_type_use": {
+                "type": "integer",
+                "description": "Type use of the accounts being registered, supported IDs are:\\\n1 = Billing"
+              },
+              "registration_company_industry_sector": {
+                "type": "string",
+                "description": "Industry sector of the company being registered."
+              },
+              "registration_additional_data": {
+                "type": "object",
+                "description": "Required only for accounts in Chile",
+                "properties": {
+                  "certificate_file": {
+                    "type": "string",
+                    "description": "The certificate file for Chile account, required only for accounts in Chile\\\nformat: base64 encoded"
+                  },
+                  "certificate_password": {
+                    "type": "string",
+                    "description": "The certificate password for Chile account, required only for accounts in Chile"
+                  }
+                }
+             }
+            },
+            "required": [
+              "country_id",
+              "contact_name",
+              "contact_phone",
+              "admin_email",
+              "admin_password",
+              "registration_legal_name_company",
+              "registration_tax_id_code",
+              "registration_tax_id_type",
+              "registration_company_size",
+              "registration_terms_of_use",
+              "registration_type_use",
+              "registration_additional_data",
+              "certificate_file",
+              "certificate_password"
+            ]
+
+
+      },
+      "AccountsResponse": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string",
+            "description": "Returns the ID of the created account.",
+            "example": "638"
+          }
+        }
+      },
       "Document": {
         "type": "object",
         "properties": {
@@ -1650,6 +1874,78 @@
           }
         }
       },
+      "AccountsResponseGet": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string",
+            "description": "Created account ID."
+          },
+          "account_created": {
+            "type": "object",
+            "properties": {
+              "country_id": {
+                "type": "integer",
+                "description": "Country ID of the created account."
+              },
+              "contact_name": {
+                "type": "string",
+                "description": "Contact name of the created account."
+              },
+              "contact_phone": {
+                "type": "string",
+                "description": "Contact phone of the created account."
+              },
+              "admin_email": {
+                "type": "string",
+                "description": "Admin email of the created account."
+              },
+              "registration_legal_name_company": {
+                "type": "string",
+                "description": "Legal name company of the created account."
+              },
+              "registration_tax_id_code": {
+                "type": "string",
+                "description": "TAX ID code of the created account."
+              },
+              "registration_tax_id_type": {
+                "type": "string",
+                "description": "TAX ID type of the created account."
+              },
+              "registration_company_size": {
+                "type": "string",
+                "description": "Company size of the created account."
+              },
+              "registration_company_industry_sector": {
+                "type": "string",
+                "description": "Company industry sector of the created account."
+              },
+              "registration_type_use": {
+                "type": "integer",
+                "description": "Type use of the created account.\\\n1 = Billing"
+              },
+              "certification_status": {
+                "type": "string",
+                "description": "Certification status of the created account."
+              },
+              "certification_status_trace": {
+                "type": "object",
+                "properties": {
+                  "date": {
+                    "type": "string",
+                    "description": "Date of the certification status of the created account."
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "Status of the created account."
+                  }
+                }
+                }
+              }
+            }
+          }
+        },
+
       "Product": {
         "type": "object",
         "properties": {
