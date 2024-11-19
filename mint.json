@@ -63,6 +63,12 @@
           ]
         },
         {
+          "group": "Accounts",
+          "pages": [
+            ""
+          ]
+        },
+        {
           "group": "Documents",
           "pages": [
             "api-reference/endpoint/get-a-paginated-list-of-documents",
