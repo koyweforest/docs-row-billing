@@ -1551,6 +1551,7 @@
               },
               "registration_additional_data": {
                 "type": "object",
+                "description": "Required only for accounts in Chile",
                 "properties": {
                   "certificate_file": {
                     "type": "string",
@@ -1588,7 +1589,7 @@
           "account_id": {
             "type": "string",
             "description": "Returns the ID of the created account.",
-            "example": "account_id : 638"
+            "example": "638"
           }
         }
       },
@@ -1931,7 +1932,7 @@
                 "type": "object",
                 "properties": {
                   "date": {
-                    "type": "datetime",
+                    "type": "string",
                     "description": "Date of the certification status of the created account."
                   },
                   "status": {
@@ -1943,8 +1944,8 @@
               }
             }
           }
-        }
-      },
+        },
+
       "Product": {
         "type": "object",
         "properties": {
