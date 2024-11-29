@@ -657,8 +657,137 @@
           }
         ]
       }
+    },
+    "/digital_certificate/{certificate_id}": {
+      "get": {
+        "summary": "Get a specific digital certificate link",
+        "parameters": [
+          {
+            "name": "certificate_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Certificate ID of the created link"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Digital_certificateResponseGet"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid input or validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "invalid input or validation error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/digital_certificate": {
+      "post": {
+        "summary": "Create a new digital certificate link",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Digital_certificatePost"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Digital certificate link successfully generated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Digital_certificateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid input or validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "invalid input or validation error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid token or missing authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Invalid or expired token"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error - unexpected error occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
     }
-},
+  },
 "components": {
     "securitySchemes": {
       "bearerAuth": {
@@ -1593,6 +1722,43 @@
           }
         }
       },
+      "Digital_certificatePost": {
+        "type": "object",
+        "properties": {
+          "certificate_duration": {
+            "type": "integer",
+            "description": "Duration year of the digital certificate \\\n1 = 1 year\\\n2 = 2 years\\\n3 = 3 years"
+          },
+          "parent_account_id": {
+            "type": "integer",
+            "description": "ID of the parent account that is creating the digital certificate link."
+          }
+        },
+        "required": [
+          "certificate_duration",
+          "parent_account_id"
+        ]
+      },
+      "Digital_certificateResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Digital certificate link successfully generated.",
+            "example": "Digital certificate link successfully generated"
+          },
+          "certificate_id": {
+            "type": "string",
+            "description": "ID of the digital certificate link.",
+            "example": "7y5wvL7tZ3aGEMnxeSF1"
+          },
+          "certificate_generation_link": {
+            "type": "string",
+            "description": "Link to generate the digital certificate.",
+            "example": "https://certificado.facto.cl/certificado/registro/7y5wvL7tZ3aGEMnxeSF1"
+          }
+        }
+      },
       "Document": {
         "type": "object",
         "properties": {
@@ -1945,6 +2111,31 @@
             }
           }
         },
+      "Digital_certificateResponseGet": {
+        "type": "object",
+        "properties": {
+          "certificate_id": {
+            "type": "string",
+            "description": "ID of the digital certificate link.",
+            "example": "7y5wvL7tZ3aGEMnxeSF1"
+          },
+          "certificate_status": {
+            "type": "string",
+            "description": "Digital certificate status.\\\n0 = Pending\\\n1 = Form completed\\\n2 = Identity validated\\\n3 = Certificate downloaded",
+            "example": "3"
+          },
+          "certificate_duration": {
+            "type": "string",
+            "description": "Digital certificate duration, 1, 2 or 3 years",
+            "example": "1"
+          },
+          "certificate_file": {
+            "type": "string",
+            "description": "Digital certificate in base64 format. \\\nThis field is displayed only if the certificate_status is 3 = Certificate downloaded",
+            "example": "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"
+          }
+        }
+      },
 
       "Product": {
         "type": "object",
