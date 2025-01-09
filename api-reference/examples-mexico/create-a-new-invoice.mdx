@@ -1,0 +1,67 @@
+In order to create a new mexican invoice, you need to use the /documents endpoint with the proper parameters.
+
+## Endpoint: /documents
+* Method: POST
+* Required headers:
+* Content-Type: application/json
+* Authorization: Bearer -token-
+* Accept: */*
+
+```json
+{
+  "header": {
+    "account_id": 141,
+    "document_type_id": "76",
+
+    "received_issued_flag": 1,
+    "issue_date": "2025-01-07",
+    "issuer_tax_id_code": "EKU9003173C9",
+    "issuer_tax_id_type": "MX-RFC",
+    "issuer_legal_name": "<string>",
+    "issuer_address": "<string>",
+    "issuer_district": "<string>",
+    "issuer_city": "<string>",
+    "issuer_country_id": "80",
+    "issuer_phone": "<string>",
+    "issuer_activity": "<string>",
+    "receiver_tax_id_code": "EKU9003173C9",
+    "receiver_tax_id_type": "MX-RFC",
+    "receiver_legal_name": "ESCUELA KEMPER URGATE",
+    "receiver_address": "<string>",
+    "receiver_district": "<string>",
+    "receiver_city": "<string>",
+    "receiver_country_id": "80",
+    "receiver_phone": "<string>",
+    "receiver_activity": "<string>",
+    "payment_conditions": "0",
+    "currency_id": 31
+
+  },
+  "details": [
+    {
+      "quantity": 1,
+      "sku": "aa111",
+      "line_description": "Prueba ROW",
+      "unit_measure": "UN",
+      "unit_price": 1500,
+      "long_description": "Esta es una linea de prueba",
+      "modifier_amount": -100,
+      "total_taxes": 224,
+      "modifier_percentage": 0,
+      "total_amount_line": 1624,
+      "taxes": [
+        {
+          "tax_type_id": "362",
+          "tax_percentage": 16,
+          "tax_amount": 224
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "net_amount": 1400,
+    "taxes_amount": 224,
+    "total_amount": 1624
+  }
+}
+```

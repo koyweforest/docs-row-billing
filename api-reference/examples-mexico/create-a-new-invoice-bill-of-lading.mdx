@@ -1,0 +1,112 @@
+In order to create a new mexican invoice with bill of lading complement, you need to use the /documents endpoint with the proper parameters.
+
+## Endpoint: /documents
+* Method: POST
+* Required headers:
+* Content-Type: application/json
+* Authorization: Bearer -token-
+* Accept: */*
+
+```json
+{
+  "header": {
+    "account_id": 141,
+    "document_type_id": "76",
+
+    "received_issued_flag": 1,
+    "issue_date": "2025-01-07",
+    "issuer_tax_id_code": "EKU9003173C9",
+    "issuer_tax_id_type": "MX-RFC",
+    "issuer_legal_name": "<string>",
+    "issuer_address": "<string>",
+    "issuer_district": "<string>",
+    "issuer_city": "<string>",
+    "issuer_country_id": "80",
+    "issuer_phone": "<string>",
+    "issuer_activity": "<string>",
+    "receiver_tax_id_code": "EKU9003173C9",
+    "receiver_tax_id_type": "MX-RFC",
+    "receiver_legal_name": "ESCUELA KEMPER URGATE",
+    "receiver_address": "<string>",
+    "receiver_district": "<string>",
+    "receiver_city": "<string>",
+    "receiver_country_id": "80",
+    "receiver_phone": "<string>",
+    "receiver_activity": "<string>",
+    "payment_conditions": "0",
+    "currency_id": 31
+
+  },
+  "additional": {
+	"transport": {
+		"distance": "100",
+		"transport_code": "01",
+		"transport_method_name": "Autotransporte",
+		"transport_tax_id_type": "MX-RFC",
+		"transport_tax_id_code": "EKU9003173C9",
+		"transport_license": "a234567890",
+		"origin": {
+			"tax_id_type" : "MX-RFC",
+			"tax_id_code": "EKU9003173C9",
+			"date_time": "2025-01-07T00:00:00",
+			"address_state_id": "31",
+			"address_country_id": "80",
+			"address_postalcode": "13250"
+		},
+		"destination": {
+			"tax_id_type" : "MX-RFC",
+			"tax_id_code": "EKU9003173C9",
+			"date_time": "2025-01-07T00:00:00",
+			"address_state_id": "31",
+			"address_country_id": "80",
+			"address_postalcode": "13250"
+		},
+		"merchandise": {
+			"total_weight": "10",
+			"sct_permission_code": "TPAF01",
+			"sct_permission_number": "222333444",
+			"vehicle_configuration": "VL",
+			"vehicle_weight": "1",
+			"vehicle_license_plate": "AA22333",
+			"vehicle_year":"2020",
+			"insurance_company": "PRUEBA SEGUROS",
+			"insurance_identifier": "123456",
+			"details": [
+				{
+					"product_code": "11121900",
+					"description" : "Accesorios telefono",
+					"quantity" : "1",
+					"weight": "10"
+				}
+			]
+		}
+	}
+
+  },
+  "details": [
+    {
+      "quantity": 1,
+      "line_description": "Prueba ROW",
+      "unit_measure": "UN",
+      "unit_price": 1500,
+      "long_description": "Esta es una linea de prueba",
+      "modifier_amount": -100,
+      "total_taxes": 224,
+      "modifier_percentage": 0,
+      "total_amount_line": 1624,
+      "taxes": [
+        {
+          "tax_type_id": "362",
+          "tax_percentage": 16,
+          "tax_amount": 224
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "net_amount": 1400,
+    "taxes_amount": 224,
+    "total_amount": 1624
+  }
+}
+```

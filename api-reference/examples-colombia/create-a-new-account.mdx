@@ -1,0 +1,30 @@
+In order to create a new chilean account, you will need to send both the colombian RUT form, and the test_set_id as an additional field,
+ that you can get from the DIAN website. Remember to get the token from the /auth endpoint first.
+
+## Endpoint: /accounts
+* Method: POST
+* Required headers:
+  * Content-Type: application/json
+  * Authorization: Bearer -token-
+  * Accept: */*
+
+```json
+{
+    "country_id": 66,
+    "contact_name": "fernando rojas",
+    "contact_phone": "+579841055220",
+    "admin_email": "test@company.com",
+    "admin_password": "nuevaclave",
+    "registration_legal_name_company": "my company",
+    "registration_tax_id_code": "1707975798-1",
+    "registration_tax_id_type": "CO-NIT",
+    "registration_company_size": 1,
+    "registration_company_industry_sector": "1",
+    "registration_type_use": 1,
+    "registration_terms_of_use": 1,
+    "registration_additional_data": {
+        "registration_test_set_id": "AFAFDDSDFSFSAFADSFDSFDFSDA",
+        "registration_form_rut": "BRTR/V4fOjwxdWDl8YHT7/tP/4sua29LHlU86L9PcdPlrmoR/6YAF/0YkERyCg..."
+    }
+}
+```
