@@ -3,7 +3,7 @@
   "info": {
     "title": "Company and Document Management API",
     "version": "1.0.0",
-    "description": "API for managing companies, documents, products, and transfers"
+    "description": "API for managing companies, documents, products, and payments"
   },
   "paths": {
     "/auth": {
