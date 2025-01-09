@@ -1,0 +1,31 @@
+In order to create a new chilean account, you will need to send the mexican digital certificate as an additional field,
+as this is a requirement to issue electronic invoices. Remember to get the token from the /auth endpoint first.
+
+## Endpoint: /accounts
+* Method: POST
+* Required headers:
+    * Content-Type: application/json
+    * Authorization: Bearer -token-
+    * Accept: */*
+
+```json
+{
+    "country_id": 80,
+    "contact_name": "fernando rojas",
+    "contact_phone": "+529841055220",
+    "admin_email": "test@company.com",
+    "admin_password": "enternewpassword",
+    "registration_legal_name_company": "my company",
+    "registration_tax_id_code": "EKU9003199C1",
+    "registration_tax_id_type": "MX-RFC",
+    "registration_company_size": 1,
+    "registration_company_industry_sector": "1",
+    "registration_type_use": 1,
+    "registration_terms_of_use": 1,
+    "registration_additional_data": {
+        "certificate_key": "MIIFDjBABgkqhkiG9w0BBQ0wMzAb...",
+        "certificate_cer": "MIIFsDCCA5igAwIBAgIUMzAwMDEw...",
+        "certificate_password": "12345678a"
+    }
+}
+```
