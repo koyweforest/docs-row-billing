@@ -130,6 +130,7 @@
         {
           "group": "Perú",
           "pages": [
+            "api-reference/examples-peru/create-a-new-account",
             "api-reference/examples-peru/deleting-a-draft"
           ]
         }
