@@ -1,8 +1,5 @@
-In order to create a new mexican account, you will need to send the mexican digital certificate as an additional field,
+In order to create a new peruvian account, you will need to send the mexican digital certificate as an additional field,
 as this is a requirement to issue electronic invoices. Remember to get the token from the /auth endpoint first.
-
-The certificate_key, certificate_cer must be in DER binary format, encoded as base64.
-Example page to convert DER to base64: https://base64.guru/converter/encode/file
 
 ## Endpoint: /accounts
 * Method: POST
@@ -24,12 +21,7 @@ Example page to convert DER to base64: https://base64.guru/converter/encode/file
     "registration_company_size": 1,
     "registration_company_industry_sector": "1",
     "registration_type_use": 1,
-    "registration_terms_of_use": 1,
-    "registration_additional_data": {
-        "certificate_key": "MIIFDjBABgkqhkiG9w0BBQ0wMzAb...",
-        "certificate_cer": "MIIFsDCCA5igAwIBAgIUMzAwMDEw...",
-        "certificate_password": "12345678a"
-    }
+    "registration_terms_of_use": 1
 }
 ```
 
