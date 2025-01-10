@@ -501,14 +501,14 @@
             }
           },
           {
-            "name": "issuer_tax_id",
+            "name": "issuer_tax_id_code",
             "in": "query",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "receiver_tax_id",
+            "name": "receiver_tax_id_code",
             "in": "query",
             "schema": {
               "type": "string"
@@ -543,7 +543,7 @@
             }
           },
           {
-            "name": "document_type",
+            "name": "document_type_id",
             "in": "query",
             "schema": {
               "type": "string"
@@ -586,12 +586,12 @@
         ]
       }
     },
-    "/inbox_documents/{document_id}": {
+    "/inbox_documents/{inbox_document_id}": {
       "get": {
         "summary": "Get a specific received document",
         "parameters": [
           {
-            "name": "document_id",
+            "name": "inbox_document_id",
             "in": "path",
             "required": true,
             "schema": {
@@ -624,7 +624,7 @@
         "summary": "Accept or reject a document",
         "parameters": [
           {
-            "name": "document_id",
+            "name": "inbox_document_id",
             "in": "path",
             "required": true,
             "schema": {
@@ -1457,11 +1457,11 @@
               },
               "gross_weight": {
                 "type": "string",
-                "description": "Enter a shipping address."
+                "description": "Enter a gross weight."
               },
               "shipping_address": {
                 "type": "string",
-                "description": "Enter a gross weight."
+                "description": "Enter a shipping address."
               }
             },
             "required": [

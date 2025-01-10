@@ -104,7 +104,8 @@
           "pages": [
             "api-reference/examples-chile/create-a-new-account",
             "api-reference/examples-chile/create-a-new-invoice",
-            "api-reference/examples-chile/deleting-a-draft"
+            "api-reference/examples-chile/deleting-a-draft",
+            "api-reference/examples-chile/create-a-new-digital-certificate-link"
           ]
         },
         {
