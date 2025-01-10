@@ -1,0 +1,32 @@
+Our API allows you generate digital certificate links for you or your customers. Once generated, the customer must enter
+the link and validate his identity online, in order to get the certificate PFX file and use it to authenticate on the SII
+website or issue electronic invoices. Remember to get the token from the /auth endpoint first.
+
+IMPORTANT: Issuing digital certificates has an additional cost. Please contact us previously so we can enable your account to
+use this endpoint.
+
+
+## Endpoint: /digital_certificate
+* Method: POST
+* Required headers:
+  * Content-Type: application/json
+  * Authorization: Bearer \<token\>
+  * Accept: \*/\*
+
+```json
+{
+    "certificate_duration": 3,
+    "parent_account_id": "1560"
+}
+```
+
+
+<CardGroup cols={1}>
+    <Card
+        title="API Reference POST /digital_certificate"
+        icon="terminal"
+        href="/api-reference/endpoint/create-a-new-digital-certificate-link"
+    >
+        Detailed endpoint documentation
+    </Card>
+</CardGroup>
