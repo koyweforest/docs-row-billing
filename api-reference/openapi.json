@@ -5,6 +5,12 @@
     "version": "1.0.0",
     "description": "API for managing companies, documents, products, and payments"
   },
+  "servers": [
+    {
+      "url": "https://api.userow.com/billing/V1",
+      "description": "Production server"
+    }
+  ],
   "paths": {
     "/auth": {
       "post": {
@@ -123,7 +129,7 @@
             "required": true,
             "schema": {
               "type": "integer",
-              "description": "Account ID to be created"
+              "description": "Account ID to read"
             }
           }
         ],
@@ -186,49 +192,56 @@
             "name": "issue_date_from",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "Filter from this date (inclusive). Format AAAA-MM-DD"
             }
           },
           {
             "name": "issue_date_to",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "Filter to this date (inclusive). Format AAAA-MM-DD"
             }
           },
           {
             "name": "taxbureau_sending_status",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "description": "0 = Sending. 1XX = Retrying sending. 2XX = Rejected by Tax Bureau. 1 = Received by Tax Bureau. 2 = Closed without sending. 3 = Imported from another system. "
             }
           },
           {
             "name": "taxbureau_validation_status",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "description": "0,1 = In process. 2 = Rejected by tax bureau. 3 = Accepted by tax bureau. 4 = Accepted by tax bureau with warnings."
             }
           },
           {
             "name": "document_number",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "Document number"
             }
           },
           {
             "name": "document_type_id",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "description" : "Document type ID according to the country"
             }
           },
           {
-            "name": "issued_received",
+            "name": "received_issued_flag",
             "in": "query",
             "schema": {
-              "type": "number"
+              "type": "number",
+              "description": "0 = issued, 1 = received"
             }
           }
         ],
@@ -801,19 +814,24 @@
         "type": "object",
         "properties": {
           "grant_type": {
-            "type": "string"
+            "type": "string",
+            "description": "Use the text 'password' for password type grant",
+            "example": "password"
           },
           "client_id": {
-            "type": "string"
+            "type": "string",
+            "description": ""
           },
           "client_secret": {
             "type": "string"
           },
           "username": {
-            "type": "string"
+            "type": "string",
+            "description": "API username, not be confused with your website username"
           },
           "password": {
-            "type": "string"
+            "type": "string",
+            "description": "API password, not be confused with your website password"
           }
         },
         "required": ["grant_type", "client_id", "client_secret", "username", "password"]
@@ -1277,19 +1295,13 @@
           "currency_id": {
             "type": "number"
           },
-          "issued_received": {
+          "received_issued_flag": {
             "type": "number"
-          },
-          "exempt_amount": {
-            "type": "string"
           },
           "net_amount": {
             "type": "string"
           },
-          "vat_amount": {
-            "type": "string"
-          },
-          "other_taxes_amount": {
+          "taxes_amount": {
             "type": "string"
           },
           "total_amount": {
@@ -1787,9 +1799,9 @@
                 "type": "integer",
                 "description": "Document number."
               },
-              "issued_received": {
+              "received_issued_flag": {
                 "type": "integer",
-                "description": "Document received."
+                "description": "0 = received, 1 = issued"
               },
               "taxbureau_validation_status": {
                 "type": "integer",
@@ -2295,16 +2307,16 @@
             "type": "string",
             "description": "Read only. Document type name in the local language"
           },
-          "issued_received": {
+          "received_issued_flag": {
             "type": "boolean",
-            "description": "Read only. 0 = issued, 1 = received"
+            "description": "Read only. 0 = received, 1 = issued"
           },
           "country_id": {
             "type": "string",
             "description": "Read only. Country ID according to ID table"
           }
         },
-        "required": ["document_type_id", "name", "issued_received", "country_id"]
+        "required": ["document_type_id", "name", "received_issued_flag", "country_id"]
       },
       "Tax": {
         "type": "object",

@@ -1,12 +1,15 @@
-In order to create a new chilean account, you will need to send both the colombian RUT form, and the test_set_id as an additional field,
+In order to create a new colombian account, you will need to send both the colombian RUT FORM, and the test_set_id as an additional field,
  that you can get from the DIAN website. Remember to get the token from the /auth endpoint first.
+
+The test_set_id is a string and the registration_form_rut must be a PDF file encoded as base 64.
+Example page to convert PDF to base64: https://base64.guru/converter/encode/pdf
 
 ## Endpoint: /accounts
 * Method: POST
 * Required headers:
-  * Content-Type: application/json
-  * Authorization: Bearer -token-
-  * Accept: */*
+    * Content-Type: application/json
+    * Authorization: Bearer \<token\>
+    * Accept: \*/\*
 
 ```json
 {
@@ -28,3 +31,16 @@ In order to create a new chilean account, you will need to send both the colombi
     }
 }
 ```
+
+
+Notes: registration_test_set_id and registration_form_rut are just examples and don't show a full valid test_set_id and PDF form.
+
+<CardGroup cols={1}>
+    <Card
+        title="API Reference POST /accounts"
+        icon="terminal"
+        href="/endpoint/create-a-new-account"
+    >
+        Detailed endpoint documentation
+    </Card>
+</CardGroup>

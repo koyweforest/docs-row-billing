@@ -1,12 +1,15 @@
 In order to create a new chilean account, you will need to send the chilean digital certificate as an additional field on PFX format encoded as base64,
 as this is a requirement to issue electronic invoices. Remember to get the token from the /auth endpoint first.
 
+The certificate_file must be in PFX binary format, encoded as base64.
+Example page to convert PFX to base64: https://base64.guru/converter/encode/file
+
 ## Endpoint: /accounts
 * Method: POST
 * Required headers:
     * Content-Type: application/json
-    * Authorization: Bearer -token-
-    * Accept: */*
+    * Authorization: Bearer \<token\>
+    * Accept: \*/\*
 
 ```json
 {
@@ -28,3 +31,15 @@ as this is a requirement to issue electronic invoices. Remember to get the token
     }
 }
 ```
+
+Notes: certificate_file and certificate_password are just examples and don't show a full valid certificate.
+
+<CardGroup cols={1}>
+    <Card
+        title="API Reference POST /accounts"
+        icon="terminal"
+        href="/endpoint/create-a-new-account"
+    >
+        Detailed endpoint documentation
+    </Card>
+</CardGroup>
