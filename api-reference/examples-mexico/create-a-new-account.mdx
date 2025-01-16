@@ -1,10 +1,15 @@
+---
+title: '➕ Create a new account'
+description: ''
+---
+
 In order to create a new mexican account, you will need to send the mexican digital certificate as an additional field,
 as this is a requirement to issue electronic invoices. Remember to get the token from the /auth endpoint first.
 
 The certificate_key, certificate_cer must be in DER binary format, encoded as base64.
 Example page to convert DER to base64: https://base64.guru/converter/encode/file
 
-## Endpoint: /accounts
+## Endpoint: https://api.userow.com/billing/V1/accounts
 * Method: POST
 * Required headers:
     * Content-Type: application/json

@@ -1,0 +1,92 @@
+---
+title: '➕ Create a new receipt'
+description: ''
+---
+
+In order to create a new peruvian receipt, you need to use the /documents endpoint with the proper parameters.
+
+## Endpoint: https://api.userow.com/billing/V1/documents
+* Method: POST
+* Required headers:
+    * Content-Type: application/json
+    * Authorization: Bearer \<token\>
+    * Accept: \*/\*
+
+```json
+{
+  "header": {
+    "account_id": 179,
+    "document_type_id": "97",
+    "received_issued_flag": 0,
+    "issue_date": "2025-01-14",
+    "issuer_tax_id_code": "20610383727",
+    "issuer_tax_id_type": "PE-RUC",
+    "issuer_legal_name": "<string>",
+    "issuer_address": "<string>",
+    "issuer_district": "<string>",
+    "issuer_city": "<string>",
+    "issuer_country_id": "83",
+    "issuer_phone": "<string>",
+    "issuer_activity": "<string>",
+    "receiver_tax_id_code": "20473731828",
+    "receiver_tax_id_type": "PE-RUC",
+    "receiver_legal_name": "ESCUELA KEMPER URGATES",
+    "receiver_address": "<string>",
+    "receiver_district": "<string>",
+    "receiver_city": "<string>",
+    "receiver_country_id": "83",
+    "receiver_phone": "<string>",
+    "receiver_activity": "<string>",
+    "payment_conditions": "0",
+    "currency_id": 7
+  },
+  "additional": {
+  	"supplier_party_address_code": "12345456",
+  	"customer_party_address_code": "12343456",
+  	"operation_type": "ASDASDG",
+  	"signature_id": "ASDFG",
+  	"operation_type": "0101",
+  	"payment_terms": {
+		"id": "FormaPago",
+		"payment_means_id": "Contado"
+	}
+  },
+  "details": [
+    {
+      "quantity": 1,
+      "line_description": "Prueba ROW",
+      "unit_measure": "NIU",
+      "unit_price": 1000,
+      "long_description": "Test descripcion",
+      "modifier_amount": 0,
+      "total_taxes": 180,
+      "modifier_percentage": 0,
+      "total_amount_line": 1180,
+      "sku": "3245",
+      "taxes": [
+        {
+          "tax_type_id": "412",
+          "tax_percentage": 18,
+          "tax_amount": 180
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "net_amount": 1000,
+    "taxes_amount": 180,
+    "total_amount": 1180
+  }
+}
+```
+
+
+<CardGroup cols={1}>
+    <Card
+        title="API Reference POST /documents"
+        icon="terminal"
+        href="/api-reference/endpoint/create-a-new-document"
+    >
+        Detailed endpoint documentation
+    </Card>
+</CardGroup>

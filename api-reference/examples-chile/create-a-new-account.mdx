@@ -1,10 +1,15 @@
+---
+title: '➕ Create a new account'
+description: ''
+---
+
 In order to create a new chilean account, you will need to send the chilean digital certificate as an additional field on PFX format encoded as base64,
 as this is a requirement to issue electronic invoices. Remember to get the token from the /auth endpoint first.
 
 The certificate_file must be in PFX binary format, encoded as base64.
 Example page to convert PFX to base64: https://base64.guru/converter/encode/file
 
-## Endpoint: /accounts
+## Endpoint: https://api.userow.com/billing/V1/accounts
 * Method: POST
 * Required headers:
     * Content-Type: application/json
