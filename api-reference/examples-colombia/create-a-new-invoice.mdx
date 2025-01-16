@@ -1,73 +1,67 @@
-In order to create a new mexican invoice, you need to use the /documents endpoint with the proper parameters.
-
-Mexican invoices can be type I, E or T, you can define the type using the document_type_id field.
+In order to create a new colombian invoice, you need to use the /documents endpoint with the proper parameters.
 
 ## Endpoint: /documents
 * Method: POST
 * Required headers:
-    * Content-Type: application/json
-    * Authorization: Bearer \<token\>
-    * Accept: \*/\*
+  * Content-Type: application/json
+  * Authorization: Bearer \<token\>
+  * Accept: \*/\*
 
 ```json
 {
   "header": {
-    "account_id": 141,
-    "document_type_id": "76",
-
-    "received_issued_flag": 1,
-    "issue_date": "2025-01-07",
-    "issuer_tax_id_code": "EKU9003173C9",
-    "issuer_tax_id_type": "MX-RFC",
+    "account_id": 39,
+    "document_type_id": "82",
+    "received_issued_flag": 0,
+    "issue_date": "2025-01-14",
+    "issuer_tax_id_code": "860517022-2",
+    "issuer_tax_id_type": "CO-NIT",
     "issuer_legal_name": "<string>",
     "issuer_address": "<string>",
     "issuer_district": "<string>",
     "issuer_city": "<string>",
-    "issuer_country_id": "80",
+    "issuer_country_id": "66",
     "issuer_phone": "<string>",
     "issuer_activity": "<string>",
-    "receiver_tax_id_code": "EKU9003173C9",
-    "receiver_tax_id_type": "MX-RFC",
+    "receiver_tax_id_code": "860517022-2",
+    "receiver_tax_id_type": "CO-NIT",
     "receiver_legal_name": "ESCUELA KEMPER URGATE",
     "receiver_address": "<string>",
     "receiver_district": "<string>",
-    "receiver_city": "<string>",
-    "receiver_country_id": "80",
+    "receiver_city": "Bogota, D.C.",
+    "receiver_country_id": "66",
     "receiver_phone": "<string>",
     "receiver_activity": "<string>",
     "payment_conditions": "0",
-    "currency_id": 31
-
+    "currency_id": 28
   },
   "details": [
     {
       "quantity": 1,
-      "sku": "aa111",
       "line_description": "Prueba ROW",
-      "unit_measure": "UN",
+      "unit_measure": "70",
       "unit_price": 1500,
       "long_description": "Esta es una linea de prueba",
       "modifier_amount": -100,
-      "total_taxes": 224,
+      "total_taxes": 266,
       "modifier_percentage": 0,
-      "total_amount_line": 1624,
+      "total_amount_line": 1666,
       "taxes": [
         {
-          "tax_type_id": "362",
-          "tax_percentage": 16,
-          "tax_amount": 224
+          "tax_type_id": "387",
+          "tax_percentage": 19,
+          "tax_amount": 266
         }
       ]
     }
   ],
   "totals": {
     "net_amount": 1400,
-    "taxes_amount": 224,
-    "total_amount": 1624
+    "taxes_amount": 266,
+    "total_amount": 1666
   }
 }
 ```
-
 
 <CardGroup cols={1}>
     <Card

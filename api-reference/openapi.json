@@ -1230,14 +1230,6 @@
             "type": "string",
             "description": "Total of all net values from each of the detail lines."
           },
-          "exempt_amount": {
-            "type": "string",
-            "description": "Total of all exempt values from each of the detail lines."
-          },
-          "vat_amount": {
-            "type": "string",
-            "description": "Total value added tax."
-          },
           "total_amount": {
             "type": "string",
             "description": "Document grand total"
@@ -1393,7 +1385,7 @@
               },
               "receiver_country_id": {
                 "type": "integer",
-                "description": "Refers to the recipient's country. If not provided, the default is Chile. It is mainly used for export documents."
+                "description": "Refers to the recipient's country. If not provided, the default is the same country as the issuer. It is mainly used for export documents."
               },
               "payment_conditions": {
                 "type": "string",
@@ -1488,61 +1480,72 @@
             "items": {
               "type": "object",
               "properties": {
-                "detail": {
-                  "type": "object",
-                  "properties": {
-                    "quantity": {
-                      "type": "number",
-                      "format": "float",
-                      "description": "Quantity (can have up to 6 decimals, separate with a dot, not with a comma)."
+                "quantity": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "Quantity (can have up to 6 decimals, separate with a dot, not with a comma)."
+                },
+                "line_description": {
+                  "type": "string",
+                  "description": "Short description to be included in the invoice as line title. Max 100 chars."
+                },
+                "unit_price": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "Unit price (can have up to 6 decimals, separate with a dot, not with a comma). If using the 'gross_values' option, it must be the value including VAT."
+                },
+                "long_description": {
+                  "type": "string",
+                  "description": "Allows adding an additional long description to the detail description for the document."
+                },
+                "unit_measure": {
+                  "type": "string",
+                  "description": "Unit that this line is measured in."
+                },
+                "modifier_amount": {
+                  "type": "number",
+                  "description": "Amount to discount or surcharge.\nIf it is a discount, use a negative value.\nIf this is used, do not use discount_or_surcharge_percentage."
+                },
+                "modifier_percentage": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "Percentage to discount or surcharge. If it is a discount, use a negative value. If this is used, do not use discount_or_surcharge_amount."
+                },
+                "total_taxes": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "Total taxes for this line."
+                },
+                "total_amount_line": {
+                  "type": "number",
+                  "format": "float",
+                  "description": "Total amount for this line, including taxes and modifiers."
+                },
+                "taxes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "tax_type_id": {
+                        "type": "string",
+                        "description": "Identifier of the tax type."
+                      },
+                      "tax_percentage": {
+                        "type": "number",
+                        "format": "float",
+                        "description": "Percentage of the tax."
+                      },
+                      "tax_amount": {
+                        "type": "number",
+                        "format": "float",
+                        "description": "Amount of the tax."
+                      }
                     },
-                    "line_description": {
-                      "type": "string",
-                      "description": "Short description to be included in the invoice as line title. Max 100 chars."
-                    },
-                    "unit_price": {
-                      "type": "number",
-                      "format": "float",
-                      "description": "Unit price (can have up to 6 decimals, separate with a dot, not with a comma). If using the 'gross_values' option, it must be the value including VAT."
-                    },
-                    "long_description": {
-                      "type": "string",
-                      "description": "Allows adding an additional long description to the detail description for the document."
-                    },
-                    "unit_measure": {
-                      "type": "string",
-                      "description": "Unit that this line is measured in."
-                    },
-                    "vat_status": {
-                      "type": "boolean",
-                      "description": "0 = exempt from VAT\n1 = subject to VAT"
-                    },
-                    "discount_surcharge_amount": {
-                      "type": "number",
-                      "description": "Amount to discount or surcharge.\nIf it is a discount, use a negative value.\nIf this is used, do not use discount_or_surcharge_percentage."
-                    },
-                    "discount_surcharge_percentage": {
-                      "type": "number",
-                      "format": "float",
-                      "description": "Percentage to discount or surcharge. If it is a discount, use a negative value. If this is used, do not use discount_or_surcharge_amount."
-                    },
-                    "tax_code": {
-                      "type": "integer",
-                      "description": "Indicates the type of additional tax for this line.\nSee the annex tax table.\nNOT supported in the case of 'gross_values'."
-                    },
-                    "unit_tax_value": {
-                      "type": "integer",
-                      "format": "float",
-                      "description": "It should only be entered for taxes that require manual entry; it should not be entered if a tax code has not been selected."
-                    },
-                    "sku": {
-                      "type": "string",
-                      "description": "Allows entering the SKU of a product in Facto inventory. If the entered SKU exactly matches one in the inventory, the corresponding stock movement will be made upon issuing the document."
-                    }
-                  },
-                  "required": ["quantity", "line_description", "unit_price", "total_amount_line", "vat_status"]
+                    "required": ["tax_type_id", "tax_percentage", "tax_amount"]
+                  }
                 }
-              }
+              },
+              "required": ["quantity", "line_description", "unit_price", "total_amount_line", "unit_measure"]
             }
           },
           "references": {
@@ -1614,19 +1617,11 @@
                 "type": "integer",
                 "description": "65% credit for construction companies. Article 21 of Decree Law No. 910/75.\nThis is the only code that operates in the opposite manner to the rest, as it is subtracted from the general VAT. It corresponds to VAT * 0.65.\nNOT supported in the case of 'gross_values' (Chile)."
               },
-              "exempt_amount": {
-                "type": "integer",
-                "description": "Required, except in the case of gross values.\nTotal value of exempt items. It should NOT be entered if using the 'gross_values' option."
-              },
               "net_amount": {
                 "type": "integer",
                 "description": "Required, except in the case of gross values.\nTotal value of taxable items. It should NOT be entered if using the 'gross_values' option."
               },
-              "vat_amount": {
-                "type": "integer",
-                "description": "Required, except in the case of gross values.\nVAT according to taxable amount. It should NOT be entered if using the 'gross_values' option."
-              },
-              "other_taxes_amount": {
+              "taxes_amount": {
                 "type": "integer",
                 "description": "Sum of other taxes, can be negative if there are withholding taxes. NOT supported in the case of 'gross_values'."
               },
@@ -1635,7 +1630,7 @@
                 "description": "Final value."
               }
             },
-            "required": ["exempt_amount", "net_amount", "vat_amount", "total_amount"]
+            "required": [ "net_amount", "total_amount"]
           }
         }
       },
@@ -1644,7 +1639,7 @@
             "properties": {
               "country_id": {
                 "type": "integer",
-                "description": "Country ID where the account is created, supported IDs are:\\\n253 = Chile\\\n89 = United States"
+                "description": "Country ID where the account is created, supported IDs are:\\\n253 = Chile\\\n89 = United States\\\n66 = Colombia\\\n80 = Mexico\\\n83 = Perú"
               },
               "contact_name": {
                 "type": "string",
@@ -1672,7 +1667,7 @@
               },
               "registration_tax_id_type": {
                 "type": "string",
-                "description": "Tax ID type of the company being registered, supported IDs are:\\\nCL-RUT = Chile\\\nUS-EIN = United States\\\nUS-SSN = United States"
+                "description": "Tax ID type of the company being registered, supported IDs are:\\\nCL-RUT = Chile RUT\\\nUS-EIN = United States EIN\\\nUS-SSN = United States SSN\\\nCO-NIT = Colombia NIT\\\nPE-RUC = Peru RUC\\\nMX-RFC = Mexico RFC"
               },
               "registration_company_size": {
                 "type": "string",
@@ -1692,15 +1687,31 @@
               },
               "registration_additional_data": {
                 "type": "object",
-                "description": "Required only for accounts in Chile",
+                "description": "Required for certain countries. Check individual fields for more information",
                 "properties": {
+                  "registration_test_set_id": {
+                    "type": "string",
+                    "description": "Required for Colombia. TEST SET ID provided by DIAN"
+                  },
+                  "registration_form_rut": {
+                    "type": "string",
+                    "description": "Required for Colombia. RUT PDF form provided by DIAN\\\nformat: PDF encoded as base64"
+                  },
                   "certificate_file": {
                     "type": "string",
-                    "description": "The certificate file for Chile account, required only for accounts in Chile\\\nformat: base64 encoded"
+                    "description": "Required for Chile. Digital certificate file.\\\nformat: PFX encoded as base64"
+                  },
+                  "certificate_key": {
+                    "type": "string",
+                    "description": "Required for Mexico. Private key provided by SAT.\\\nformat: DER format just as provided by the SAT"
+                  },
+                  "certificate_cer": {
+                    "type": "string",
+                    "description": "Required for Mexico. Public certificate provided by SAT.\\\nformat: DER format just as provided by the SAT"
                   },
                   "certificate_password": {
                     "type": "string",
-                    "description": "The certificate password for Chile account, required only for accounts in Chile"
+                    "description": "Required for Chile and Mexico. The certificate password"
                   }
                 }
              }
@@ -2014,19 +2025,11 @@
           "totals": {
             "type": "object",
             "properties": {
-              "exempt_amount": {
-                "type": "number",
-                "description": "Total of all exempt values from each of the detail lines."
-              },
               "net_amount": {
                 "type": "number",
                 "description": "Total of all net values from each of the detail lines."
               },
-              "vat_amount": {
-                "type": "number",
-                "description": "Total value added tax."
-              },
-              "other_taxes_amount": {
+              "taxes_amount": {
                 "type": "number",
                 "description": "Total of all other taxes"
               },
@@ -2107,17 +2110,21 @@
                 "description": "Certification status of the created account."
               },
               "certification_status_trace": {
-                "type": "object",
-                "properties": {
-                  "date": {
-                    "type": "string",
-                    "description": "Date of the certification status of the created account."
-                  },
-                  "status": {
-                    "type": "string",
-                    "description": "Status of the created account."
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "date": {
+                      "type": "string",
+                      "description": "Date of the certification status of the created account."
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "Status of the created account."
+                    }
                   }
                 }
+
                 }
               }
             }

@@ -102,36 +102,46 @@
         {
           "group": "Chile",
           "pages": [
+            "api-reference/examples-chile/sandbox-environment-credentials",
             "api-reference/examples-chile/create-a-new-account",
             "api-reference/examples-chile/create-a-new-invoice",
             "api-reference/examples-chile/deleting-a-draft",
-            "api-reference/examples-chile/create-a-new-digital-certificate-link"
+            "api-reference/examples-chile/create-a-new-digital-certificate-link",
+            "api-reference/examples-chile/table-of-codes"
           ]
         },
         {
           "group": "Colombia",
           "pages": [
+            "api-reference/examples-colombia/sandbox-environment-credentials",
             "api-reference/examples-colombia/create-a-new-account",
-            "api-reference/examples-colombia/deleting-a-draft"
+            "api-reference/examples-colombia/create-a-new-invoice",
+            "api-reference/examples-colombia/create-a-new-credit-note",
+            "api-reference/examples-colombia/deleting-a-draft",
+            "api-reference/examples-colombia/table-of-codes"
           ]
         },
         {
           "group": "Mexico",
           "pages": [
+            "api-reference/examples-mexico/sandbox-environment-credentials",
             "api-reference/examples-mexico/create-a-new-account",
             "api-reference/examples-mexico/create-a-new-invoice",
             "api-reference/examples-mexico/create-a-new-invoice-exports",
             "api-reference/examples-mexico/create-a-new-invoice-bill-of-lading",
             "api-reference/examples-mexico/create-a-new-payment",
             "api-reference/examples-mexico/cancelling-an-invoice",
-            "api-reference/examples-mexico/deleting-a-draft"
+            "api-reference/examples-mexico/deleting-a-draft",
+            "api-reference/examples-mexico/table-of-codes"
           ]
         },
         {
           "group": "Perú",
           "pages": [
+            "api-reference/examples-peru/sandbox-environment-credentials",
             "api-reference/examples-peru/create-a-new-account",
-            "api-reference/examples-peru/deleting-a-draft"
+            "api-reference/examples-peru/deleting-a-draft",
+            "api-reference/examples-peru/table-of-codes"
           ]
         }
       ]
