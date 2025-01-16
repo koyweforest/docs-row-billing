@@ -104,6 +104,7 @@
         {
           "group": "Chile",
           "pages": [
+            "api-reference/examples-chile/intro-to-e-invoice",
             "api-reference/examples-chile/sandbox-environment-credentials",
             "api-reference/examples-chile/create-a-new-account",
             "api-reference/examples-chile/create-a-new-invoice",
@@ -115,6 +116,7 @@
         {
           "group": "Colombia",
           "pages": [
+            "api-reference/examples-colombia/intro-to-e-invoice",
             "api-reference/examples-colombia/sandbox-environment-credentials",
             "api-reference/examples-colombia/create-a-new-account",
             "api-reference/examples-colombia/create-a-new-invoice",
@@ -127,6 +129,7 @@
         {
           "group": "Mexico",
           "pages": [
+            "api-reference/examples-mexico/intro-to-e-invoice",
             "api-reference/examples-mexico/sandbox-environment-credentials",
             "api-reference/examples-mexico/create-a-new-account",
             "api-reference/examples-mexico/create-a-new-invoice",
@@ -141,6 +144,7 @@
         {
           "group": "Perú",
           "pages": [
+            "api-reference/examples-peru/intro-to-e-invoice",
             "api-reference/examples-peru/sandbox-environment-credentials",
             "api-reference/examples-peru/create-a-new-account",
             "api-reference/examples-peru/create-a-new-invoice",
@@ -152,7 +156,7 @@
         {
           "group": "United States",
           "pages": [
-            "new-standard",
+            "api-reference/examples-usa/intro-to-e-invoice",
             "documents"
           ]
         }
