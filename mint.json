@@ -23,7 +23,7 @@
   ],
   "topbarCtaButton": {
     "name": "Home",
-    "url": "https://userow.com/billing"
+    "url": "https://userow.com/"
   },
   "tabs": [
 
@@ -119,6 +119,7 @@
             "api-reference/examples-colombia/create-a-new-account",
             "api-reference/examples-colombia/create-a-new-invoice",
             "api-reference/examples-colombia/create-a-new-credit-note",
+            "api-reference/examples-colombia/create-a-new-debit-note",
             "api-reference/examples-colombia/deleting-a-draft",
             "api-reference/examples-colombia/table-of-codes"
           ]
@@ -142,6 +143,8 @@
           "pages": [
             "api-reference/examples-peru/sandbox-environment-credentials",
             "api-reference/examples-peru/create-a-new-account",
+            "api-reference/examples-peru/create-a-new-invoice",
+            "api-reference/examples-peru/create-a-new-receipt",
             "api-reference/examples-peru/deleting-a-draft",
             "api-reference/examples-peru/table-of-codes"
           ]
