@@ -1,0 +1,116 @@
+The following are the codes to be used on mexican operations. Use the navigation on your right to quickly move to different id.
+
+All request to the API should be made using the first column ID. External codes are to be considered only for reference purposes.
+
+# country_id
+| country_id | name   |
+|------------|--------|
+| 80         | México |
+
+# currency_id
+| country_id | name          | external_code |
+|------------|---------------|---------------|
+| 31         | Peso mexicano | MXN           |
+| 5          | Dolar USA     | USD           |
+| 38         | Euro          | EUR           |
+
+# tax_id_type
+| tax_id_type | name                                       |
+|-------------|--------------------------------------------|
+| MX-RFC      | Registro federal de contribuyente mexicano |
+
+
+# document_type_id
+| document_type_id | name                         | received_issued_flag | external_code |
+|------------------|------------------------------|----------------------|---------------|
+| 76               | Factura de ingreso emitida   | 1                    | I             |
+| 77               | Factura de egreso emitida    | 1                    | E             |
+| 78               | Factura de traslado emitida  | 1                    | T             |
+| 79               | Factura de ingreso recibida  | 0                    | I             |
+| 80               | Factura de egreso recibida   | 0                    | E             |
+| 81               | Factura de traslado recibida | 0                    | T             |
+
+
+# tax_type_id
+| tax_type_id | name                    | tax_type | value      | external_code |
+|-------------|-------------------------|----------|------------|---------------|
+| 360         | IVA 0%                 | 2        | 0,0000     | 002           |
+| 361         | IVA 8%                 | 2        | 8,0000     | 002           |
+| 362         | IVA 16%                | 2        | 16,0000    | 002           |
+| 363         | Retención IVA 0%       | 2        | 0,0000     | 002           |
+| 364         | Retención IVA 8%       | 2        | -8,0000    | 002           |
+| 365         | Retención IVA 16%      | 2        | -16,0000   | 002           |
+| 366         | Retención ISR 10%      | 2        | -10,0000   | 001           |
+| 367         | IEPS 0%                | 2        | 0,0000     | 003           |
+| 368         | IEPS 3%                | 2        | 3,0000     | 003           |
+| 369         | IEPS 6%                | 2        | 6,0000     | 003           |
+| 370         | IEPS 7%                | 2        | 7,0000     | 003           |
+| 371         | IEPS 8%                | 2        | 8,0000     | 003           |
+| 372         | IEPS 25%               | 2        | 25,0000    | 003           |
+| 373         | IEPS 30%               | 2        | 30,0000    | 003           |
+| 374         | IEPS 53%               | 2        | 53,0000    | 003           |
+| 375         | IEPS 160%              | 2        | 160,0000   | 003           |
+| 376         | IEPS Cuota             | 3        | 0,0000     | 003           |
+| 377         | Retención IEPS 0%      | 2        | 0,0000     | 003           |
+| 378         | Retención IEPS 3%      | 2        | -3,0000    | 003           |
+| 379         | Retención IEPS 6%      | 2        | -6,0000    | 003           |
+| 380         | Retención IEPS 7%      | 2        | -7,0000    | 003           |
+| 381         | Retención IEPS 8%      | 2        | -8,0000    | 003           |
+| 382         | Retención IEPS 25%     | 2        | -25,0000   | 003           |
+| 383         | Retención IEPS 30%     | 2        | -30,0000   | 003           |
+| 384         | Retención IEPS 53%     | 2        | -53,0000   | 003           |
+| 385         | Retención IEPS 160%    | 2        | -160,0000  | 003           |
+| 386         | Retención IEPS Cuota   | 3        | 0,0000     | 003           |
+
+Notes:
+tax_type values:
+1 = fixed value in money
+2 = fixed percentage
+3 = variable value in money to be defined by user as part of the request
+
+tax_value:
+Positive numbers will add to the final amount, while negative values are retentions and will decrease the final amount
+
+# state_id
+| state_id | name                   | external_code |
+|----------|------------------------|---------------|
+| 18       | Aguascalientes         | AGU           |
+| 19       | Baja California        | BCN           |
+| 20       | Baja California Sur    | BCS           |
+| 21       | Campeche               | CAM           |
+| 22       | Chiapas                | CHP           |
+| 23       | Chihuahua              | CHH           |
+| 24       | Coahuila               | COA           |
+| 25       | Colima                 | COL           |
+| 26       | Circunscripción 1      | CR1           |
+| 27       | Circunscripción 2      | CR2           |
+| 28       | Circunscripción 3      | CR3           |
+| 29       | Circunscripción 4      | CR4           |
+| 30       | Circunscripción 5      | CR5           |
+| 31       | Ciudad de México       | CMX           |
+| 32       | Durango                | DUR           |
+| 33       | Guanajuato             | GUA           |
+| 34       | Guerrero               | GRO           |
+| 35       | Hidalgo                | HID           |
+| 36       | Jalisco                | JAL           |
+| 37       | México                 | MEX           |
+| 38       | Michoacán              | MIC           |
+| 39       | Morelos                | MOR           |
+| 40       | Nacional               | NAC           |
+| 41       | Nayarit                | NAY           |
+| 42       | Nuevo León             | NLE           |
+| 43       | Oaxaca                 | OAX           |
+| 44       | Puebla                 | PUE           |
+| 45       | Querétaro              | QUE           |
+| 46       | Quintana Roo           | ROO           |
+| 47       | San Luis Potosí        | SLP           |
+| 48       | Sinaloa                | SIN           |
+| 49       | Sonora                 | SON           |
+| 50       | Tabasco                | TAB           |
+| 51       | Tamaulipas             | TAM           |
+| 114      | Yucatán                | YUC           |
+| 115      | Tlaxcala               | TLA           |
+| 116      | Veracruz               | VER           |
+| 117      | Zacatecas              | ZAC           |
+
+

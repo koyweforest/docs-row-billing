@@ -1,0 +1,73 @@
+The following are the codes to be used on mexican operations. Use the navigation on your right to quickly move to different id.
+
+All request to the API should be made using the first column ID. External codes are to be considered only for reference purposes.
+
+# country_id
+| country_id | name |
+|------------|------|
+| 83         | Perú |
+
+# currency_id
+| country_id | name      | external_code |
+|------------|-----------|---------------|
+| 7          | Sol       | PEN           |
+| 5          | Dolar USA | USD           |
+| 38         | Euro      | EUR           |
+
+# tax_id_type
+| tax_id_type | name                                 |
+|----------|--------------------------------------|
+| PE-RUC        | Registro único contribuyente peruano                            |
+
+
+
+# document_type_id
+| document_type_id | Name                                         | received_issued_flag | External Code |
+|------------------|----------------------------------------------|----------------------|---------------|
+| 96               | Factura emitida                              | 1                    | 01            |
+| 97               | Boleta de venta emitida                      | 1                    | 03            |
+| 98               | Nota de crédito emitida                      | 1                    | 07            |
+| 99               | Nota de débito emitida                       | 1                    | 08            |
+| 100              | Guia de remisión para remitente emitida      | 1                    | 09            |
+| 101              | Guia de remisión para Transportista emitida  | 1                    | 31            |
+| 102              | Factura recibida                             | 0                    | 01            |
+| 103              | Boleta de venta recibida                     | 0                    | 03            |
+| 104              | Nota de crédito recibida                     | 0                    | 07            |
+| 105              | Nota de débito recibida                      | 0                    | 08            |
+| 107              | Guia de remisión para remitente recibida     | 0                    | 09            |
+| 108              | Guia de remisión para Transportista recibida | 0                    | 31            |
+| 109              | Comprobante de retención emitido             | 1                    | 20            |
+| 110              | Comprobante de retención recibido            | 1                    | 20            |
+
+
+# tax_type_id
+| tax_type_id | name                                | tax_type | value   | external_code |
+|-------------|-------------------------------------|----------|---------|---------------|
+| 412         | IGV 16%                            | 2        | 16,0000 | 1000          |
+| 413         | IGV 18%                            | 2        | 18,0000 | 1000          |
+| 414         | IGV 0%                             | 2        | 0,0000  | 9997          |
+| 415         | ISC Alcohol 20%                    | 2        | 20,0000 | 2000          |
+| 416         | ISC Alcohol 50%                    | 2        | 50,0000 | 2000          |
+| 417         | ISC Bebidas azucaradas 17%         | 2        | 17,0000 | 2000          |
+| 418         | ISC Cigarrillos                    | 3        | 0,0000  | 2000          |
+| 419         | ISC Combustibles                   | 3        | 0,0000  | 2000          |
+| 420         | ISC Vehículos 10%                  | 2        | 10,0000 | 2000          |
+| 421         | ISC Vehículos 20%                  | 2        | 20,0000 | 2000          |
+| 422         | ISC Vehículos Otros                | 3        | 0,0000  | 2000          |
+| 423         | ISC Bebidas azucaradas 25%         | 2        | 25,0000 | 2000          |
+| 424         | ISC Alcohol                        | 3        | 0,0000  | 2000          |
+| 425         | Exportación                        | 2        | 0,0000  | 9995          |
+| 426         | Operaciones gratuitas              | 2        | 0,0000  | 9996          |
+| 427         | Operaciones exoneradas             | 2        | 0,0000  | 9997          |
+| 428         | Operaciones inafectas              | 2        | 0,0000  | 9998          |
+| 429         | Otros conceptos de pago            | 3        | 0,0000  | 9999          |
+
+
+Notes:
+tax_type values:
+1 = fixed value in money
+2 = fixed percentage
+3 = variable value in money to be defined by user as part of the request
+
+tax_value:
+Positive numbers will add to the final amount, while negative values are retentions and will decrease the final amount

@@ -1,0 +1,892 @@
+The following are the codes to be used on colombian operations. Use the navigation on your right to quickly move to different id.
+
+All request to the API should be made using the first column ID. External codes are to be considered only for reference purposes.
+
+# country_id
+| country_id | name     |
+|------------|----------|
+| 66         | Colombia |
+
+
+# currency_id
+| country_id | name            | external_code |
+|------------|-----------------|---------------|
+| 28         | Peso colombiano | COP           |
+| 5          | Dolar USA       | USD           |
+| 38         | Euro            | EUR           |
+
+# tax_id_type
+| tax_id_type | name           |
+|-------------|----------------|
+| CO-NIT      | NIT colombiano |
+
+
+# document_type_id
+| document_type_id | name                                               | received_issued_flag | external_code |
+|------------------|----------------------------------------------------|----------------------|---------------|
+| 82               | Factura emitida                                    | 1                    | 01            |
+| 83               | Nota de crédito emitida                            | 1                    | 04            |
+| 84               | Nota de débito emitida                             | 1                    | 05            |
+| 85               | Documento de soporte emitido                       | 1                    | 12            |
+| 86               | Nota de crédito a documento de soporte emitido     | 1                    | 22            |
+| 87               | Documento equivalente POS emitido                  | 1                    | 20            |
+| 88               | Nota de crédito documento equivalente POS emitido  | 1                    | 94            |
+| 89               | Factura recibida                                   | 0                    | 01            |
+| 90               | Nota de crédito recibida                           | 0                    | 04            |
+| 91               | Nota de débito recibida                            | 0                    | 05            |
+| 92               | Documento de soporte recibido                      | 0                    | 12            |
+| 93               | Nota de crédito a documento de soporte recibido    | 0                    | 22            |
+| 94               | Documento equivalente POS recibido                 | 0                    | 20            |
+| 95               | Nota de crédito documento equivalente POS recibido | 0                    | 94            |
+
+
+
+# tax_type_id
+| tax_type_id | name                          | tax_type | value    | external_code |
+|-------------|-------------------------------|----------|----------|---------------|
+| 388         | IVA 19%                       | 2        | 19,0000  | 01            |
+| 389         | IVA 5%                        | 2        | 5,0000   | 01            |
+| 390         | IVA 0%                        | 2        | 0,0000   | 01            |
+| 391         | IC 8%                         | 2        | 8,0000   | 02            |
+| 392         | IC 16%                        | 2        | 16,0000  | 02            |
+| 393         | IC 4%                         | 2        | 4,0000   | 02            |
+| 394         | IC 10%                        | 2        | 10,0000  | 02            |
+| 395         | ICA 0.2%                      | 2        | 0,2000   | 03            |
+| 396         | ICA 1.4%                      | 2        | 1,4000   | 03            |
+| 397         | Retención IVA 15% (caso 19%)  | 2        | -2,8500  | 04            |
+| 398         | Retención IVA 15% (caso 5%)   | 2        | -0,7500  | 04            |
+| 399         | Retención IVA 100% (caso 19%) | 2        | -19,0000 | 04            |
+| 400         | Retención IVA 100% (caso 5%)  | 2        | -5,0000  | 04            |
+| 401         | Retención Renta 2.5%          | 2        | -2,5000  | 05            |
+| 402         | Retención Renta 4%            | 2        | -4,0000  | 05            |
+| 403         | Retención Renta 10%           | 2        | -10,0000 | 05            |
+| 404         | Retención Renta 1%            | 2        | -1,0000  | 05            |
+| 405         | Retención Renta 3.5%          | 2        | -3,5000  | 05            |
+| 406         | Retención ICA 0.2%            | 2        | -0,2000  | 06            |
+| 407         | Retención ICA 1.4%            | 2        | -1,4000  | 06            |
+| 408         | INC 2%                        | 2        | 2,0000   | 07            |
+| 409         | INC 4%                        | 2        | 4,0000   | 07            |
+| 410         | INC 8%                        | 2        | 8,0000   | 07            |
+| 411         | INC 16%                       | 2        | 16,0000  | 07            |
+
+
+Notes:
+tax_type values:
+1 = fixed value in money
+2 = fixed percentage
+3 = variable value in money to be defined by user as part of the request
+
+tax_value:
+Positive numbers will add to the final amount, while negative values are retentions and will decrease the final amount
+
+
+# state_id
+| state_id | name                        | external_code |
+|----------|-----------------------------|---------------|
+| 118      | Amazonas                    | 1             |
+| 119      | Antioquia                   | 2             |
+| 120      | Arauca                      | 3             |
+| 121      | Atlántico                   | 4             |
+| 122      | Bogotá                      | 5             |
+| 123      | Bolívar                     | 6             |
+| 124      | Boyacá                      | 7             |
+| 125      | Caldas                      | 8             |
+| 126      | Caquetá                     | 9             |
+| 127      | Casanare                    | 10            |
+| 128      | Cauca                       | 11            |
+| 129      | Cesar                       | 12            |
+| 130      | Chocó                       | 13            |
+| 131      | Córdoba                     | 14            |
+| 132      | Cundinamarca                | 15            |
+| 133      | Guainía                     | 16            |
+| 134      | Guaviare                    | 17            |
+| 135      | Huila                       | 18            |
+| 136      | La Guajira                  | 19            |
+| 137      | Magdalena                   | 20            |
+| 138      | Meta                        | 21            |
+| 139      | Nariño                      | 22            |
+| 140      | Norte de Santander          | 23            |
+| 141      | Putumayo                    | 24            |
+| 142      | Quindío                     | 25            |
+| 143      | Risaralda                   | 26            |
+| 144      | San Andrés y Providencia    | 27            |
+| 145      | Santander                   | 28            |
+| 146      | Sucre                       | 29            |
+| 147      | Tolima                      | 30            |
+| 148      | Valle del Cauca             | 31            |
+| 149      | Vaupés                      | 32            |
+| 150      | Vichada                     | 33            |
+
+
+# county_id
+| county_id | name                        | state_id | external_code |
+|-----------|-----------------------------|----------|---------------|
+| 348       | Medellín                    | 119      | 05001         |
+| 349       | Abejorral                   | 119      | 05002         |
+| 350       | Abriaquí                     | 119      | 05004         |
+| 351       | Alejandría                  | 119      | 05021         |
+| 352       | Amagá                        | 119      | 05030         |
+| 353       | Amalfi                       | 119      | 05031         |
+| 354       | Andes                        | 119      | 05034         |
+| 355       | Angelópolis                 | 119      | 05036         |
+| 356       | Angostura                    | 119      | 05038         |
+| 357       | Anorí                        | 119      | 05040         |
+| 358       | Santa Fé De Antioquia       | 119      | 05042         |
+| 359       | Anzá                         | 119      | 05044         |
+| 360       | Apartadó                     | 119      | 05045         |
+| 361       | Arboletes                    | 119      | 05051         |
+| 362       | Argelia                      | 119      | 05055         |
+| 363       | Armenia                      | 119      | 05059         |
+| 364       | Barbosa                      | 119      | 05079         |
+| 365       | Belmira                      | 119      | 05086         |
+| 366       | Bello                        | 119      | 05088         |
+| 367       | Betania                      | 119      | 05091         |
+| 368       | Betulia                      | 119      | 05093         |
+| 369       | Ciudad Bolívar              | 119      | 05101         |
+| 370       | Briceño                      | 119      | 05107         |
+| 371       | Buriticá                     | 119      | 05113         |
+| 372       | Cáceres                      | 119      | 05120         |
+| 373       | Caicedo                      | 119      | 05125         |
+| 374       | Caldas                       | 119      | 05129         |
+| 375       | Campamento                   | 119      | 05134         |
+| 376       | Cañasgordas                  | 119      | 05138         |
+| 377       | Caracolí                     | 119      | 05142         |
+| 378       | Caramanta                    | 119      | 05145         |
+| 379       | Carepa                       | 119      | 05147         |
+| 380       | El Carmen de Viboral        | 119      | 05148         |
+| 381       | Carolina                     | 119      | 05150         |
+| 382       | Caucasia                     | 119      | 05154         |
+| 383       | Chigorodó                    | 119      | 05172         |
+| 384       | Cisneros                     | 119      | 05190         |
+| 385       | Cocorná                      | 119      | 05197         |
+| 386       | Concepción                  | 119      | 05206         |
+| 387       | Concordia                    | 119      | 05209         |
+| 388       | Copacabana                   | 119      | 05212         |
+| 389       | Dabeiba                      | 119      | 05234         |
+| 390       | Donmatías                    | 119      | 05237         |
+| 391       | Ebéjico                      | 119      | 05240         |
+| 392       | El Bagre                     | 119      | 05250         |
+| 393       | Entrerríos                   | 119      | 05264         |
+| 394       | Envigado                     | 119      | 05266         |
+| 395       | Fredonia                     | 119      | 05282         |
+| 396       | Frontino                     | 119      | 05284         |
+| 397       | Giraldo                      | 119      | 05306         |
+| 398       | Girardota                    | 119      | 05308         |
+| 399       | Gómez Plata                  | 119      | 05310         |
+| 400       | Granada                      | 119      | 05313         |
+| 401       | Guadalupe                      | 119      | 05315         |
+| 402       | Guarne                         | 119      | 05318         |
+| 403       | Guatapé                        | 119      | 05321         |
+| 404       | Heliconia                      | 119      | 05347         |
+| 405       | Hispania                       | 119      | 05353         |
+| 406       | Itagüí                         | 119      | 05360         |
+| 407       | Ituango                        | 119      | 05361         |
+| 408       | Jardín                         | 119      | 05364         |
+| 409       | Jericó                         | 119      | 05368         |
+| 410       | La Ceja                        | 119      | 05376         |
+| 411       | La Estrella                    | 119      | 05380         |
+| 412       | La Pintada                     | 119      | 05390         |
+| 413       | La Unión                       | 119      | 05400         |
+| 414       | Liborina                       | 119      | 05411         |
+| 415       | Maceo                          | 119      | 05425         |
+| 416       | Marinilla                      | 119      | 05440         |
+| 417       | Montebello                     | 119      | 05467         |
+| 418       | Murindó                        | 119      | 05475         |
+| 419       | Mutatá                         | 119      | 05480         |
+| 420       | Nariño                         | 119      | 05483         |
+| 421       | Necoclí                        | 119      | 05490         |
+| 422       | Nechí                          | 119      | 05495         |
+| 423       | Olaya                          | 119      | 05501         |
+| 424       | Peñol                          | 119      | 05541         |
+| 425       | Peque                          | 119      | 05543         |
+| 426       | Pueblorrico                    | 119      | 05576         |
+| 427       | Puerto Berrío                  | 119      | 05579         |
+| 428       | Puerto Nare                    | 119      | 05585         |
+| 429       | Puerto Triunfo                 | 119      | 05591         |
+| 430       | Remedios                       | 119      | 05604         |
+| 431       | Retiro                         | 119      | 05607         |
+| 432       | Rionegro                        | 119      | 05615         |
+| 433       | Sabanalarga                    | 119      | 05628         |
+| 434       | Sabaneta                        | 119      | 05631         |
+| 435       | Salgar                         | 119      | 05642         |
+| 436       | San Andrés de Cuerquía         | 119      | 05647         |
+| 437       | San Carlos                     | 119      | 05649         |
+| 438       | San Francisco                  | 119      | 05652         |
+| 439       | San Jerónimo                   | 119      | 05656         |
+| 440       | San José de la Montaña         | 119      | 05658         |
+| 441       | San Juan de Urabá              | 119      | 05659         |
+| 442       | San Luis                       | 119      | 05660         |
+| 443       | San Pedro de los Milagros      | 119      | 05664         |
+| 444       | San Pedro de Urabá             | 119      | 05665         |
+| 445       | San Rafael                     | 119      | 05667         |
+| 446       | San Roque                       | 119      | 05670         |
+| 447       | San Vicente Ferrer             | 119      | 05674         |
+| 448       | Santa Bárbara                  | 119      | 05679         |
+| 449       | Santa Rosa de Osos             | 119      | 05686         |
+| 450       | Santo Domingo                  | 119      | 05690         |
+| 451       | El Santuario                   | 119      | 05697         |
+| 452       | Segovia                        | 119      | 05736         |
+| 453       | Sonsón                         | 119      | 05756         |
+| 454       | Sopetrán                       | 119      | 05761         |
+| 455       | Támesis                        | 119      | 05789         |
+| 456       | Tarazá                         | 119      | 05790         |
+| 457       | Tarso                          | 119      | 05792         |
+| 458       | Titiribí                       | 119      | 05809         |
+| 459       | Toledo                         | 119      | 05819         |
+| 460       | Turbo                          | 119      | 05837         |
+| 461       | Uramita                        | 119      | 05842         |
+| 462       | Urrao                          | 119      | 05847         |
+| 463       | Valdivia                       | 119      | 05854         |
+| 464       | Valparaíso                     | 119      | 05856         |
+| 465       | Vegachí                        | 119      | 05858         |
+| 466       | Venecia                        | 119      | 05861         |
+| 467       | Vigía del Fuerte               | 119      | 05873         |
+| 468       | Yalí                           | 119      | 05885         |
+| 469       | Yarumal                        | 119      | 05887         |
+| 470       | Yolombó                        | 119      | 05890         |
+| 471       | Yondó                          | 119      | 05893         |
+| 472       | Zaragoza                       | 119      | 05895         |
+| 473       | Barranquilla                   | 121      | 08001         |
+| 474       | Baranoa                        | 121      | 08078         |
+| 475       | Campo de la Cruz               | 121      | 08137         |
+| 476       | Candelaria                     | 121      | 08141         |
+| 477       | Galapa                         | 121      | 08296         |
+| 478       | Juan de Acosta                 | 121      | 08372         |
+| 479       | Luruaco                        | 121      | 08421         |
+| 480       | Malambo                        | 121      | 08433         |
+| 481       | Manatí                         | 121      | 08436         |
+| 482       | Palmar de Varela               | 121      | 08520         |
+| 483       | Piojó                          | 121      | 08549         |
+| 484       | Polonuevo                      | 121      | 08558         |
+| 485       | Ponedera                       | 121      | 08560         |
+| 486       | Puerto Colombia                | 121      | 08573         |
+| 487       | Repelón                        | 121      | 08606         |
+| 488       | Sabanagrande                   | 121      | 08634         |
+| 489       | Sabanalarga                    | 121      | 08638         |
+| 490       | Santa Lucía                    | 121      | 08675         |
+| 491       | Santo Tomás                    | 121      | 08685         |
+| 492       | Soledad                        | 121      | 08758         |
+| 493       | Suan                           | 121      | 08770         |
+| 494       | Tubará                         | 121      | 08832         |
+| 495       | Usiacurí                       | 121      | 08849         |
+| 496       | Bogotá, D.C.                   | 122      | 11001         |
+| 497       | Cartagena de Indias            | 123      | 13001         |
+| 498       | Achí                           | 123      | 13006         |
+| 499       | Altos del Rosario              | 123      | 13030         |
+| 500       | Arenal                         | 123      | 13042         |
+| 501       | Arjona                    | 123      | 13052         |
+| 502       | Arroyohondo               | 123      | 13062         |
+| 503       | Barranco de Loba          | 123      | 13074         |
+| 504       | Calamar                   | 123      | 13140         |
+| 505       | Cantagallo                | 123      | 13160         |
+| 506       | Cicuco                    | 123      | 13188         |
+| 507       | Córdoba                   | 123      | 13212         |
+| 508       | Clemencia                 | 123      | 13222         |
+| 509       | El Carmen de Bolívar      | 123      | 13244         |
+| 510       | El Guamo                  | 123      | 13248         |
+| 511       | El Peñón                  | 123      | 13268         |
+| 512       | Hatillo de Loba           | 123      | 13300         |
+| 513       | Magangué                  | 123      | 13430         |
+| 514       | Mahates                   | 123      | 13433         |
+| 515       | Margarita                 | 123      | 13440         |
+| 516       | María la Baja             | 123      | 13442         |
+| 517       | Montecristo               | 123      | 13458         |
+| 518       | Santa Cruz de Mompox      | 123      | 13468         |
+| 519       | Morales                   | 123      | 13473         |
+| 520       | Norosí                    | 123      | 13490         |
+| 521       | Pinillos                  | 123      | 13549         |
+| 522       | Regidor                   | 123      | 13580         |
+| 523       | Río Viejo                 | 123      | 13600         |
+| 524       | San Cristóbal             | 123      | 13620         |
+| 525       | San Estanislao            | 123      | 13647         |
+| 526       | San Fernando              | 123      | 13650         |
+| 527       | San Jacinto               | 123      | 13654         |
+| 528       | San Jacinto del Cauca     | 123      | 13655         |
+| 529       | San Juan Nepomuceno       | 123      | 13657         |
+| 530       | San Martín de Loba        | 123      | 13667         |
+| 531       | San Pablo                 | 123      | 13670         |
+| 532       | Santa Catalina            | 123      | 13673         |
+| 533       | Santa Rosa                | 123      | 13683         |
+| 534       | Santa Rosa del Sur        | 123      | 13688         |
+| 535       | Simití                    | 123      | 13744         |
+| 536       | Soplaviento               | 123      | 13760         |
+| 537       | Talaigua Nuevo            | 123      | 13780         |
+| 538       | Tiquisio                  | 123      | 13810         |
+| 539       | Turbaco                   | 123      | 13836         |
+| 540       | Turbaná                   | 123      | 13838         |
+| 541       | Villanueva                | 123      | 13873         |
+| 542       | Zambrano                  | 123      | 13894         |
+| 543       | Tunja                     | 124      | 15001         |
+| 544       | Almeida                   | 124      | 15022         |
+| 545       | Aquitania                 | 124      | 15047         |
+| 546       | Arcabuco                  | 124      | 15051         |
+| 547       | Belén                     | 124      | 15087         |
+| 548       | Berbeo                    | 124      | 15090         |
+| 549       | Betéitiva                  | 124      | 15092         |
+| 550       | Boavita                   | 124      | 15097         |
+| 551       | Boyacá                    | 124      | 15104         |
+| 552       | Briceño                   | 124      | 15106         |
+| 553       | Buenavista                | 124      | 15109         |
+| 554       | Busbanzá                  | 124      | 15114         |
+| 555       | Caldas                    | 124      | 15131         |
+| 556       | Campohermoso              | 124      | 15135         |
+| 557       | Cerinza                   | 124      | 15162         |
+| 558       | Chinavita                 | 124      | 15172         |
+| 559       | Chiquinquirá              | 124      | 15176         |
+| 560       | Chiscas                   | 124      | 15180         |
+| 561       | Chita                     | 124      | 15183         |
+| 562       | Chitaraque                | 124      | 15185         |
+| 563       | Chivatá                   | 124      | 15187         |
+| 564       | Ciénega                   | 124      | 15189         |
+| 565       | Cómbita                   | 124      | 15204         |
+| 566       | Coper                     | 124      | 15212         |
+| 567       | Corrales                  | 124      | 15215         |
+| 568       | Covarachía                | 124      | 15218         |
+| 569       | Cubará                    | 124      | 15223         |
+| 570       | Cucaita                   | 124      | 15224         |
+| 571       | Cuítiva                   | 124      | 15226         |
+| 572       | Chíquiza                  | 124      | 15232         |
+| 573       | Chivor                    | 124      | 15236         |
+| 574       | Duitama                   | 124      | 15238         |
+| 575       | El Cocuy                  | 124      | 15244         |
+| 576       | El Espino                 | 124      | 15248         |
+| 577       | Firavitoba                | 124      | 15272         |
+| 578       | Floresta                  | 124      | 15276         |
+| 579       | Gachantivá                | 124      | 15293         |
+| 580       | Gámeza                    | 124      | 15296         |
+| 581       | Garagoa                   | 124      | 15299         |
+| 582       | Guacamayas                | 124      | 15317         |
+| 583       | Guateque                  | 124      | 15322         |
+| 584       | Guayatá                   | 124      | 15325         |
+| 585       | Güicán de la Sierra       | 124      | 15332         |
+| 586       | Iza                       | 124      | 15362         |
+| 587       | Jenesano                  | 124      | 15367         |
+| 588       | Jericó                    | 124      | 15368         |
+| 589       | Labranzagrande            | 124      | 15377         |
+| 590       | La Capilla                | 124      | 15380         |
+| 591       | La Victoria               | 124      | 15401         |
+| 592       | La Uvita                  | 124      | 15403         |
+| 593       | Villa de Leyva            | 124      | 15407         |
+| 594       | Macanal                   | 124      | 15425         |
+| 595       | Maripí                    | 124      | 15442         |
+| 596       | Miraflores                | 124      | 15455         |
+| 597       | Mongua                    | 124      | 15464         |
+| 598       | Monguí                    | 124      | 15466         |
+| 599       | Moniquirá                 | 124      | 15469         |
+| 600       | Motavita                  | 124      | 15476         |
+| 601       | Muzo                   | 124      | 15480         |
+| 602       | Nobsa                  | 124      | 15491         |
+| 603       | Nuevo Colón            | 124      | 15494         |
+| 604       | Oicatá                 | 124      | 15500         |
+| 605       | Otanche                 | 124      | 15507         |
+| 606       | Pachavita              | 124      | 15511         |
+| 607       | Páez                   | 124      | 15514         |
+| 608       | Paipa                   | 124      | 15516         |
+| 609       | Pajarito                | 124      | 15518         |
+| 610       | Panqueba                | 124      | 15522         |
+| 611       | Pauna                   | 124      | 15531         |
+| 612       | Paya                    | 124      | 15533         |
+| 613       | Paz de Río             | 124      | 15537         |
+| 614       | Pesca                   | 124      | 15542         |
+| 615       | Pisba                   | 124      | 15550         |
+| 616       | Puerto Boyacá          | 124      | 15572         |
+| 617       | Quípama                 | 124      | 15580         |
+| 618       | Ramiriquí               | 124      | 15599         |
+| 619       | Ráquira                 | 124      | 15600         |
+| 620       | Rondón                  | 124      | 15621         |
+| 621       | Saboyá                  | 124      | 15632         |
+| 622       | Sáchica                 | 124      | 15638         |
+| 623       | Samacá                  | 124      | 15646         |
+| 624       | San Eduardo            | 124      | 15660         |
+| 625       | San José de Pare       | 124      | 15664         |
+| 626       | San Luis de Gaceno     | 124      | 15667         |
+| 627       | San Mateo               | 124      | 15673         |
+| 628       | San Miguel de Sema     | 124      | 15676         |
+| 629       | San Pablo de Borbur    | 124      | 15681         |
+| 630       | Santana                 | 124      | 15686         |
+| 631       | Santa María            | 124      | 15690         |
+| 632       | Santa Rosa de Viterbo  | 124      | 15693         |
+| 633       | Santa Sofía            | 124      | 15696         |
+| 634       | Sativanorte             | 124      | 15720         |
+| 635       | Sativasur               | 124      | 15723         |
+| 636       | Siachoque               | 124      | 15740         |
+| 637       | Soatá                   | 124      | 15753         |
+| 638       | Socotá                  | 124      | 15755         |
+| 639       | Socha                   | 124      | 15757         |
+| 640       | Sogamoso                | 124      | 15759         |
+| 641       | Somondoco               | 124      | 15761         |
+| 642       | Sora                    | 124      | 15762         |
+| 643       | Sotaquirá               | 124      | 15763         |
+| 644       | Soracá                  | 124      | 15764         |
+| 645       | Susacón                 | 124      | 15774         |
+| 646       | Sutamarchán             | 124      | 15776         |
+| 647       | Sutatenza               | 124      | 15778         |
+| 648       | Tasco                   | 124      | 15790         |
+| 649       | Tenza                   | 124      | 15798         |
+| 650       | Tibaná                  | 124      | 15804         |
+| 651       | Tibasosa                | 124      | 15806         |
+| 652       | Tinjacá                 | 124      | 15808         |
+| 653       | Tipacoque               | 124      | 15810         |
+| 654       | Toca                    | 124      | 15814         |
+| 655       | Togüí                   | 124      | 15816         |
+| 656       | Tópaga                  | 124      | 15820         |
+| 657       | Tota                    | 124      | 15822         |
+| 658       | Tununguá                | 124      | 15832         |
+| 659       | Turmequé                | 124      | 15835         |
+| 660       | Tuta                    | 124      | 15837         |
+| 661       | Tutazá                  | 124      | 15839         |
+| 662       | Úmbita                  | 124      | 15842         |
+| 663       | Ventaquemada            | 124      | 15861         |
+| 664       | Viracachá               | 124      | 15879         |
+| 665       | Zetaquira               | 124      | 15897         |
+| 666       | Manizales               | 125      | 17001         |
+| 667       | Aguadas                 | 125      | 17013         |
+| 668       | Anserma                 | 125      | 17042         |
+| 669       | Aranzazu                | 125      | 17050         |
+| 670       | Belalcázar              | 125      | 17088         |
+| 671       | Chinchiná               | 125      | 17174         |
+| 672       | Filadelfia              | 125      | 17272         |
+| 673       | La Dorada               | 125      | 17380         |
+| 674       | La Merced               | 125      | 17388         |
+| 675       | Manzanares              | 125      | 17433         |
+| 676       | Marmato                 | 125      | 17442         |
+| 677       | Marquetalia             | 125      | 17444         |
+| 678       | Marulanda               | 125      | 17446         |
+| 679       | Neira                   | 125      | 17486         |
+| 680       | Norcasia                | 125      | 17495         |
+| 681       | Pácora                  | 125      | 17513         |
+| 682       | Palestina               | 125      | 17524         |
+| 683       | Pensilvania             | 125      | 17541         |
+| 684       | Riosucio                | 125      | 17614         |
+| 685       | Risaralda               | 125      | 17616         |
+| 686       | Salamina                | 125      | 17653         |
+| 687       | Samaná                  | 125      | 17662         |
+| 688       | San José                | 125      | 17665         |
+| 689       | Supía                   | 125      | 17777         |
+| 690       | Victoria                | 125      | 17867         |
+| 691       | Villamaría              | 125      | 17873         |
+| 692       | Viterbo                 | 125      | 17877         |
+| 693       | Florencia               | 126      | 18001         |
+| 694       | Albania                 | 126      | 18029         |
+| 695       | Belén de los Andaquíes  | 126      | 18094         |
+| 696       | Cartagena del Chairá    | 126      | 18150         |
+| 697       | Curillo                 | 126      | 18205         |
+| 698       | El Doncello             | 126      | 18247         |
+| 699       | El Paujíl               | 126      | 18256         |
+| 700       | La Montañita            | 126      | 18410         |
+| 701       | Milán                       | 126      | 18460         |
+| 702       | Morelia                      | 126      | 18479         |
+| 703       | Puerto Rico                  | 126      | 18592         |
+| 704       | San José del Fragua          | 126      | 18610         |
+| 705       | San Vicente del Caguán       | 126      | 18753         |
+| 706       | Solano                       | 126      | 18756         |
+| 707       | Solita                       | 126      | 18785         |
+| 708       | Valparaíso                   | 126      | 18860         |
+| 709       | Popayán                      | 128      | 19001         |
+| 710       | Almaguer                     | 128      | 19022         |
+| 711       | Argelia                      | 128      | 19050         |
+| 712       | Balboa                       | 128      | 19075         |
+| 713       | Bolívar                      | 128      | 19100         |
+| 714       | Buenos Aires                 | 128      | 19110         |
+| 715       | Cajibío                      | 128      | 19130         |
+| 716       | Caldono                       | 128      | 19137         |
+| 717       | Caloto                       | 128      | 19142         |
+| 718       | Corinto                      | 128      | 19212         |
+| 719       | El Tambo                     | 128      | 19256         |
+| 720       | Florencia                    | 128      | 19290         |
+| 721       | Guachené                     | 128      | 19300         |
+| 722       | Guapi                        | 128      | 19318         |
+| 723       | Inzá                         | 128      | 19355         |
+| 724       | Jambaló                      | 128      | 19364         |
+| 725       | La Sierra                    | 128      | 19392         |
+| 726       | La Vega                      | 128      | 19397         |
+| 727       | López de Micay               | 128      | 19418         |
+| 728       | Mercaderes                   | 128      | 19450         |
+| 729       | Miranda                      | 128      | 19455         |
+| 730       | Morales                      | 128      | 19473         |
+| 731       | Padilla                      | 128      | 19513         |
+| 732       | Páez                         | 128      | 19517         |
+| 733       | Patía                        | 128      | 19532         |
+| 734       | Piamonte                     | 128      | 19533         |
+| 735       | Piendamó - Tunía             | 128      | 19548         |
+| 736       | Puerto Tejada                | 128      | 19573         |
+| 737       | Puracé                       | 128      | 19585         |
+| 738       | Rosas                        | 128      | 19622         |
+| 739       | San Sebastián                | 128      | 19693         |
+| 740       | Santander de Quilichao       | 128      | 19698         |
+| 741       | Santa Rosa                   | 128      | 19701         |
+| 742       | Silvia                       | 128      | 19743         |
+| 743       | Sotará Paispamba             | 128      | 19760         |
+| 744       | Suárez                       | 128      | 19780         |
+| 745       | Sucre                        | 128      | 19785         |
+| 746       | Timbío                       | 128      | 19807         |
+| 747       | Timbiquí                     | 128      | 19809         |
+| 748       | Toribío                      | 128      | 19821         |
+| 749       | Totoró                       | 128      | 19824         |
+| 750       | Villa Rica                   | 128      | 19845         |
+| 751       | Valledupar                   | 129      | 20001         |
+| 752       | Aguachica                    | 129      | 20011         |
+| 753       | Agustín Codazzi              | 129      | 20013         |
+| 754       | Astrea                       | 129      | 20032         |
+| 755       | Becerril                     | 129      | 20045         |
+| 756       | Bosconia                     | 129      | 20060         |
+| 757       | Chimichagua                  | 129      | 20175         |
+| 758       | Chiriguaná                   | 129      | 20178         |
+| 759       | Curumaní                     | 129      | 20228         |
+| 760       | El Copey                     | 129      | 20238         |
+| 761       | El Paso                      | 129      | 20250         |
+| 762       | Gamarra                       | 129      | 20295         |
+| 763       | González                     | 129      | 20310         |
+| 764       | La Gloria                    | 129      | 20383         |
+| 765       | La Jagua de Ibirico          | 129      | 20400         |
+| 766       | Manaure Balcón del Cesar     | 129      | 20443         |
+| 767       | Pailitas                     | 129      | 20517         |
+| 768       | Pelaya                       | 129      | 20550         |
+| 769       | Pueblo Bello                 | 129      | 20570         |
+| 770       | Río de Oro                   | 129      | 20614         |
+| 771       | La Paz                       | 129      | 20621         |
+| 772       | San Alberto                  | 129      | 20710         |
+| 773       | San Diego                    | 129      | 20750         |
+| 774       | San Martín                   | 129      | 20770         |
+| 775       | Tamalameque                  | 129      | 20787         |
+| 776       | Montería                     | 131      | 23001         |
+| 777       | Ayapel                       | 131      | 23068         |
+| 778       | Buenavista                   | 131      | 23079         |
+| 779       | Canalete                     | 131      | 23090         |
+| 780       | Cereté                       | 131      | 23162         |
+| 781       | Chimá                        | 131      | 23168         |
+| 782       | Chinú                        | 131      | 23182         |
+| 783       | Ciénaga de Oro               | 131      | 23189         |
+| 784       | Cotorra                       | 131      | 23300         |
+| 785       | La Apartada                  | 131      | 23350         |
+| 786       | Lorica                       | 131      | 23417         |
+| 787       | Los Córdobas                 | 131      | 23419         |
+| 788       | Momil                        | 131      | 23464         |
+| 789       | Montelíbano                  | 131      | 23466         |
+| 790       | Moñitos                      | 131      | 23500         |
+| 791       | Planeta Rica                 | 131      | 23555         |
+| 792       | Pueblo Nuevo                 | 131      | 23570         |
+| 793       | Puerto Escondido             | 131      | 23574         |
+| 794       | Puerto Libertador            | 131      | 23580         |
+| 795       | Purísima de la Concepción    | 131      | 23586         |
+| 796       | Sahagún                       | 131      | 23660         |
+| 797       | San Andrés de Sotavento      | 131      | 23670         |
+| 798       | San Antero                   | 131      | 23672         |
+| 799       | San Bernardo del Viento      | 131      | 23675         |
+| 800       | San Carlos                   | 131      | 23678         |
+| 801       | San José de Uré         | 131      | 23682         |
+| 802       | San Pelayo              | 131      | 23686         |
+| 803       | Tierralta               | 131      | 23807         |
+| 804       | Tuchín                  | 131      | 23815         |
+| 805       | Valencia                | 131      | 23855         |
+| 806       | Agua de Dios            | 132      | 25001         |
+| 807       | Albán                   | 132      | 25019         |
+| 808       | Anapoima                | 132      | 25035         |
+| 809       | Anolaima                | 132      | 25040         |
+| 810       | Arbeláez                | 132      | 25053         |
+| 811       | Beltrán                 | 132      | 25086         |
+| 812       | Bituima                 | 132      | 25095         |
+| 813       | Bojacá                  | 132      | 25099         |
+| 814       | Cabrera                 | 132      | 25120         |
+| 815       | Cachipay                | 132      | 25123         |
+| 816       | Cajicá                  | 132      | 25126         |
+| 817       | Caparrapí               | 132      | 25148         |
+| 818       | Cáqueza                 | 132      | 25151         |
+| 819       | Carmen de Carupa        | 132      | 25154         |
+| 820       | Chaguaní                | 132      | 25168         |
+| 821       | Chía                    | 132      | 25175         |
+| 822       | Chipaque                | 132      | 25178         |
+| 823       | Choachí                 | 132      | 25181         |
+| 824       | Chocontá                | 132      | 25183         |
+| 825       | Cogua                   | 132      | 25200         |
+| 826       | Cota                    | 132      | 25214         |
+| 827       | Cucunubá                | 132      | 25224         |
+| 828       | El Colegio              | 132      | 25245         |
+| 829       | El Peñón                | 132      | 25258         |
+| 830       | El Rosal                | 132      | 25260         |
+| 831       | Facatativá              | 132      | 25269         |
+| 832       | Fómeque                 | 132      | 25279         |
+| 833       | Fosca                   | 132      | 25281         |
+| 834       | Funza                   | 132      | 25286         |
+| 835       | Fúquene                 | 132      | 25288         |
+| 836       | Fusagasugá              | 132      | 25290         |
+| 837       | Gachalá                 | 132      | 25293         |
+| 838       | Gachancipá              | 132      | 25295         |
+| 839       | Gachetá                 | 132      | 25297         |
+| 840       | Gama                    | 132      | 25299         |
+| 841       | Girardot                | 132      | 25307         |
+| 842       | Granada                 | 132      | 25312         |
+| 843       | Guachetá                | 132      | 25317         |
+| 844       | Guaduas                 | 132      | 25320         |
+| 845       | Guasca                  | 132      | 25322         |
+| 846       | Guataquí                | 132      | 25324         |
+| 847       | Guatavita               | 132      | 25326         |
+| 848       | Guayabal de Síquima     | 132      | 25328         |
+| 849       | Guayabetal              | 132      | 25335         |
+| 850       | Gutiérrez               | 132      | 25339         |
+| 851       | Jerusalén               | 132      | 25368         |
+| 852       | Junín                   | 132      | 25372         |
+| 853       | La Calera               | 132      | 25377         |
+| 854       | La Mesa                 | 132      | 25386         |
+| 855       | La Palma                | 132      | 25394         |
+| 856       | La Peña                 | 132      | 25398         |
+| 857       | La Vega                 | 132      | 25402         |
+| 858       | Lenguazaque             | 132      | 25407         |
+| 859       | Machetá                 | 132      | 25426         |
+| 860       | Madrid                  | 132      | 25430         |
+| 861       | Manta                   | 132      | 25436         |
+| 862       | Medina                  | 132      | 25438         |
+| 863       | Mosquera                | 132      | 25473         |
+| 864       | Nariño                  | 132      | 25483         |
+| 865       | Nemocón                 | 132      | 25486         |
+| 866       | Nilo                    | 132      | 25488         |
+| 867       | Nimaima                 | 132      | 25489         |
+| 868       | Nocaima                 | 132      | 25491         |
+| 869       | Venecia                 | 132      | 25506         |
+| 870       | Pacho                   | 132      | 25513         |
+| 871       | Paime                   | 132      | 25518         |
+| 872       | Pandi                   | 132      | 25524         |
+| 873       | Paratebueno             | 132      | 25530         |
+| 874       | Pasca                   | 132      | 25535         |
+| 875       | Puerto Salgar           | 132      | 25572         |
+| 876       | Pulí                    | 132      | 25580         |
+| 877       | Quebradanegra           | 132      | 25592         |
+| 878       | Quetame                 | 132      | 25594         |
+| 879       | Quipile                 | 132      | 25596         |
+| 880       | Apulo                   | 132      | 25599         |
+| 881       | Ricaurte                | 132      | 25612         |
+| 882       | San Antonio del Tequendama | 132   | 25645         |
+| 883       | San Bernardo            | 132      | 25649         |
+| 884       | San Cayetano            | 132      | 25653         |
+| 885       | San Francisco           | 132      | 25658         |
+| 886       | San Juan de Rioseco     | 132      | 25662         |
+| 887       | Sasaima                 | 132      | 25718         |
+| 888       | Sesquilé                | 132      | 25736         |
+| 889       | Sibaté                  | 132      | 25740         |
+| 890       | Silvania                | 132      | 25743         |
+| 891       | Simijaca                | 132      | 25745         |
+| 892       | Soacha                  | 132      | 25754         |
+| 893       | Sopó                    | 132      | 25758         |
+| 894       | Subachoque              | 132      | 25769         |
+| 895       | Suesca                  | 132      | 25772         |
+| 896       | Supatá                  | 132      | 25777         |
+| 897       | Susa                    | 132      | 25779         |
+| 898       | Sutatausa               | 132      | 25781         |
+| 899       | Tabio                   | 132      | 25785         |
+| 900       | Tausa                   | 132      | 25793         |
+| 901       | Tena                             | 132      | 25797         |
+| 902       | Tenjo                            | 132      | 25799         |
+| 903       | Tibacuy                          | 132      | 25805         |
+| 904       | Tibirita                         | 132      | 25807         |
+| 905       | Tocaima                          | 132      | 25815         |
+| 906       | Tocancipá                        | 132      | 25817         |
+| 907       | Topaipí                          | 132      | 25823         |
+| 908       | Ubalá                            | 132      | 25839         |
+| 909       | Ubaque                           | 132      | 25841         |
+| 910       | Villa de San Diego de Ubaté     | 132      | 25843         |
+| 911       | Une                              | 132      | 25845         |
+| 912       | Útica                            | 132      | 25851         |
+| 913       | Vergara                          | 132      | 25862         |
+| 914       | Vianí                            | 132      | 25867         |
+| 915       | Villagómez                       | 132      | 25871         |
+| 916       | Villapinzón                      | 132      | 25873         |
+| 917       | Villeta                          | 132      | 25875         |
+| 918       | Viotá                            | 132      | 25878         |
+| 919       | Yacopí                           | 132      | 25885         |
+| 920       | Zipacón                          | 132      | 25898         |
+| 921       | Zipaquirá                        | 132      | 25899         |
+| 922       | Quibdó                           | 130      | 27001         |
+| 923       | Acandí                           | 130      | 27006         |
+| 924       | Alto Baudó                       | 130      | 27025         |
+| 925       | Atrato                           | 130      | 27050         |
+| 926       | Bagadó                           | 130      | 27073         |
+| 927       | Bahía Solano                     | 130      | 27075         |
+| 928       | Bajo Baudó                       | 130      | 27077         |
+| 929       | Bojayá                           | 130      | 27099         |
+| 930       | El Cantón del San Pablo         | 130      | 27135         |
+| 931       | Carmen del Darién                | 130      | 27150         |
+| 932       | Cértegui                         | 130      | 27160         |
+| 933       | Condoto                          | 130      | 27205         |
+| 934       | El Carmen de Atrato              | 130      | 27245         |
+| 935       | El Litoral del San Juan          | 130      | 27250         |
+| 936       | Istmina                          | 130      | 27361         |
+| 937       | Juradó                           | 130      | 27372         |
+| 938       | Lloró                            | 130      | 27413         |
+| 939       | Medio Atrato                      | 130      | 27425         |
+| 940       | Medio Baudó                       | 130      | 27430         |
+| 941       | Medio San Juan                    | 130      | 27450         |
+| 942       | Nóvita                           | 130      | 27491         |
+| 943       | Nuquí                            | 130      | 27495         |
+| 944       | Río Iró                          | 130      | 27580         |
+| 945       | Río Quito                         | 130      | 27600         |
+| 946       | Riosucio                         | 130      | 27615         |
+| 947       | San José del Palmar             | 130      | 27660         |
+| 948       | Sipí                             | 130      | 27745         |
+| 949       | Tadó                             | 130      | 27787         |
+| 950       | Unguía                           | 130      | 27800         |
+| 951       | Unión Panamericana               | 130      | 27810         |
+| 952       | Neiva                            | 135      | 41001         |
+| 953       | Acevedo                          | 135      | 41006         |
+| 954       | Agrado                           | 135      | 41013         |
+| 955       | Aipe                             | 135      | 41016         |
+| 956       | Algeciras                        | 135      | 41020         |
+| 957       | Altamira                         | 135      | 41026         |
+| 958       | Baraya                           | 135      | 41078         |
+| 959       | Campoalegre                      | 135      | 41132         |
+| 960       | Colombia                         | 135      | 41206         |
+| 961       | Elías                            | 135      | 41244         |
+| 962       | Garzón                           | 135      | 41298         |
+| 963       | Gigante                          | 135      | 41306         |
+| 964       | Guadalupe                        | 135      | 41319         |
+| 965       | Hobo                             | 135      | 41349         |
+| 966       | Íquira                           | 135      | 41357         |
+| 967       | Isnos                            | 135      | 41359         |
+| 968       | La Argentina                     | 135      | 41378         |
+| 969       | La Plata                         | 135      | 41396         |
+| 970       | Nátaga                           | 135      | 41483         |
+| 971       | Oporapa                          | 135      | 41503         |
+| 972       | Paicol                           | 135      | 41518         |
+| 973       | Palermo                          | 135      | 41524         |
+| 974       | Palestina                        | 135      | 41530         |
+| 975       | Pital                            | 135      | 41548         |
+| 976       | Pitalito                         | 135      | 41551         |
+| 977       | Rivera                           | 135      | 41615         |
+| 978       | Saladoblanco                     | 135      | 41660         |
+| 979       | San Agustín                      | 135      | 41668         |
+| 980       | Santa María                      | 135      | 41676         |
+| 981       | Suaza                            | 135      | 41770         |
+| 982       | Tarqui                           | 135      | 41791         |
+| 983       | Tesalia                          | 135      | 41797         |
+| 984       | Tello                            | 135      | 41799         |
+| 985       | Teruel                           | 135      | 41801         |
+| 986       | Timaná                           | 135      | 41807         |
+| 987       | Villavieja                       | 135      | 41872         |
+| 988       | Yaguará                          | 135      | 41885         |
+| 989       | Riohacha                         | 136      | 44001         |
+| 990       | Albania                          | 136      | 44035         |
+| 991       | Barrancas                        | 136      | 44078         |
+| 992       | Dibulla                          | 136      | 44090         |
+| 993       | Distracción                      | 136      | 44098         |
+| 994       | El Molino                        | 136      | 44110         |
+| 995       | Fonseca                          | 136      | 44279         |
+| 996       | Hatonuevo                        | 136      | 44378         |
+| 997       | La Jagua del Pilar               | 136      | 44420         |
+| 998       | Maicao                           | 136      | 44430         |
+| 999       | Manaure                          | 136      | 44560         |
+| 1000      | San Juan del Cesar               | 136      | 44650         |
+| county_id | name                          | state_id | external_code |
+|-----------|-------------------------------|----------|---------------|
+| 1001      | Uribia                        | 136      | 44847         |
+| 1002      | Urumita                       | 136      | 44855         |
+| 1003      | Villanueva                    | 136      | 44874         |
+| 1004      | Santa Marta                   | 137      | 47001         |
+| 1005      | Algarrobo                     | 137      | 47030         |
+| 1006      | Aracataca                     | 137      | 47053         |
+| 1007      | Ariguaní                      | 137      | 47058         |
+| 1008      | Cerro de San Antonio          | 137      | 47161         |
+| 1009      | Chivolo                       | 137      | 47170         |
+| 1010      | Ciénaga                       | 137      | 47189         |
+| 1011      | Concordia                     | 137      | 47205         |
+| 1012      | El Banco                      | 137      | 47245         |
+| 1013      | El Piñón                      | 137      | 47258         |
+| 1014      | El Retén                      | 137      | 47268         |
+| 1015      | Fundación                     | 137      | 47288         |
+| 1016      | Guamal                        | 137      | 47318         |
+| 1017      | Nueva Granada                 | 137      | 47460         |
+| 1018      | Pedraza                       | 137      | 47541         |
+| 1019      | Pijiño del Carmen             | 137      | 47545         |
+| 1020      | Pivijay                       | 137      | 47551         |
+| 1021      | Plato                         | 137      | 47555         |
+| 1022      | Puebloviejo                   | 137      | 47570         |
+| 1023      | Remolino                      | 137      | 47605         |
+| 1024      | Sabanas de San Ángel          | 137      | 47660         |
+| 1025      | Salamina                       | 137      | 47675         |
+| 1026      | San Sebastián de Buenavista    | 137      | 47692         |
+| 1027      | San Zenón                     | 137      | 47703         |
+| 1028      | Santa Ana                     | 137      | 47707         |
+| 1029      | Santa Bárbara de Pinto        | 137      | 47720         |
+| 1030      | Sitionuevo                    | 137      | 47745         |
+| 1031      | Tenerife                      | 137      | 47798         |
+| 1032      | Zapayán                       | 137      | 47960         |
+| 1033      | Zona Bananera                 | 137      | 47980         |
+| 1034      | Villavicencio                 | 138      | 50001         |
+| 1035      | Acacías                       | 138      | 50006         |
+| 1036      | Barranca de Upía              | 138      | 50110         |
+| 1037      | Cabuyaro                       | 138      | 50124         |
+| 1038      | Castilla La Nueva             | 138      | 50150         |
+| 1039      | Cubarral                      | 138      | 50223         |
+| 1040      | Cumaral                       | 138      | 50226         |
+| 1041      | El Calvario                   | 138      | 50245         |
+| 1042      | El Castillo                   | 138      | 50251         |
+| 1043      | El Dorado                     | 138      | 50270         |
+| 1044      | Fuente de Oro                 | 138      | 50287         |
+| 1045      | Granada                       | 138      | 50313         |
+| 1046      | Guamal                        | 138      | 50318         |
+| 1047      | Mapiripán                     | 138      | 50325         |
+| 1048      | Mesetas                        | 138      | 50330         |
+| 1049      | La Macarena                   | 138      | 50350         |
+| 1050      | Uribe                         | 138      | 50370         |
+| 1051      | Lejanías                      | 138      | 50400         |
+| 1052      | Puerto Concordia              | 138      | 50450         |
+| 1053      | Puerto Gaitán                 | 138      | 50568         |
+| 1054      | Puerto López                  | 138      | 50573         |
+| 1055      | Puerto Lleras                 | 138      | 50577         |
+| 1056      | Puerto Rico                   | 138      | 50590         |
+| 1057      | Restrepo                      | 138      | 50606         |
+| 1058      | San Carlos de Guaroa          | 138      | 50680         |
+| 1059      | San Juan de Arama             | 138      | 50683         |
+| 1060      | San Juanito                    | 138      | 50686         |
+| 1061      | San Martín                    | 138      | 50689         |
+| 1062      | Vistahermosa                  | 138      | 50711         |
+| 1063      | Pasto                         | 139      | 52001         |
+| 1064      | Albán                         | 139      | 52019         |
+| 1065      | Aldana                        | 139      | 52022         |
+| 1066      | Ancuya                        | 139      | 52036         |
+| 1067      | Arboleda                      | 139      | 52051         |
+| 1068      | Barbacoas                     | 139      | 52079         |
+| 1069      | Belén                         | 139      | 52083         |
+| 1070      | Buesaco                        | 139      | 52110         |
+| 1071      | Colón                         | 139      | 52203         |
+| 1072      | Consacá                       | 139      | 52207         |
+| 1073      | Contadero                     | 139      | 52210         |
+| 1074      | Córdoba                        | 139      | 52215         |
+| 1147      | Cuaspud Carlosama             | 139      | 52224         |
+| 1148      | Cumbal                        | 139      | 52227         |
+| 1149      | Cumbitara                     | 139      | 52233         |
+| 1150      | Chachagüí                     | 139      | 52240         |
+| 1151      | El Charco                     | 139      | 52250         |
+| 1152      | El Peñol                      | 139      | 52254         |
+| 1153      | El Rosario                    | 139      | 52256         |
+| 1154      | El Tablón de Gómez            | 139      | 52258         |
+| 1155      | El Tambo                       | 139      | 52260         |
+| 1156      | Funes                         | 139      | 52287         |
+| 1157      | Guachucal                     | 139      | 52317         |
+| 1158      | Guaitarilla                   | 139      | 52320         |
+| 1159      | Gualmatán                     | 139      | 52323         |
+| 1160      | Iles                          | 139      | 52352         |
+| 1161      | Imués                         | 139      | 52354         |
+| 1162      | Ipiales                       | 139      | 52356         |
+| 1163      | La Cruz                       | 139      | 52378         |
+| 1164      | La Florida                    | 139      | 52381         |
+| 1165      | La Llanada                    | 139      | 52385         |
+| 1166      | La Tola                        | 139      | 52390         |
+| 1167      | La Unión                      | 139      | 52399         |
+| 1168      | Leiva                         | 139      | 52405         |
+| 1169      | Linares                       | 139      | 52411         |
+| 1170      | Los Andes                     | 139      | 52418         |
+| 1171      | Magüí                         | 139      | 52427         |
+| 1172      | Mallama                       | 139      | 52435         |
+| 1173      | Mosquera                      | 139      | 52473         |
+| 1174      | Nariño                        | 139      | 52480         |
+| 1175      | Olaya Herrera                 | 139      | 52490         |
+| 1176      | Ospina                        | 139      | 52506         |
+| 1177      | Francisco Pizarro             | 139      | 52520         |
+| 1178      | Policarpa                      | 139      | 52540         |
+| 1179      | Potosí                        | 139      | 52560         |
+| 1180      | Providencia                   | 139      | 52565         |
+| 1181      | Puerres                       | 139      | 52573         |
+| 1182      | Pupiales                       | 139      | 52585         |
+| 1183      | Ricaurte                       | 139      | 52612         |
+
+
+
