@@ -26,51 +26,53 @@
     "url": "https://userow.com/billing"
   },
   "tabs": [
-    {
-      "name": "API Reference",
-      "url": "api-reference"
-    }
+
   ],
   "anchors": [
     {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://docs-billing.userow.com/"
+      "name": "Contact Us",
+      "url": "tel:+56 442 020 550",
+      "icon": "phone"
+    },
+    {
+      "name": "Support",
+      "url": "mailto:soporte@facto.cl",
+      "icon": "envelope"
     }
   ],
   "navigation": [
     {
-      "group": "Get Started",
+      "group": "Quickstart",
       "pages": [
         "introduction",
-        "new-standard",
-        "documents"
-      ]
-    },
-    {
-      "group": "API Basics",
-      "pages": [
         "api-reference/introduction"
       ]
     },
     {
-      "group": "Endpoints",
+      "group": "About us",
+      "pages": [
+        "about-us/our-experience",
+        "about-us/use-cases"
+      ]
+    },
+    {
+      "group": "API Endpoints",
       "pages": [
         {
-          "group": "Authentication",
+          "group": "\uD83D\uDD11 Authentication",
           "pages": [
             "api-reference/endpoint/authenticate-and-receive-a-bearer-token"
           ]
         },
         {
-          "group": "Accounts",
+          "group": "\uD83C\uDFE2 Accounts",
           "pages": [
             "api-reference/endpoint/create-a-new-account",
             "api-reference/endpoint/get-a-specific-account"
           ]
         },
         {
-          "group": "Documents",
+          "group": "\uD83D\uDCDD Documents",
           "pages": [
             "api-reference/endpoint/get-a-paginated-list-of-documents",
             "api-reference/endpoint/create-a-new-document",
@@ -80,7 +82,7 @@
           ]
         },
         {
-          "group": "Inbox",
+          "group": "\uD83D\uDCE9 Inbox",
           "pages": [
             "api-reference/endpoint/get-a-paginated-list-of-received-documents",
             "api-reference/endpoint/get-a-specific-received-document",
@@ -88,7 +90,7 @@
           ]
         },
         {
-          "group": "Digital certificate",
+          "group": "\uD83D\uDCDC Digital certificate",
           "pages": [
             "api-reference/endpoint/create-a-new-digital-certificate-link",
             "api-reference/endpoint/get-a-specific-digital-certificate-link"
@@ -142,6 +144,13 @@
             "api-reference/examples-peru/create-a-new-account",
             "api-reference/examples-peru/deleting-a-draft",
             "api-reference/examples-peru/table-of-codes"
+          ]
+        },
+        {
+          "group": "United States",
+          "pages": [
+            "new-standard",
+            "documents"
           ]
         }
       ]
