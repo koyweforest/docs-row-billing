@@ -72,6 +72,13 @@
           ]
         },
         {
+          "group": "\uD83D\uDCDC Digital certificate",
+          "pages": [
+            "api-reference/endpoint/create-a-new-digital-certificate-link",
+            "api-reference/endpoint/get-a-specific-digital-certificate-link"
+          ]
+        },
+        {
           "group": "\uD83D\uDCDD Documents",
           "pages": [
             "api-reference/endpoint/get-a-paginated-list-of-documents",
@@ -90,10 +97,10 @@
           ]
         },
         {
-          "group": "\uD83D\uDCDC Digital certificate",
+          "group": "\uD83D\uDCB2 Payments",
           "pages": [
-            "api-reference/endpoint/create-a-new-digital-certificate-link",
-            "api-reference/endpoint/get-a-specific-digital-certificate-link"
+            "api-reference/endpoint/create-a-new-payment",
+            "api-reference/endpoint/get-a-specific-payment"
           ]
         }
       ]
