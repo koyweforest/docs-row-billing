@@ -13,6 +13,21 @@
   ],
   "paths": {
     "/auth": {
+      "get": {
+        "description": "New endpoint",
+        "responses": {
+          "200": {
+            "description": "New response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "": ""
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "summary": "Authenticate and receive a bearer token",
         "requestBody": {
@@ -798,6 +813,60 @@
             "bearerAuth": []
           }
         ]
+      }
+    },
+    "/payments": {
+      "post": {
+        "summary": "Create a new payment",
+        "description": "Creates a new payment with the given details.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Payment"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Payment created successfully"
+          },
+          "400": {
+            "description": "Invalid request"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get payment details",
+        "description": "Retrieves the details of a specific payment by ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "description": "The ID of the payment to retrieve",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Payment details retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payment"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Payment not found"
+          }
+        }
       }
     }
   },
@@ -2339,6 +2408,37 @@
           }
         },
         "required": ["tax_id", "tax_type", "tax_value", "tax_amount", "country_id", "country_name"]
+      },
+      "Payment": {
+        "type": "object",
+        "properties": {
+          "payment_date": {
+            "type": "string",
+            "format": "date",
+            "description": "The date of the payment."
+          },
+          "document_id": {
+            "type": "string",
+            "description": "The ID of the document associated with the payment."
+          },
+          "payment_type_id": {
+            "type": "string",
+            "description": "The ID of the payment type."
+          },
+          "payment_amount": {
+            "type": "number",
+            "description": "The amount of the payment."
+          },
+          "payment_details": {
+            "type": "string",
+            "description": "Additional details about the payment."
+          },
+          "cash_account_id": {
+            "type": "string",
+            "description": "The ID of the cash account associated with the payment."
+          }
+        },
+        "required": ["payment_date", "document_id", "payment_type_id", "payment_amount", "cash_account_id"]
       }
     }
   }

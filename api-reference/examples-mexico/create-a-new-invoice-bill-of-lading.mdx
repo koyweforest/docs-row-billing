@@ -39,55 +39,56 @@ In order to create a new mexican invoice with bill of lading complement, you nee
     "receiver_phone": "<string>",
     "receiver_activity": "<string>",
     "payment_conditions": "0",
-    "currency_id": 31
+    "currency_id": 31,
+    "additional": {
+        "mx_shipping": {
+            "distance": "100",
+            "transport_code": "01",
+            "transport_method_name": "Autotransporte",
+            "transport_tax_id_type": "MX-RFC",
+            "transport_tax_id_code": "EKU9003173C9",
+            "transport_license": "a234567890",
+            "origin": {
+                "tax_id_type" : "MX-RFC",
+                "tax_id_code": "EKU9003173C9",
+                "date_time": "2025-01-07T00:00:00",
+                "address_state_id": "31",
+                "address_country_id": "80",
+                "address_postalcode": "13250"
+            },
+            "destination": {
+                "tax_id_type" : "MX-RFC",
+                "tax_id_code": "EKU9003173C9",
+                "date_time": "2025-01-07T00:00:00",
+                "address_state_id": "31",
+                "address_country_id": "80",
+                "address_postalcode": "13250"
+            },
+            "merchandise": {
+                "total_weight": "10",
+                "sct_permission_code": "TPAF01",
+                "sct_permission_number": "222333444",
+                "vehicle_configuration": "VL",
+                "vehicle_weight": "1",
+                "vehicle_license_plate": "AA22333",
+                "vehicle_year":"2020",
+                "insurance_company": "PRUEBA SEGUROS",
+                "insurance_identifier": "123456",
+                "details": [
+                    {
+                        "product_code": "11121900",
+                        "description" : "Accesorios telefono",
+                        "quantity" : "1",
+                        "weight": "10"
+                    }
+                ]
+            }
+        }
+
+      }
 
   },
-  "additional": {
-	"transport": {
-		"distance": "100",
-		"transport_code": "01",
-		"transport_method_name": "Autotransporte",
-		"transport_tax_id_type": "MX-RFC",
-		"transport_tax_id_code": "EKU9003173C9",
-		"transport_license": "a234567890",
-		"origin": {
-			"tax_id_type" : "MX-RFC",
-			"tax_id_code": "EKU9003173C9",
-			"date_time": "2025-01-07T00:00:00",
-			"address_state_id": "31",
-			"address_country_id": "80",
-			"address_postalcode": "13250"
-		},
-		"destination": {
-			"tax_id_type" : "MX-RFC",
-			"tax_id_code": "EKU9003173C9",
-			"date_time": "2025-01-07T00:00:00",
-			"address_state_id": "31",
-			"address_country_id": "80",
-			"address_postalcode": "13250"
-		},
-		"merchandise": {
-			"total_weight": "10",
-			"sct_permission_code": "TPAF01",
-			"sct_permission_number": "222333444",
-			"vehicle_configuration": "VL",
-			"vehicle_weight": "1",
-			"vehicle_license_plate": "AA22333",
-			"vehicle_year":"2020",
-			"insurance_company": "PRUEBA SEGUROS",
-			"insurance_identifier": "123456",
-			"details": [
-				{
-					"product_code": "11121900",
-					"description" : "Accesorios telefono",
-					"quantity" : "1",
-					"weight": "10"
-				}
-			]
-		}
-	}
 
-  },
   "details": [
     {
       "quantity": 1,
