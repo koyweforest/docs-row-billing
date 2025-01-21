@@ -13,21 +13,6 @@
   ],
   "paths": {
     "/auth": {
-      "get": {
-        "description": "New endpoint",
-        "responses": {
-          "200": {
-            "description": "New response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "": ""
-                }
-              }
-            }
-          }
-        }
-      },
       "post": {
         "summary": "Authenticate and receive a bearer token",
         "requestBody": {
@@ -837,36 +822,55 @@
             "description": "Invalid request"
           }
         }
-      },
+      }
+    },
+    "/payments/{payment_id}": {
       "get": {
-        "summary": "Get payment details",
-        "description": "Retrieves the details of a specific payment by ID.",
+        "summary": "Get a specific payment",
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
+            "name": "payment_id",
+            "in": "path",
             "required": true,
-            "description": "The ID of the payment to retrieve",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "description": "Payment ID of the created payment"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Payment details retrieved successfully",
+            "description": "Successful response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Payment"
+                  "$ref": "#/components/schemas/PaymentResponseGet"
                 }
               }
             }
           },
-          "404": {
-            "description": "Payment not found"
+          "400": {
+            "description": "Bad request - invalid input or validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "invalid input or validation error"
+                    }
+                  }
+                }
+              }
+            }
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     }
   },
@@ -1378,6 +1382,7 @@
         "properties": {
           "options": {
             "type": "object",
+            "x-order": 1,
             "properties": {
               "template_id": {
                 "type": "integer",
@@ -1408,6 +1413,7 @@
           },
           "header": {
             "type": "object",
+            "x-order": 2,
             "properties": {
               "document_type_id": {
                 "type": "integer",
@@ -1523,6 +1529,298 @@
               "shipping_address": {
                 "type": "string",
                 "description": "Enter a shipping address."
+              },
+              "additional": {
+                "type": "object",
+                "properties": {
+                  "mx_shipping": {
+                    "type": "object",
+                    "properties": {
+                      "distance": {
+                        "type": "string",
+                        "example": "100"
+                      },
+                      "transport_code": {
+                        "type": "string",
+                        "example": "01"
+                      },
+                      "transport_method_name": {
+                        "type": "string",
+                        "example": "Autotransporte"
+                      },
+                      "transport_tax_id_type": {
+                        "type": "string",
+                        "example": "MX-RFC"
+                      },
+                      "transport_tax_id_code": {
+                        "type": "string",
+                        "example": "EKU9003173C9"
+                      },
+                      "transport_license": {
+                        "type": "string",
+                        "example": "a234567890"
+                      },
+                      "origin": {
+                        "type": "object",
+                        "properties": {
+                          "tax_id_type": {
+                            "type": "string",
+                            "example": "MX-RFC"
+                          },
+                          "tax_id_code": {
+                            "type": "string",
+                            "example": "EKU9003173C9"
+                          },
+                          "date_time": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2025-01-07T00:00:00"
+                          },
+                          "address_state_id": {
+                            "type": "string",
+                            "example": "31"
+                          },
+                          "address_country_id": {
+                            "type": "string",
+                            "example": "80"
+                          },
+                          "address_postalcode": {
+                            "type": "string",
+                            "example": "13250"
+                          }
+                        }
+                      },
+                      "destination": {
+                        "type": "object",
+                        "properties": {
+                          "tax_id_type": {
+                            "type": "string",
+                            "example": "MX-RFC"
+                          },
+                          "tax_id_code": {
+                            "type": "string",
+                            "example": "EKU9003173C9"
+                          },
+                          "date_time": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2025-01-07T00:00:00"
+                          },
+                          "address_state_id": {
+                            "type": "string",
+                            "example": "31"
+                          },
+                          "address_country_id": {
+                            "type": "string",
+                            "example": "80"
+                          },
+                          "address_postalcode": {
+                            "type": "string",
+                            "example": "13250"
+                          }
+                        }
+                      },
+                      "merchandise": {
+                        "type": "object",
+                        "properties": {
+                          "total_weight": {
+                            "type": "string",
+                            "example": "10"
+                          },
+                          "sct_permission_code": {
+                            "type": "string",
+                            "example": "TPAF01"
+                          },
+                          "sct_permission_number": {
+                            "type": "string",
+                            "example": "222333444"
+                          },
+                          "vehicle_configuration": {
+                            "type": "string",
+                            "example": "VL"
+                          },
+                          "vehicle_weight": {
+                            "type": "string",
+                            "example": "1"
+                          },
+                          "vehicle_license_plate": {
+                            "type": "string",
+                            "example": "AA22333"
+                          },
+                          "vehicle_year": {
+                            "type": "string",
+                            "example": "2020"
+                          },
+                          "insurance_company": {
+                            "type": "string",
+                            "example": "PRUEBA SEGUROS"
+                          },
+                          "insurance_identifier": {
+                            "type": "string",
+                            "example": "123456"
+                          },
+                          "details": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "product_code": {
+                                  "type": "string",
+                                  "example": "11121900"
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "example": "Accesorios telefono"
+                                },
+                                "quantity": {
+                                  "type": "string",
+                                  "example": "1"
+                                },
+                                "weight": {
+                                  "type": "string",
+                                  "example": "10"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "mx_exports": {
+                    "type": "object",
+                    "properties": {
+                      "terms": {
+                        "type": "string",
+                        "example": "FOB"
+                      },
+                      "exchange_rate": {
+                        "type": "number",
+                        "format": "float",
+                        "example": 20.6708
+                      },
+                      "total": {
+                        "type": "integer",
+                        "example": 1624
+                      },
+                      "origin": {
+                        "type": "object",
+                        "properties": {
+                          "address_street": {
+                            "type": "string",
+                            "example": "CALLE DEL PAPEL"
+                          },
+                          "address_city_id": {
+                            "type": "string",
+                            "example": "01"
+                          },
+                          "address_county_id": {
+                            "type": "string",
+                            "example": "1961"
+                          },
+                          "address_state_id": {
+                            "type": "string",
+                            "example": "45"
+                          },
+                          "address_country_id": {
+                            "type": "string",
+                            "example": "80"
+                          },
+                          "address_postalcode": {
+                            "type": "string",
+                            "example": "76199"
+                          }
+                        }
+                      },
+                      "destination": {
+                        "type": "object",
+                        "properties": {
+                          "tax_id_type": {
+                            "type": "string",
+                            "example": "US-EIN"
+                          },
+                          "tax_id_code": {
+                            "type": "string",
+                            "example": "222333444"
+                          },
+                          "address_street": {
+                            "type": "string",
+                            "example": "2470 SW 19th"
+                          },
+                          "address_state_id": {
+                            "type": "string",
+                            "example": "61"
+                          },
+                          "address_country_id": {
+                            "type": "string",
+                            "example": "89"
+                          },
+                          "address_postalcode": {
+                            "type": "string",
+                            "example": "00000"
+                          }
+                        }
+                      },
+                      "merchandise": {
+                        "type": "object",
+                        "properties": {
+                          "details": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "customs_code": {
+                                  "type": "string",
+                                  "example": "2402200100"
+                                },
+                                "customs_quantity": {
+                                  "type": "string",
+                                  "example": "117.64"
+                                },
+                                "sku": {
+                                  "type": "string",
+                                  "example": "aa111"
+                                },
+                                "customs_measure_unit": {
+                                  "type": "string",
+                                  "example": "01"
+                                },
+                                "customs_unit_value": {
+                                  "type": "string",
+                                  "example": "13.81"
+                                },
+                                "customs_total_value": {
+                                  "type": "string",
+                                  "example": "1624.00"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "pe_shipping": {
+                    "type": "object",
+                    "properties": {
+                      "supplier_party_address_code": {
+                        "type": "string"
+                      },
+                      "customer_party_address_code": {
+                        "type": "string"
+                      },
+                      "operation_type": {
+                        "type": "string"
+                      },
+                      "signature_id": {
+                        "type": "string"
+                      },
+                      "operation_type": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
               }
             },
             "required": [
@@ -2439,6 +2737,41 @@
           }
         },
         "required": ["payment_date", "document_id", "payment_type_id", "payment_amount", "cash_account_id"]
+      },
+      "PaymentResponseGet": {
+        "type": "object",
+        "properties": {
+          "payment_id": {
+            "type": "string",
+            "description": "ID of the payment.",
+            "example": "aaa111"
+          },
+          "payment_date": {
+            "type": "string",
+            "format": "date",
+            "description": "The date of the payment."
+          },
+          "document_id": {
+            "type": "string",
+            "description": "The ID of the document associated with the payment."
+          },
+          "payment_type_id": {
+            "type": "string",
+            "description": "The ID of the payment type."
+          },
+          "payment_amount": {
+            "type": "number",
+            "description": "The amount of the payment."
+          },
+          "payment_details": {
+            "type": "string",
+            "description": "Additional details about the payment."
+          },
+          "cash_account_id": {
+            "type": "string",
+            "description": "The ID of the cash account associated with the payment."
+          }
+        }
       }
     }
   }
