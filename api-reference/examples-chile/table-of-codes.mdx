@@ -131,4 +131,26 @@ Positive numbers will add to the final amount, while negative values are retenti
 | 16       | Ñuble                                | 16            |
 
 
-
+# account certification_status
+| certification_status | name                                          | customer_action_required | explanation                                                                                                                             |
+|----------------------|-----------------------------------------------|--------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| 0                    | Account created                               | Yes                      | The account was created, but no certificate has been uploaded                                                                           |
+| 5                    | Payroll only                                  | No                       | The account is in payroll only mode, no certification will take place                                                                   |
+| 10                   | Certification information received            | No                       | The certification information was received and the process has started                                                                  |
+| 11                   | Certificate can not login                     | Yes                      | The digital certificate is unable to authenticate on the SII website. Check that it is not expired or revoked.                          |
+| 12                   | Certificate unauthorized                      | Yes                      | The digital certificate is not allowed to operate with this company in the SII website. Check the authorized people.                    |
+| 20                   | Company information succesfully read          | No                       | We were able to read the company data from the SII website                                                                              |
+| 21                   | Tax situation                                 | Yes                      | The SII is not allowing the process to continue. Check status details and take action.                                                  |
+| 22                   | Inactive                                      | Yes                      | There is a problem on the certification process that the customer hasn't resolved                                                       |
+| 23                   | Scheduled for elimination                     | Yes                      | This account is scheduled for elimination                                                                                               |
+| 26                   | Payroll only with certificate                 | No                       | The account is configured to operate only for payroll processing and requires a certificate.                                            |
+| 27                   | Automatic certification failed                | No                       | The automated certification process failed. Manual intervention on our side will be required. We will update you as we solve the issue. |
+| 30                   | Test set sent                                 | No                       | A test set of documents was sent to the SII for evaluation.                                                                             |
+| 40                   | Simulation set sent                           | No                       | A set of simulated documents was sent to the SII for review.                                                                            |
+| 50                   | Exchange sent                                 | No                       | The exchange process has been completed, and documents were successfully sent.                                                          |
+| 60                   | Printed samples sent                          | No                       | Printed sample documents have been sent to the SII.                                                                                     |
+| 70                   | Printed samples approved                      | No                       | The SII has approved the printed sample documents.                                                                                      |
+| 71                   | On hold: Declaration paused by client         | Yes                      | The declaration process is paused due to a request or action by the client.                                                             |
+| 72                   | On hold: Declaration paused due to tax issue  | Yes                      | The declaration process is paused due to a tax-related issue identified by the SII. Check status details and take action.               |
+| 75                   | On hold: Receipts only, invoices certificated | Yes                      | The invoice certification was completed, however, only e-receipts has been activated for now.                                           |
+| 80                   | Invoice certification                         | No                       | The account is certified to issue invoices.                                                                                             |

@@ -76,3 +76,16 @@ tax_type values:
 
 tax_value:
 Positive numbers will add to the final amount, while negative values are retentions and will decrease the final amount
+
+
+# account certification_status
+| certification_status | name                                         | customer_action_required | explanation                                                                                                                |
+|----------------------|----------------------------------------------|--------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| 0                    | Account created                              | Yes                      | The account was created, but no certificate has been uploaded                                                              |
+| 21                   | Tax situation                                | Yes                      | The SUNAT is not allowing the process to continue. Check status details and take action.                                    |
+| 22                   | Inactive                                     | Yes                      | There is a problem on the certification process that the customer hasn't resolved                                          |
+| 23                   | Scheduled for elimination                    | Yes                      | This account is scheduled for elimination                                                                                  |
+| 70                   | Ready to be activated                        | No                       | The information was succesfully received and we are ready to activate invoices.                                            |
+| 71                   | On hold: Declaration paused by client        | Yes                      | The declaration process is paused due to a request or action by the client.                                                |
+| 72                   | On hold: Declaration paused due to tax issue | Yes                      | The declaration process is paused due to a tax-related issue identified by the SUNAT. Check status details and take action. |
+| 80                   | Invoice certification                        | No                       | The account is certified to issue invoices.                                                                                |
