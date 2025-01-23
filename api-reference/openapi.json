@@ -1814,9 +1814,6 @@
                       },
                       "signature_id": {
                         "type": "string"
-                      },
-                      "operation_type": {
-                        "type": "string"
                       }
                     }
                   }
