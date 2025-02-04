@@ -4,7 +4,7 @@ description: ''
 ---
 
 
-## Invoice
+## Invoice (Factura)
 In order to create a new colombian invoice, you need to use the /documents endpoint with the proper parameters.
 
 * Endpoint: https://api.userow.com/billing/V1/documents
@@ -71,7 +71,13 @@ In order to create a new colombian invoice, you need to use the /documents endpo
 ```
 
 
-## Credit note
+## Credit note (Nota de crédito)
+
+In order to create a new colombian credit note, you need to use the /documents endpoint with the proper parameters.
+
+reference_number should be the document that you are cancelling
+
+
 * Endpoint: https://api.userow.com/billing/V1/documents
 * Method: POST
 * Required headers:
@@ -144,12 +150,14 @@ In order to create a new colombian invoice, you need to use the /documents endpo
 }
 ```
 
-In order to create a new colombian credit note, you need to use the /documents endpoint with the proper parameters.
+
+
+## Debit note (Nota de débito)
+
+In order to create a new colombian debit note, you need to use the /documents endpoint with the proper parameters.
 
 reference_number should be the document that you are cancelling
 
-
-## Debit note
 * Endpoint: https://api.userow.com/billing/V1/documents
 * Method: POST
 * Required headers:
@@ -222,9 +230,165 @@ reference_number should be the document that you are cancelling
 }
 ```
 
-In order to create a new colombian debit note, you need to use the /documents endpoint with the proper parameters.
 
-reference_number should be the document that you are cancelling
+
+
+## POS equivalent document (Documento equivalente POS)
+
+<Note>
+    POS will only generate XML, no PDF will be generated on test or production environment. You can use the data to
+    generate your own document format
+</Note>
+
+* Endpoint: https://api.userow.com/billing/V1/documents
+* Method: POST
+* Required headers:
+  * Content-Type: application/json
+  * Authorization: Bearer \<token\>
+  * Accept: \*/\*
+
+```json
+{
+  "header": {
+    "account_id": 39,
+    "document_type_id": "87",
+    "received_issued_flag": 0,
+    "issue_date": "2025-01-31",
+    "issuer_tax_id_code": "EKU9003173C9",
+    "issuer_tax_id_type": "MX-RFC",
+    "issuer_legal_name": "<string>",
+    "issuer_address": "<string>",
+    "issuer_district": "<string>",
+    "issuer_city": "<string>",
+    "issuer_country_id": "66",
+    "issuer_phone": "<string>",
+    "issuer_activity": "<string>",
+    "receiver_tax_id_code": "860517022-2",
+    "receiver_tax_id_type": "CO-NIT",
+    "receiver_legal_name": "ESCUELA KEMPER URGATE",
+    "receiver_address": "<string>",
+    "receiver_district": "<string>",
+    "receiver_city": "Bogota, D.C.",
+    "receiver_country_id": "66",
+    "receiver_phone": "<string>",
+    "receiver_activity": "<string>",
+    "payment_conditions": "0",
+    "currency_id": 28,
+    "postal_code": "11001",
+    "receiver_email": "miemail@email.com"
+  },
+  "details": [
+    {
+      "quantity": 1,
+      "line_description": "Prueba ROW",
+      "unit_measure": "70",
+      "unit_price": 1500,
+      "long_description": "Esta es una linea de prueba",
+      "modifier_amount": -100,
+      "total_taxes": 266,
+      "modifier_percentage": 0,
+      "total_amount_line": 1666,
+      "taxes": [
+        {
+          "tax_type_id": "387",
+          "tax_percentage": 19,
+          "tax_amount": 266
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "net_amount": 1400,
+    "taxes_amount": 266,
+    "total_amount": 1666
+  }
+}
+```
+
+## POS equivalent credit note (Nota de crédito para documento equivalente POS)
+
+<Note>
+    POS will only generate XML, no PDF will be generated on test or production environment. You can use the data to
+    generate your own document format
+</Note>
+
+
+* Endpoint: https://api.userow.com/billing/V1/documents
+* Method: POST
+* Required headers:
+* Content-Type: application/json
+* Authorization: Bearer \<token\>
+* Accept: \*/\*
+
+```json
+{
+  "header": {
+    "account_id": 39,
+    "document_type_id": "88",
+    "received_issued_flag": 0,
+    "issue_date": "2025-01-31",
+    "issuer_tax_id_code": "EKU9003173C9",
+    "issuer_tax_id_type": "MX-RFC",
+    "issuer_legal_name": "<string>",
+    "issuer_address": "<string>",
+    "issuer_district": "<string>",
+    "issuer_city": "<string>",
+    "issuer_country_id": "66",
+    "issuer_phone": "<string>",
+    "issuer_activity": "<string>",
+    "receiver_tax_id_code": "860517022-2",
+    "receiver_tax_id_type": "CO-NIT",
+    "receiver_legal_name": "ESCUELA KEMPER URGATE",
+    "receiver_address": "<string>",
+    "receiver_district": "<string>",
+    "receiver_city": "Bogota, D.C.",
+    "receiver_country_id": "66",
+    "receiver_phone": "<string>",
+    "receiver_activity": "<string>",
+    "payment_conditions": "0",
+    "currency_id": 28,
+    "postal_code": "11001",
+    "receiver_email": "miemail@email.com"
+  },
+  "details": [
+    {
+      "quantity": 1,
+      "line_description": "Prueba ROW",
+      "unit_measure": "70",
+      "unit_price": 1500,
+      "long_description": "Esta es una linea de prueba",
+      "modifier_amount": -100,
+      "total_taxes": 266,
+      "modifier_percentage": 0,
+      "total_amount_line": 1666,
+      "taxes": [
+        {
+          "tax_type_id": "387",
+          "tax_percentage": 19,
+          "tax_amount": 266
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+        "reference_type": 87,
+        "reference_number": "EPOS217",
+        "reference_code": 1,
+        "description": "Anulacion solicitada por el emisor",
+        "reference_date": "2025-01-31"
+    }
+  ],
+  "totals": {
+    "net_amount": 1400,
+    "taxes_amount": 266,
+    "total_amount": 1666
+  }
+}
+```
+
+
+
 
 <CardGroup cols={1}>
     <Card

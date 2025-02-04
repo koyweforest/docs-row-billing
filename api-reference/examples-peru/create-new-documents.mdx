@@ -4,7 +4,7 @@ description: ''
 ---
 
 
-## Invoice
+## Invoice (Factura electrónica)
 In order to create a new peruvian invoice, you need to use the /documents endpoint with the proper parameters.
 
 * Endpoint: https://api.userow.com/billing/V1/documents
@@ -16,71 +16,72 @@ In order to create a new peruvian invoice, you need to use the /documents endpoi
 
 ```json
 {
-  "header": {
-    "account_id": 179,
-    "document_type_id": "96",
-    "received_issued_flag": 0,
-    "issue_date": "2025-01-14",
-    "issuer_tax_id_code": "20610383727",
-    "issuer_tax_id_type": "PE-RUC",
-    "issuer_legal_name": "<string>",
-    "issuer_address": "<string>",
-    "issuer_district": "<string>",
-    "issuer_city": "<string>",
-    "issuer_country_id": "83",
-    "issuer_phone": "<string>",
-    "issuer_activity": "<string>",
-    "receiver_tax_id_code": "20473731828",
-    "receiver_tax_id_type": "PE-RUC",
-    "receiver_legal_name": "ESCUELA KEMPER URGATES",
-    "receiver_address": "<string>",
-    "receiver_district": "<string>",
-    "receiver_city": "<string>",
-    "receiver_country_id": "83",
-    "receiver_phone": "<string>",
-    "receiver_activity": "<string>",
-    "payment_conditions": "0",
-    "currency_id": 7,
-    "additional": {
-        "pe_shipping": {
-                "supplier_party_address_code": "12345456",
-                "customer_party_address_code": "12343456",
-                "operation_type": "ASDASDG",
-                "signature_id": "ASDFG",
-                "operation_type": "0101"
-        }
+   "header":{
+      "account_id":179,
+      "document_type_id":"96",
+      "received_issued_flag":0,
+      "issue_date":"2025-02-03",
+      "issuer_tax_id_code":"20610383727",
+      "issuer_tax_id_type":"PE-RUC",
+      "issuer_legal_name":"<string>",
+      "issuer_address":"<string>",
+      "issuer_district":"<string>",
+      "issuer_city":"<string>",
+      "issuer_department":"<string>",
+      "issuer_country_id":"83",
+      "issuer_phone":"<string>",
+      "issuer_activity":"<string>",
+      "receiver_tax_id_code":"20473731828",
+      "receiver_tax_id_type":"PE-RUC",
+      "receiver_legal_name":"ESCUELA KEMPER URGATES",
+      "receiver_address":"<string>",
+      "receiver_district":"<string>",
+      "receiver_city":"<string>",
+      "receiver_department":"<string>",
+      "receiver_country_id":"83",
+      "receiver_phone":"<string>",
+      "receiver_activity":"<string>",
+      "payment_conditions":"0",
+      "currency_id":7,
+      "additional":{
+         "pe_header":{
+            "signature_id":"ASDFG",
+            "operation_type":"0101",
+            "issuer_postalcode":"12345456",
+            "receiver_postalcode":"12343456"
+         }
       }
-  },
-  "details": [
-    {
-      "quantity": 1,
-      "line_description": "Prueba ROW",
-      "unit_measure": "NIU",
-      "unit_price": 1000,
-      "long_description": "Test descripcion",
-      "modifier_amount": 0,
-      "total_taxes": 180,
-      "modifier_percentage": 0,
-      "total_amount_line": 1180,
-      "sku": "3245",
-      "taxes": [
-        {
-          "tax_type_id": "412",
-          "tax_percentage": 18,
-          "tax_amount": 180
-        }
-      ]
-    }
-  ],
-  "totals": {
-    "net_amount": 1000,
-    "taxes_amount": 180,
-    "total_amount": 1180
-  }
+   },
+   "details":[
+      {
+         "quantity":1,
+         "line_description":"Prueba ROW",
+         "unit_measure":"NIU",
+         "unit_price":1000,
+         "long_description":"Test descripcion",
+         "modifier_amount":0,
+         "total_taxes":180,
+         "modifier_percentage":0,
+         "total_amount_line":1180,
+         "sku":"3245",
+         "taxes":[
+            {
+               "tax_type_id":"412",
+               "tax_percentage":18,
+               "tax_amount":180
+            }
+         ]
+      }
+   ],
+   "totals":{
+      "net_amount":1000,
+      "taxes_amount":180,
+      "total_amount":1180
+   }
 }
 ```
 
-## Receipt
+## Receipt (Boleta electrónica)
 
 In order to create a new peruvian receipt, you need to use the /documents endpoint with the proper parameters.
 
@@ -93,70 +94,489 @@ In order to create a new peruvian receipt, you need to use the /documents endpoi
 
 ```json
 {
-  "header": {
-    "account_id": 179,
-    "document_type_id": "97",
-    "received_issued_flag": 0,
-    "issue_date": "2025-01-14",
-    "issuer_tax_id_code": "20610383727",
-    "issuer_tax_id_type": "PE-RUC",
-    "issuer_legal_name": "<string>",
-    "issuer_address": "<string>",
-    "issuer_district": "<string>",
-    "issuer_city": "<string>",
-    "issuer_country_id": "83",
-    "issuer_phone": "<string>",
-    "issuer_activity": "<string>",
-    "receiver_tax_id_code": "20473731828",
-    "receiver_tax_id_type": "PE-RUC",
-    "receiver_legal_name": "ESCUELA KEMPER URGATES",
-    "receiver_address": "<string>",
-    "receiver_district": "<string>",
-    "receiver_city": "<string>",
-    "receiver_country_id": "83",
-    "receiver_phone": "<string>",
-    "receiver_activity": "<string>",
-    "payment_conditions": "0",
-    "currency_id": 7,
-      "additional": {
-        "pe_shipping": {
-                "supplier_party_address_code": "12345456",
-                "customer_party_address_code": "12343456",
-                "operation_type": "ASDASDG",
-                "signature_id": "ASDFG",
-                "operation_type": "0101"
-        }
+   "header":{
+      "account_id":179,
+      "document_type_id":"97",
+      "received_issued_flag":0,
+      "issue_date":"2025-02-03",
+      "issuer_tax_id_code":"20610383727",
+      "issuer_tax_id_type":"PE-RUC",
+      "issuer_legal_name":"<string>",
+      "issuer_address":"<string>",
+      "issuer_district":"<string>",
+      "issuer_city":"<string>",
+      "issuer_department":"<string>",
+      "issuer_country_id":"80",
+      "issuer_phone":"<string>",
+      "issuer_activity":"<string>",
+      "receiver_tax_id_code":"20473731828",
+      "receiver_tax_id_type":"PE-RUC",
+      "receiver_legal_name":"ESCUELA KEMPER URGATES",
+      "receiver_address":"<string>",
+      "receiver_district":"<string>",
+      "receiver_city":"<string>",
+      "receiver_department":"<string>",
+      "receiver_country_id":"80",
+      "receiver_phone":"<string>",
+      "receiver_activity":"<string>",
+      "payment_conditions":"0",
+      "currency_id":7,
+      "additional":{
+         "pe_header":{
+            "signature_id":"ASDFG",
+            "operation_type":"0101",
+            "issuer_postalcode":"12345456",
+            "receiver_postalcode":"12343456"
+         }
       }
-  },
-  "details": [
-    {
-      "quantity": 1,
-      "line_description": "Prueba ROW",
-      "unit_measure": "NIU",
-      "unit_price": 1000,
-      "long_description": "Test descripcion",
-      "modifier_amount": 0,
-      "total_taxes": 180,
-      "modifier_percentage": 0,
-      "total_amount_line": 1180,
-      "sku": "3245",
-      "taxes": [
-        {
-          "tax_type_id": "412",
-          "tax_percentage": 18,
-          "tax_amount": 180
-        }
-      ]
-    }
-  ],
-  "totals": {
-    "net_amount": 1000,
-    "taxes_amount": 180,
-    "total_amount": 1180
-  }
+   },
+   "details":[
+      {
+         "quantity":1,
+         "line_description":"Prueba ROW",
+         "unit_measure":"NIU",
+         "unit_price":1000,
+         "long_description":"Test descripcion",
+         "modifier_amount":0,
+         "total_taxes":180,
+         "modifier_percentage":0,
+         "total_amount_line":1180,
+         "sku":"3245",
+         "taxes":[
+            {
+               "tax_type_id":"412",
+               "tax_percentage":18,
+               "tax_amount":180
+            }
+         ]
+      }
+   ],
+   "totals":{
+      "net_amount":1000,
+      "taxes_amount":180,
+      "total_amount":1180
+   }
 }
 ```
 
+
+## Credit note (Nota de crédito electrónica)
+
+In order to create a new peruvian credit note, you need to use the /documents endpoint with the proper parameters and
+add a reference field
+
+* Endpoint: https://api.userow.com/billing/V1/documents
+* Method: POST
+* Required headers:
+* Content-Type: application/json
+* Authorization: Bearer \<token\>
+* Accept: \*/\*
+
+```json
+{
+   "header": {
+      "account_id": 179,
+      "document_type_id": "98",
+      "received_issued_flag": 0,
+      "issue_date": "2025-01-27",
+      "issuer_tax_id_code": "20610383727",
+      "issuer_tax_id_type": "PE-RUC",
+      "issuer_legal_name": "<string>",
+      "issuer_address": "<string>",
+      "issuer_district": "<string>",
+      "issuer_city": "<string>",
+	  "issuer_department":"<string>",
+      "issuer_country_id": "80",
+      "issuer_phone": "<string>",
+      "issuer_activity": "<string>",
+      "receiver_tax_id_code": "20473731828",
+      "receiver_tax_id_type": "PE-RUC",
+      "receiver_legal_name": "ESCUELA KEMPER URGATES",
+      "receiver_address": "<string>",
+      "receiver_district": "<string>",
+      "receiver_city": "<string>",
+	  "receiver_department":"<string>",
+      "receiver_country_id": "80",
+      "receiver_phone": "<string>",
+      "receiver_activity": "<string>",
+      "payment_conditions": "0",
+      "currency_id": 7,
+	  "additional":{
+         "pe_header":{
+            "signature_id":"ASDFG",
+            "operation_type":"0101",
+            "issuer_postalcode":"12345456",
+            "receiver_postalcode":"12343456"
+         }
+      }
+   },
+   "details": [
+      {
+         "quantity": 1,
+         "line_description": "Prueba ROW",
+         "unit_measure": "NIU",
+         "unit_price": 1000,
+         "long_description": "Test descripcion",
+         "modifier_amount": 0,
+         "total_taxes": 180,
+         "modifier_percentage": 0,
+         "total_amount_line": 1180,
+         "sku": "3245",
+         "taxes": [
+            {
+               "tax_type_id": "412",
+               "tax_percentage": 18,
+               "tax_amount": 180
+            }
+         ]
+      }
+   ],
+   "references": [
+	   {
+		  "reference_type": "96",
+		  "reference_number": "F001-00000087",
+		  "reference_code": "01",
+		  "description": "Anulacion solicitada por el emisor",
+		  "reference_date": "2025-01-27"
+	   }
+   ],
+   "totals": {
+      "net_amount": 1000,
+      "taxes_amount": 180,
+      "total_amount": 1180
+   }
+}
+```
+
+## Debit note (Nota de débito electrónica)
+
+In order to create a new peruvian debit note, you need to use the /documents endpoint with the proper parameters and
+add a reference field
+
+* Endpoint: https://api.userow.com/billing/V1/documents
+* Method: POST
+* Required headers:
+* Content-Type: application/json
+* Authorization: Bearer \<token\>
+* Accept: \*/\*
+
+```json
+{
+   "header":{
+      "account_id":179,
+      "document_type_id":"99",
+      "received_issued_flag":0,
+      "issue_date":"2025-01-23",
+      "issuer_tax_id_code":"20610383727",
+      "issuer_tax_id_type":"PE-RUC",
+      "issuer_legal_name":"<string>",
+      "issuer_address":"<string>",
+      "issuer_district":"<string>",
+      "issuer_city":"<string>",
+	  "issuer_department":"<string>",
+      "issuer_country_id":"80",
+      "issuer_phone":"<string>",
+      "issuer_activity":"<string>",
+      "receiver_tax_id_code":"20473731828",
+      "receiver_tax_id_type":"PE-RUC",
+      "receiver_legal_name":"ESCUELA KEMPER URGATES",
+      "receiver_address":"<string>",
+      "receiver_district":"<string>",
+      "receiver_city":"<string>",
+	  "receiver_department":"<string>",
+      "receiver_country_id":"80",
+      "receiver_phone":"<string>",
+      "receiver_activity":"<string>",
+      "payment_conditions":"0",
+      "currency_id":7,
+      "additional":{
+         "pe_header":{
+            "signature_id":"ASDFG",
+            "operation_type":"0101",
+            "issuer_postalcode":"12345456",
+            "receiver_postalcode":"12343456"
+         }
+      }
+   },
+   "details":[
+      {
+         "quantity":1,
+         "line_description":"Prueba ROW",
+         "unit_measure":"NIU",
+         "unit_price":1000,
+         "long_description":"Test descripcion",
+         "modifier_amount":0,
+         "total_taxes":180,
+         "modifier_percentage":0,
+         "total_amount_line":1180,
+         "sku":"3245",
+         "taxes":[
+            {
+               "tax_type_id":"412",
+               "tax_percentage":18,
+               "tax_amount":180
+            }
+         ]
+      }
+   ],
+   "references": [
+	 {
+		"reference_type":"96",
+		"reference_number":"F001-00000080",
+		"reference_code":"03",
+		"description":"Penalidad/otros conceptos",
+		"reference_date":"2025-01-23"
+	 }
+   ],
+   "totals":{
+      "net_amount":1000,
+      "taxes_amount":180,
+      "total_amount":1180
+   }
+}
+```
+
+## Bill of lading (Guía de remisión electrónica)
+
+In order to create a new peruvian bill of lading, you need to use the /documents endpoint with the proper parameters and
+add the additional shipping fields
+
+* Endpoint: https://api.userow.com/billing/V1/documents
+* Method: POST
+* Required headers:
+* Content-Type: application/json
+* Authorization: Bearer \<token\>
+* Accept: \*/\*
+
+```json
+{
+   "header":{
+      "account_id":179,
+      "document_type_id":"100",
+      "received_issued_flag":0,
+      "issue_date":"2025-01-31",
+      "issuer_tax_id_code":"20610383727",
+      "issuer_tax_id_type":"PE-RUC",
+      "issuer_legal_name":"<string>",
+      "issuer_address":"<string>",
+      "issuer_district":"<string>",
+      "issuer_city":"<string>",
+	  "issuer_department":"<string>",
+      "issuer_country_id":"83",
+      "issuer_phone":"<string>",
+      "issuer_activity":"<string>",
+      "receiver_tax_id_code":"20473731828",
+      "receiver_tax_id_type":"PE-RUC",
+      "receiver_legal_name":"ESCUELA KEMPER URGATES",
+      "receiver_address":"<string>",
+      "receiver_district":"<string>",
+	  "receiver_department":"<string>",
+      "receiver_city":"<string>",
+      "receiver_country_id":"80",
+      "receiver_phone":"<string>",
+      "receiver_activity":"<string>",
+      "payment_conditions":"0",
+      "currency_id":7,
+      "additional":{
+         "pe_header":{
+            "signature_id":"ASDFG",
+            "operation_type":"0101",
+            "issuer_postalcode":"12345456",
+            "receiver_postalcode":"12343456"
+         },
+         "pe_shipping":{
+            "handling_code":"01",
+            "special_instructions":"SUNAT_Envio_IndicadorTrasladoVehiculoM1L",
+            "handling_instructions":"DESCRIPCION DEL MOTIVO DE TRASLADO",
+            "gross_weight_measure":"500",
+            "gross_weight_measure_id":"KGM",
+            "shipment_stage":{
+               "transport_mode_code":"01",
+               "transit_period":"2025-01-31",
+               "driver_person":{
+                  "driver_id":"72257341",
+                  "first_name":"NOMBRE CONDUCTOR",
+                  "family_name":"APELLIDOS CONDUCTOR",
+                  "job_title":"Principal",
+                  "identity_document_reference":"LICENC1234"
+               },
+               "carrier_party":{
+          	   "party_identification": "20104498044",
+          	   "party_legal_entity_name": "EMPRESA TRANSPORTISTA",
+          	   "party_legal_entity_id": "NUMREGISTRANS",
+          	   "agent_party_id": "NUMAUTRANS"
+          	}
+            },
+            "delivery":{
+               "delivery_address":{
+                  "id":"150110",
+                  "city_subdivision_name":"URBANIZACION",
+                  "city_name":"PROVINCIA",
+                  "country_subentity":"DEPARTAMENTO",
+                  "district":"DISTRITO",
+                  "address_line":"DIRECCION PUNTO LLEGADA",
+                  "country":"83"
+               },
+               "dispatch":{
+                  "id":"150112",
+                  "city_subdivision_name":"URBANIZACION",
+                  "city_name":"PROVINCIA",
+                  "country_subentity":"DEPARTAMENTO",
+                  "district":"DISTRITO",
+                  "address_line":"DIRECCION PUNTO LLEGADA",
+                  "country":"83",
+                  "dispatch_party_company_id": "NUMAUTORIREMIT123"
+               }
+            },
+            "transport_handling_unit":{
+               "transport_equipment_id":"PLACA1"
+            }
+         }
+      }
+   },
+   "details":[
+      {
+         "quantity":1,
+         "line_description":"Prueba ROW",
+         "unit_measure":"NIU",
+         "unit_price":1000,
+         "long_description":"Test descripcion",
+         "modifier_amount":0,
+         "total_taxes":180,
+         "modifier_percentage":0,
+         "total_amount_line":1180,
+         "sku":"3245",
+         "taxes":[
+            {
+               "tax_type_id":"412",
+               "tax_percentage":18,
+               "tax_amount":180
+            }
+         ]
+      }
+   ],
+   "references": [
+	 {
+		"reference_type": "96",
+		"reference_number": "F001-00000099",
+		"reference_code": 1,
+		"description": "Traslado",
+		"reference_date": "2025-01-31"
+	 }
+   ],
+   "totals":{
+      "net_amount":1000,
+      "taxes_amount":180,
+      "total_amount":1180
+   }
+}
+```
+
+## Retention receipt (Comprobante de retención)
+
+In order to create a new peruvian retention receipt, you need to use the /documents endpoint with the proper parameters and
+add the retention fields
+
+* Endpoint: https://api.userow.com/billing/V1/documents
+* Method: POST
+* Required headers:
+* Content-Type: application/json
+* Authorization: Bearer \<token\>
+* Accept: \*/\*
+
+```json
+{
+   "header":{
+      "account_id":179,
+      "document_type_id":"109",
+      "received_issued_flag":0,
+      "issue_date":"2025-01-24",
+      "issuer_tax_id_code":"20610383727",
+      "issuer_tax_id_type":"PE-RUC",
+      "issuer_legal_name":"<string>",
+      "issuer_address":"<string>",
+      "issuer_district":"<string>",
+      "issuer_city":"<string>",
+	  "issuer_department":"<string>",
+      "issuer_country_id":"80",
+      "issuer_phone":"<string>",
+      "issuer_activity":"<string>",
+      "receiver_tax_id_code":"20473731828",
+      "receiver_tax_id_type":"PE-RUC",
+      "receiver_legal_name":"ESCUELA KEMPER URGATES",
+      "receiver_address":"<string>",
+      "receiver_district":"<string>",
+      "receiver_city":"<string>",
+	  "receiver_department":"<string>",
+      "receiver_country_id":"80",
+      "receiver_phone":"<string>",
+      "receiver_activity":"<string>",
+      "receiver_email":"rockman-jjlb@hotmail.com",
+      "payment_conditions":"0",
+      "currency_id":7,
+      "additional":{
+         "pe_header":{
+            "signature_id":"ASDFG",
+            "operation_type":"0101",
+            "issuer_postalcode":"12345456",
+            "receiver_postalcode":"12343456"
+         },
+		 "pe_retention_header":{
+			 "pe_sunat_retention_system_code":"01",
+			 "pe_sunat_retention_percent":"3.00",
+			 "pe_sunat_total_paid":"1144.60"
+		 }
+      }
+   },
+   "details":[
+      {
+         "quantity":1,
+         "line_description":"Prueba ROW",
+         "unit_measure":"NIU",
+         "unit_price":1000,
+         "long_description":"Test descripcion",
+         "modifier_amount":0,
+         "total_taxes":180,
+         "modifier_percentage":0,
+         "total_amount_line":1180,
+         "sku":"3245",
+         "taxes":[
+            {
+               "tax_type_id":"412",
+               "tax_percentage":18,
+               "tax_amount":180
+            }
+         ]
+      }
+   ],
+   "references":[
+		 {
+			"reference_type":"96",
+			"reference_number":"F001-00000080",
+			"reference_code":1,
+			"description":"Pago",
+			"reference_date":"2025-01-24",
+			"additional":{
+				"pe_retention_details":{
+					"reference_paid_amount":"1144.60",
+					"reference_total_invoice_amount": "1180",
+					"reference_paid_date":"2025-01-24",
+					"reference_payment_id":"1",
+					"pe_reference_sunat_retention_amount":"34.34",
+					"pe_reference_sunat_retention_date":"2025-01-23",
+					"calculation_rate":"1",
+					"currency_id":"7"
+				}
+			}
+		 }
+    ],
+   "totals":{
+      "net_amount":1000,
+      "taxes_amount":180,
+      "total_amount":1180
+   }
+}
+```
 
 <CardGroup cols={1}>
     <Card

@@ -1,15 +1,15 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Row Billing",
+  "name": "Koywe Billing API",
   "logo": {
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
   },
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#00E5D1",
-    "light": "#00CCBB",
-    "dark": "#000066",
+    "primary": "#006252",
+    "light": "#006252",
+    "dark": "#C8FF1E",
     "anchors": {
       "from": "#0D9373",
       "to": "#07C983"
@@ -18,12 +18,12 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:support@userow.com"
+      "url": "mailto:soporte@facto.cl"
     }
   ],
   "topbarCtaButton": {
-    "name": "Home",
-    "url": "https://userow.com/"
+    "name": "Koywe Home",
+    "url": "https://koywe.com/"
   },
   "tabs": [
 
@@ -107,6 +107,46 @@
           "pages": [
             "api-reference/endpoint/create-a-new-payment",
             "api-reference/endpoint/get-a-specific-payment"
+          ]
+        },
+        {
+          "group": "\uD83D\uDCE6 Products",
+          "pages": [
+            "api-reference/endpoint/create-a-new-product",
+            "api-reference/endpoint/get-a-paginated-list-of-products",
+            "api-reference/endpoint/get-a-specific-product",
+            "api-reference/endpoint/update-a-specific-product",
+            "api-reference/endpoint/delete-a-specific-product"
+          ]
+        },
+        {
+          "group": "\uD83D\uDCE6 Product Categories",
+          "pages": [
+            "api-reference/endpoint/create-a-new-product-category",
+            "api-reference/endpoint/get-a-paginated-list-of-product-categories",
+            "api-reference/endpoint/get-a-specific-product-category",
+            "api-reference/endpoint/update-a-specific-product-category",
+            "api-reference/endpoint/delete-a-specific-product-category"
+          ]
+        },
+        {
+          "group": "\uD83D\uDCE6 Product Locations",
+          "pages": [
+            "api-reference/endpoint/create-a-new-product-location",
+            "api-reference/endpoint/get-a-paginated-list-of-product-locations",
+            "api-reference/endpoint/get-a-specific-product-location",
+            "api-reference/endpoint/update-a-specific-product-location",
+            "api-reference/endpoint/delete-a-specific-product-location"
+          ]
+        },
+        {
+          "group": "\uD83D\uDCE6 Product Price Lists",
+          "pages": [
+            "api-reference/endpoint/create-a-new-product-price-list",
+            "api-reference/endpoint/get-a-paginated-list-of-product-price-lists",
+            "api-reference/endpoint/get-a-specific-product-price-list",
+            "api-reference/endpoint/update-a-specific-product-price-list",
+            "api-reference/endpoint/delete-a-specific-product-price-list"
           ]
         }
       ]
