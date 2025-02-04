@@ -872,6 +872,928 @@
           }
         ]
       }
+    },
+    "/products": {
+      "post": {
+        "summary": "Creates a new product",
+        "description": "Adds a new product with the provided details.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "invoicing_details": { "type": "string" },
+                  "additional_details": { "type": "string" },
+                  "model": { "type": "string" },
+                  "brand": { "type": "string" },
+                  "status": { "type": "integer" },
+                  "sku": { "type": "string" },
+                  "barcode": { "type": "string" },
+                  "measure_unit": { "type": "string" },
+                  "type": { "type": "integer" },
+                  "embedded_quantity_barcode": { "type": "integer" },
+                  "embedded_quantity_barcode_decimals": { "type": "integer" },
+                  "additional_data_1": { "type": "string" },
+                  "additional_data_2": { "type": "string" },
+                  "additional_data_3": { "type": "string" },
+                  "favorite": { "type": "integer" },
+                  "product_category_id": { "type": "integer" },
+                  "cost": {
+                    "type": "object",
+                    "properties": {
+                      "currency_id": { "type": "integer" },
+                      "value": { "type": "number" }
+                    }
+                  },
+                  "price": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "price_list_id": { "type": "integer" },
+                        "unit_price": { "type": "number" },
+                        "unit_tax": { "type": "number" },
+                        "unit_total": { "type": "number" },
+                        "currency_id": { "type": "integer" },
+                        "comission_amount": { "type": "number" },
+                        "taxes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "tax_type_id": { "type": "string" },
+                              "tax_percentage": { "type": "number" },
+                              "tax_amount": { "type": "number" }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": ["name", "status", "product_category_id", "cost", "price"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Product created successfully."
+          }
+        }
+      },
+      "get": {
+        "summary": "Lists all products",
+        "description": "Retrieves a list of all products, with optional search parameters.",
+        "parameters": [
+          {
+            "name": "product_category_id",
+            "in": "query",
+            "description": "Filter by product category ID.",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "sku",
+            "in": "query",
+            "description": "Filter by SKU.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Filter by product name.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Filter by product type.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "model",
+            "in": "query",
+            "description": "Filter by model.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "brand",
+            "in": "query",
+            "description": "Filter by brand.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter by status. If not sent, it will only present products with status = 1.",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "additional_data_1",
+            "in": "query",
+            "description": "Filter by additional data 1.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "additional_data_2",
+            "in": "query",
+            "description": "Filter by additional data 2.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "additional_data_3",
+            "in": "query",
+            "description": "Filter by additional data 3.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "barcode",
+            "in": "query",
+            "description": "Filter by barcode.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of products.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "product_id": { "type": "integer" },
+                      "name": { "type": "string" },
+                      "status": { "type": "integer" },
+                      "product_category_id": { "type": "integer" },
+                      "type": { "type": "string" },
+                      "sku": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/{product_id}": {
+      "get": {
+        "summary": "Retrieves a specific product",
+        "description": "Fetches details of a product by its ID.",
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the specified product.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "product_id": { "type": "integer" },
+                    "name": { "type": "string" },
+                    "invoicing_details": { "type": "string" },
+                    "additional_details": { "type": "string" },
+                    "model": { "type": "string" },
+                    "brand": { "type": "string" },
+                    "status": { "type": "integer" },
+                    "sku": { "type": "string" },
+                    "barcode": { "type": "string" },
+                    "measure_unit": { "type": "string" },
+                    "type": { "type": "integer" },
+                    "embedded_quantity_barcode": { "type": "integer" },
+                    "embedded_quantity_barcode_decimals": { "type": "integer" },
+                    "additional_data_1": { "type": "string" },
+                    "additional_data_2": { "type": "string" },
+                    "additional_data_3": { "type": "string" },
+                    "favorite": { "type": "integer" },
+                    "product_category_id": { "type": "integer" },
+                    "cost": {
+                      "type": "object",
+                      "properties": {
+                        "currency_id": { "type": "integer" },
+                        "value": { "type": "number" }
+                      }
+                    },
+                    "price": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "price_list_id": { "type": "integer" },
+                          "unit_price": { "type": "number" },
+                          "unit_tax": { "type": "number" },
+                          "unit_total": { "type": "number" },
+                          "currency_id": { "type": "integer" },
+                          "comission_amount": { "type": "number" },
+                          "taxes": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "tax_type_id": { "type": "string" },
+                                "tax_percentage": { "type": "number" },
+                                "tax_amount": { "type": "number" }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update product",
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "sku": {
+                    "type": "string"
+                  }
+                },
+                "required": ["name"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Product updated successfully",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid data or product not found"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Deletes a specific product",
+        "description": "Removes a product identified by its ID.",
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Product deleted successfully."
+          }
+        }
+      }
+    },
+    "/product_price_lists": {
+      "post": {
+        "summary": "Creates a new product price list",
+        "description": "Creates a new product price list with the given details.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the products price list."
+                  }
+                },
+                "required": ["product_price_list_id", "name"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Products price list created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "product_price_list_id": {
+                      "type": "integer",
+                      "description": "Unique identifier for the newly created products price list."
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Name of the newly created products price list."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Retrieves all products price lists",
+        "description": "Returns a list of all products price lists.",
+        "responses": {
+          "200": {
+            "description": "A list of products price lists.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "product_price_list_id": {
+                        "type": "integer",
+                        "description": "Unique identifier for a products price list."
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Name of the products price list."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product_price_lists/{product_price_list_id}": {
+      "get": {
+        "summary": "Retrieves a specific products price list",
+        "description": "Fetches details of a products price list by its ID.",
+        "parameters": [
+          {
+            "name": "product_price_list_id",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the products price list.",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of the specified products price list.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "product_price_list_id": {
+                      "type": "integer",
+                      "description": "Unique identifier for the products price list."
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Name of the products price list."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update product price list",
+        "parameters": [
+          {
+            "name": "product_price_list_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": ["name"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Product price list updated successfully",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid data or product price list not found"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Deletes a specific products price list",
+        "description": "Removes a products price list identified by its ID.",
+        "parameters": [
+          {
+            "name": "product_price_list_id",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the products price list to delete.",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Products price list deleted successfully."
+          }
+        }
+      }
+    },
+    "/product_locations": {
+      "post": {
+        "summary": "Creates a new product location",
+        "description": "Creates a new product location with the given details.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the product location."
+                  },
+                  "status": {
+                    "type": "integer",
+                    "description": "Status of the product location."
+                  },
+                  "company_branch_id": {
+                    "type": "integer",
+                    "description": "Identifier for the company branch associated with the product location."
+                  }
+                },
+                "required": [ "name", "status", "company_branch_id"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Product location created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "product_location_id": {
+                      "type": "integer",
+                      "description": "Unique identifier for the newly created product location."
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Name of the newly created product location."
+                    },
+                    "status": {
+                      "type": "integer",
+                      "description": "Status of the newly created product location."
+                    },
+                    "company_branch_id": {
+                      "type": "integer",
+                      "description": "Identifier for the company branch associated with the newly created product location."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Retrieves all product locations",
+        "description": "Returns a list of all product locations.",
+        "responses": {
+          "200": {
+            "description": "A list of product locations.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "product_location_id": {
+                        "type": "integer",
+                        "description": "Unique identifier for the product location."
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Name of the product location."
+                      },
+                      "status": {
+                        "type": "integer",
+                        "description": "Status of the product location."
+                      },
+                      "company_branch_id": {
+                        "type": "integer",
+                        "description": "Identifier for the company branch associated with the product location."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product_locations/{product_location_id}": {
+      "get": {
+        "summary": "Retrieves a specific Product location",
+        "description": "Returns the details of a product location.",
+        "responses": {
+          "200": {
+            "description": "The detail of a product location.",
+            "content": {
+              "application/json": {
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                      "product_location_id": {
+                        "type": "integer",
+                        "description": "Unique identifier for the product location."
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Name of the product location."
+                      },
+                      "status": {
+                        "type": "integer",
+                        "description": "Status of the product location."
+                      },
+                      "company_branch_id": {
+                        "type": "integer",
+                        "description": "Identifier for the company branch associated with the product location."
+                      }
+                    }
+                  }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update product location",
+        "parameters": [
+          {
+            "name": "product_location_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "company_branch_id": {
+                    "type": "string"
+                  }
+                },
+                "required": ["name"]
+              }
+            }
+          }
+          },
+        "responses": {
+          "200": {
+            "description": "Product location updated successfully",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid data or product location not found"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+        },
+      "delete": {
+        "summary": "Deletes a specific products location",
+        "description": "Removes a products location identified by its ID.",
+        "parameters": [
+          {
+            "name": "product_location_id",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the products location to delete.",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Products location deleted successfully."
+          }
+        }
+      }
+    },
+    "/product_categories": {
+      "post": {
+        "summary": "Creates a new product category",
+        "description": "Creates a new product category with the given details.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the product category."
+                  },
+                  "parent_product_category_id": {
+                    "type": "integer",
+                    "description": "Identifier of the parent category. null if there is no parent category."
+                  }
+                },
+                "required": [ "name"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Product category created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "product_category_id": {
+                      "type": "string",
+                      "description": "Unique identifier for the newly created product category."
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Name of the newly created product category."
+                    },
+                    "parent_product_category_id": {
+                      "type": "string",
+                      "description": "Identifier for the parent category. null if there is no parent category."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Retrieves all product categories",
+        "description": "Returns a list of all product categories.",
+        "responses": {
+          "200": {
+            "description": "A list of product categories.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "product_category_id": {
+                        "type": "string",
+                        "description": "Unique identifier for the product category."
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "Name of the product category."
+                      },
+                      "parent_product_category_id": {
+                        "type": "integer",
+                        "description": "Identifier for the parent category. null if no parent."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product_categories/{product_category_id}": {
+      "get": {
+        "summary": "Retrieves a specific product category",
+        "description": "Returns the details of a product category.",
+        "responses": {
+          "200": {
+            "description": "The detail of a product category.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "product_category_id": {
+                      "type": "integer",
+                      "description": "Unique identifier for the product category."
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Name of the product category."
+                    },
+                    "parent_product_category_id": {
+                      "type": "integer",
+                      "description": "Identifier for the parent category. null if no parent."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update product category",
+        "parameters": [
+          {
+            "name": "product_category_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "parent_product_category_id": {
+                    "type": "string"
+                  }
+                },
+                "required": ["name"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Product category updated successfully",
+            "content": {
+              "application/json": {
+
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid data or product category not found"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Deletes a specific products category",
+        "description": "Removes a products category identified by its ID.",
+        "parameters": [
+          {
+            "name": "product_category_id",
+            "in": "path",
+            "required": true,
+            "description": "Unique identifier for the products category to delete.",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Products category deleted successfully."
+          }
+        }
+      }
     }
   },
 "components": {
