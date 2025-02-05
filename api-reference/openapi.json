@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://api.userow.com/billing/V1",
+      "url": "https://api-billing.koywe.com/V1",
       "description": "Production server"
     }
   ],
@@ -2733,17 +2733,159 @@
                   "pe_header": {
                     "type": "object",
                     "properties": {
-                      "supplier_party_address_code": {
-                        "type": "string"
-                      },
-                      "customer_party_address_code": {
-                        "type": "string"
-                      },
                       "operation_type": {
                         "type": "string"
                       },
                       "signature_id": {
                         "type": "string"
+                      }
+                    }
+                  },
+                  "pe_retention_header": {
+                    "type": "object",
+                    "properties": {
+                      "pe_sunat_retention_system_code":{
+                        "type": "string"
+                      },
+                      "pe_sunat_retention_percent": {
+                        "type": "number"
+                      },
+                      "pe_sunat_total_paid":{
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "pe_shipping": {
+                    "type": "object",
+                    "properties": {
+                      "handling_code": {
+                        "type": "string"
+                      },
+                      "special_instructions": {
+                        "type": "string"
+                      },
+                      "handling_instructions": {
+                        "type": "string"
+                      },
+                      "gross_weight_measure": {
+                        "type": "string"
+                      },
+                      "gross_weight_measure_id": {
+                        "type": "string"
+                      },
+                      "shipment_stage": {
+                        "type": "object",
+                        "properties": {
+                          "transport_mode_code": {
+                            "type": "string"
+                          },
+                          "transit_period": {
+                            "type": "string"
+                          },
+                          "driver_person": {
+                            "type": "object",
+                            "properties": {
+                              "driver_id": {
+                                "type": "string"
+                              },
+                              "first_name": {
+                                "type": "string"
+                              },
+                              "family_name": {
+                                "type": "string"
+                              },
+                              "job_title": {
+                                "type": "string"
+                              },
+                              "identity_document_reference": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "carrier_party": {
+                            "type": "string"
+                          },
+                          "party_identification": {
+                            "type": "string"
+                          },
+                          "party_legal_entity_name": {
+                            "type": "string"
+                          },
+                          "party_legal_entity_id": {
+                            "type": "string"
+                          },
+                          "agent_party_id": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "delivery": {
+                        "type": "object",
+                        "properties": {
+                          "delivery_address": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "city_subdivision_name": {
+                                "type": "string"
+                              },
+                              "city_name": {
+                                "type": "string"
+                              },
+                              "country_subentity": {
+                                "type": "string"
+                              },
+                              "district": {
+                                "type": "string"
+                              },
+                              "address_line": {
+                                "type": "string"
+                              },
+                              "country_id": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "dispatch": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "city_subdivision_name": {
+                                "type": "string"
+                              },
+                              "city_name": {
+                                "type": "string"
+                              },
+                              "country_subentity": {
+                                "type": "string"
+                              },
+                              "district": {
+                                "type": "string"
+                              },
+                              "address_line": {
+                                "type": "string"
+                              },
+                              "country_id": {
+                                "type": "string"
+                              },
+                              "dispatch_party_company_id": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "transport_handling_unit": {
+                        "type": "object",
+                        "properties": {
+                          "transport_equipment_id": {
+                            "type": "string"
+                          }
+                        }
                       }
                     }
                   }
@@ -2867,6 +3009,42 @@
                       "type": "string",
                       "format": "date",
                       "description": "It should only be entered when using a reference that is not an electronic tax document. (YYYY-MM-DD)."
+                    },
+                    "additional": {
+                      "type": "object",
+                      "properties": {
+                        "pe_retention_details": {
+                          "type": "object",
+                          "properties": {
+                            "reference_paid_amount": {
+                              "type": "number"
+                            },
+                            "reference_total_invoice_amount": {
+                              "type": "number"
+                            },
+                            "reference_paid_date": {
+                              "type": "string",
+                              "format": "date"
+                            },
+                            "reference_payment_id": {
+                              "type": "string"
+                            },
+                            "pe_reference_sunat_retention_amount": {
+                              "type": "number"
+                            },
+                            "pe_reference_sunat_retention_date": {
+                              "type": "string",
+                              "format": "date"
+                            },
+                            "calculation_rate": {
+                              "type": "number"
+                            },
+                            "currency_id": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
                     }
                   },
                   "required": ["reference_type","reference_number","reference_code","description"]
