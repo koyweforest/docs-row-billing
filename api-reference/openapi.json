@@ -2380,6 +2380,14 @@
                 "type": "string",
                 "description": "Required for invoices, credit notes, and debit notes.\nOptional for other documents.\nReceiver activity of the document receiver.\nNamed receipts should NOT include this field."
               },
+              "receiver_postalcode": {
+                "type": "string",
+                "description": "Optional postal code according to the national format."
+              },
+              "receiver_state_id": {
+                "type": "integer",
+                "description": "Refers to the recipient's state. Empty if it doesn't apply. This is a required field on some countries, check the examples for your country"
+              },
               "receiver_country_id": {
                 "type": "integer",
                 "description": "Refers to the recipient's country. If not provided, the default is the same country as the issuer. It is mainly used for export documents."
@@ -2722,7 +2730,7 @@
                       }
                     }
                   },
-                  "pe_shipping": {
+                  "pe_header": {
                     "type": "object",
                     "properties": {
                       "supplier_party_address_code": {
@@ -3124,6 +3132,10 @@
                 "type": "string",
                 "description": "Identifier for the city of the document issuer"
               },
+              "issuer_state_id": {
+                "type": "integer",
+                "description": "Refers to the issuer's state. Empty if it doesn't apply. This is a required field on some countries, check the examples for your country"
+              },
               "issuer_country_id": {
                 "type": "string",
                 "description": "Identifier for the country of the document issuer"
@@ -3135,6 +3147,10 @@
               "issuer_activity": {
                 "type": "string",
                 "description": "Represents the activity or business operation of the document issuer"
+              },
+              "issuer_postalcode": {
+                "type": "string",
+                "description": "Optional postal code according to the national format."
               },
               "receiver_tax_id_code": {
                 "type": "string",
@@ -3160,6 +3176,10 @@
                 "type": "string",
                 "description": "The city of the document receiver"
               },
+              "receiver_state_id": {
+                "type": "integer",
+                "description": "Refers to the recipient's state. Empty if it doesn't apply. This is a required field on some countries, check the examples for your country"
+              },
               "receiver_country_id": {
                 "type": "string",
                 "description": "Country ID according to ID table"
@@ -3171,6 +3191,10 @@
               "receiver_activity": {
                 "type": "string",
                 "description": "The activity of the document receiver"
+              },
+              "receiver_postalcode": {
+                "type": "string",
+                "description": "Optional postal code according to the national format."
               },
               "payment_conditions": {
                 "type": "string",
