@@ -3,7 +3,7 @@ title: '➕ Create new documents'
 description: ''
 ---
 
-## Invoice
+## Invoice (Factura electrónica)
 In order to create a new chilean invoice, you need to use the /documents endpoint with the proper parameters.
 
 * Endpoint: https://api-billing.koywe.com/V1/documents
@@ -47,7 +47,7 @@ In order to create a new chilean invoice, you need to use the /documents endpoin
     {
       "quantity": 1,
       "sku": "aa111",
-      "line_description": "Prueba ROW",
+      "line_description": "Prueba Koywe",
       "unit_measure": "UN",
       "unit_price": 1500,
       "long_description": "Esta es una linea de prueba",
@@ -71,6 +71,79 @@ In order to create a new chilean invoice, you need to use the /documents endpoin
   }
 }
 ```
+
+## Receipt (Boleta electrónica)
+The receiver parameters are optional for electronic receipt. You can include them to create a nominative receipt or not
+include them to generate a regular (non-nominative) receipt.
+
+* Endpoint: https://api-billing.koywe.com/V1/documents
+* Method: POST
+* Required headers:
+  * Content-Type: application/json
+  * Authorization: Bearer \<token\>
+  * Accept: \*/\*
+
+```json
+{
+  "header": {
+    "account_id": 141,
+    "document_type_id": "37",
+
+    "received_issued_flag": 1,
+    "issue_date": "2025-01-07",
+    "issuer_tax_id_code": "76399932-7",
+    "issuer_tax_id_type": "CL-RUT",
+    "issuer_legal_name": "<string>",
+    "issuer_address": "<string>",
+    "issuer_district": "<string>",
+    "issuer_city": "<string>",
+    "issuer_country_id": "253",
+    "issuer_phone": "<string>",
+    "issuer_activity": "<string>",
+    "receiver_tax_id_code": "76399932-7",
+    "receiver_tax_id_type": "CL-RUT",
+    "receiver_legal_name": "ESCUELA KEMPER URGATE",
+    "receiver_address": "<string>",
+    "receiver_district": "<string>",
+    "receiver_city": "<string>",
+    "receiver_country_id": "253",
+    "receiver_phone": "<string>",
+    "receiver_activity": "<string>",
+    "payment_conditions": "0",
+    "currency_id": 39
+
+  },
+  "details": [
+    {
+      "quantity": 1,
+      "sku": "aa111",
+      "line_description": "Prueba Koywe",
+      "unit_measure": "UN",
+      "unit_price": 1500,
+      "long_description": "Esta es una linea de prueba",
+      "modifier_amount": -100,
+      "total_taxes": 266,
+      "modifier_percentage": 0,
+      "total_amount_line": 1666,
+      "taxes": [
+        {
+          "tax_type_id": "387",
+          "tax_percentage": 19,
+          "tax_amount": 266
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "net_amount": 1400,
+    "taxes_amount": 266,
+    "total_amount": 1666
+  }
+}
+```
+
+
+
 
 <CardGroup cols={1}>
     <Card

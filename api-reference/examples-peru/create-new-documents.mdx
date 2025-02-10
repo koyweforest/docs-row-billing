@@ -31,6 +31,7 @@ In order to create a new peruvian invoice, you need to use the /documents endpoi
       "issuer_country_id":"83",
       "issuer_phone":"<string>",
       "issuer_activity":"<string>",
+	  "issuer_postalcode":"12345456",
       "receiver_tax_id_code":"20473731828",
       "receiver_tax_id_type":"PE-RUC",
       "receiver_legal_name":"ESCUELA KEMPER URGATES",
@@ -41,21 +42,20 @@ In order to create a new peruvian invoice, you need to use the /documents endpoi
       "receiver_country_id":"83",
       "receiver_phone":"<string>",
       "receiver_activity":"<string>",
+	  "receiver_postalcode":"12343456",
       "payment_conditions":"0",
       "currency_id":7,
       "additional":{
          "pe_header":{
             "signature_id":"ASDFG",
-            "operation_type":"0101",
-            "issuer_postalcode":"12345456",
-            "receiver_postalcode":"12343456"
+            "operation_type":"0101"
          }
       }
    },
    "details":[
       {
          "quantity":1,
-         "line_description":"Prueba ROW",
+         "line_description":"Prueba Koywe",
          "unit_measure":"NIU",
          "unit_price":1000,
          "long_description":"Test descripcion",
@@ -109,6 +109,7 @@ In order to create a new peruvian receipt, you need to use the /documents endpoi
       "issuer_country_id":"80",
       "issuer_phone":"<string>",
       "issuer_activity":"<string>",
+	  "issuer_postalcode":"12345456",
       "receiver_tax_id_code":"20473731828",
       "receiver_tax_id_type":"PE-RUC",
       "receiver_legal_name":"ESCUELA KEMPER URGATES",
@@ -119,21 +120,20 @@ In order to create a new peruvian receipt, you need to use the /documents endpoi
       "receiver_country_id":"80",
       "receiver_phone":"<string>",
       "receiver_activity":"<string>",
+	  "receiver_postalcode":"12343456",
       "payment_conditions":"0",
       "currency_id":7,
       "additional":{
          "pe_header":{
             "signature_id":"ASDFG",
-            "operation_type":"0101",
-            "issuer_postalcode":"12345456",
-            "receiver_postalcode":"12343456"
+            "operation_type":"0101"
          }
       }
    },
    "details":[
       {
          "quantity":1,
-         "line_description":"Prueba ROW",
+         "line_description":"Prueba Koywe",
          "unit_measure":"NIU",
          "unit_price":1000,
          "long_description":"Test descripcion",
@@ -189,6 +189,7 @@ add a reference field
       "issuer_country_id": "80",
       "issuer_phone": "<string>",
       "issuer_activity": "<string>",
+	  "issuer_postalcode":"12345456",
       "receiver_tax_id_code": "20473731828",
       "receiver_tax_id_type": "PE-RUC",
       "receiver_legal_name": "ESCUELA KEMPER URGATES",
@@ -199,21 +200,20 @@ add a reference field
       "receiver_country_id": "80",
       "receiver_phone": "<string>",
       "receiver_activity": "<string>",
+	  "receiver_postalcode":"12343456",
       "payment_conditions": "0",
       "currency_id": 7,
 	  "additional":{
          "pe_header":{
             "signature_id":"ASDFG",
-            "operation_type":"0101",
-            "issuer_postalcode":"12345456",
-            "receiver_postalcode":"12343456"
+            "operation_type":"0101"
          }
       }
    },
    "details": [
       {
          "quantity": 1,
-         "line_description": "Prueba ROW",
+         "line_description": "Prueba Koywe",
          "unit_measure": "NIU",
          "unit_price": 1000,
          "long_description": "Test descripcion",
@@ -277,6 +277,7 @@ add a reference field
       "issuer_country_id":"80",
       "issuer_phone":"<string>",
       "issuer_activity":"<string>",
+	  "issuer_postalcode":"12345456",
       "receiver_tax_id_code":"20473731828",
       "receiver_tax_id_type":"PE-RUC",
       "receiver_legal_name":"ESCUELA KEMPER URGATES",
@@ -287,21 +288,20 @@ add a reference field
       "receiver_country_id":"80",
       "receiver_phone":"<string>",
       "receiver_activity":"<string>",
+	  "receiver_postalcode":"12343456",
       "payment_conditions":"0",
       "currency_id":7,
       "additional":{
          "pe_header":{
             "signature_id":"ASDFG",
-            "operation_type":"0101",
-            "issuer_postalcode":"12345456",
-            "receiver_postalcode":"12343456"
+            "operation_type":"0101"
          }
       }
    },
    "details":[
       {
          "quantity":1,
-         "line_description":"Prueba ROW",
+         "line_description":"Prueba Koywe",
          "unit_measure":"NIU",
          "unit_price":1000,
          "long_description":"Test descripcion",
@@ -365,6 +365,7 @@ add the additional shipping fields
       "issuer_country_id":"83",
       "issuer_phone":"<string>",
       "issuer_activity":"<string>",
+	  "issuer_postalcode":"12345456",
       "receiver_tax_id_code":"20473731828",
       "receiver_tax_id_type":"PE-RUC",
       "receiver_legal_name":"ESCUELA KEMPER URGATES",
@@ -375,14 +376,13 @@ add the additional shipping fields
       "receiver_country_id":"80",
       "receiver_phone":"<string>",
       "receiver_activity":"<string>",
+	  "receiver_postalcode":"12343456",
       "payment_conditions":"0",
       "currency_id":7,
       "additional":{
          "pe_header":{
             "signature_id":"ASDFG",
-            "operation_type":"0101",
-            "issuer_postalcode":"12345456",
-            "receiver_postalcode":"12343456"
+            "operation_type":"0101"
          },
          "pe_shipping":{
             "handling_code":"01",
@@ -437,7 +437,7 @@ add the additional shipping fields
    "details":[
       {
          "quantity":1,
-         "line_description":"Prueba ROW",
+         "line_description":"Prueba Koywe",
          "unit_measure":"NIU",
          "unit_price":1000,
          "long_description":"Test descripcion",
@@ -501,7 +501,7 @@ add the retention fields
       "issuer_country_id":"80",
       "issuer_phone":"<string>",
       "issuer_activity":"<string>",
-      "issuer_postalcode":"12345456",
+	  "issuer_postalcode":"12345456",
       "receiver_tax_id_code":"20473731828",
       "receiver_tax_id_type":"PE-RUC",
       "receiver_legal_name":"ESCUELA KEMPER URGATES",
@@ -512,8 +512,8 @@ add the retention fields
       "receiver_country_id":"80",
       "receiver_phone":"<string>",
       "receiver_activity":"<string>",
-      "receiver_postalcode":"12343456",
       "receiver_email":"rockman-jjlb@hotmail.com",
+	  "receiver_postalcode":"12343456",
       "payment_conditions":"0",
       "currency_id":7,
       "additional":{
@@ -531,7 +531,7 @@ add the retention fields
    "details":[
       {
          "quantity":1,
-         "line_description":"Prueba ROW",
+         "line_description":"Prueba Koywe",
          "unit_measure":"NIU",
          "unit_price":1000,
          "long_description":"Test descripcion",

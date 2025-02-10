@@ -671,12 +671,12 @@
         ]
       }
     },
-    "/digital_certificate/{certificate_id}": {
+    "/digital_certificate_issuance/{certificate_issuance_id}": {
       "get": {
         "summary": "Get a specific digital certificate link",
         "parameters": [
           {
-            "name": "certificate_id",
+            "name": "certificate_issuance_id",
             "in": "path",
             "required": true,
             "schema": {
@@ -691,7 +691,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Digital_certificateResponseGet"
+                  "$ref": "#/components/schemas/Digital_certificate_issuanceResponseGet"
                 }
               }
             }
@@ -720,7 +720,7 @@
         ]
       }
     },
-    "/digital_certificate": {
+    "/digital_certificate_issuance": {
       "post": {
         "summary": "Create a new digital certificate link",
         "requestBody": {
@@ -728,7 +728,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Digital_certificatePost"
+                "$ref": "#/components/schemas/Digital_certificate_issuancePost"
               }
             }
           }
@@ -739,7 +739,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Digital_certificateResponse"
+                  "$ref": "#/components/schemas/Digital_certificate_issuanceResponse"
                 }
               }
             }
@@ -2313,7 +2313,7 @@
               },
               "gross_values": {
                 "type": "integer",
-                "description": "This field is only valid for electronic receipts (document_type_id = 39, Chile) and allows the values to be entered as gross amounts (including VAT) for the line items, with the total being directly calculated as the multiplication of the item prices by the quantities. The total calculated in this way will be slightly different from the one obtained by rounding the net amounts and calculating VAT on the net total. The amounts will be adjusted and saved as net values in Row, but respecting the rounding applied to the gross amounts.",
+                "description": "This field is only valid for electronic receipts (document_type_id = 39, Chile) and allows the values to be entered as gross amounts (including VAT) for the line items, with the total being directly calculated as the multiplication of the item prices by the quantities. The total calculated in this way will be slightly different from the one obtained by rounding the net amounts and calculating VAT on the net total. The amounts will be adjusted and saved as net values in Koywe, but respecting the rounding applied to the gross amounts.",
                 "example": "1"
               },
               "rounding_type": {
@@ -2323,12 +2323,12 @@
               },
               "company_web": {
                 "type": "string",
-                "description": "You can enter a website URL, which will replace the one registered in the ROW account data and will be reflected in the automatic email sent to the recipient. It must start with http:// or https://.",
+                "description": "You can enter a website URL, which will replace the one registered in the Koywe account data and will be reflected in the automatic email sent to the recipient. It must start with http:// or https://.",
                 "example": "https://www.company.com/"
               },
               "company_email": {
                 "type": "string",
-                "description": "You can enter an email, which will replace the one registered in the Row account data and will be reflected in the automatic email sent to the document recipient.",
+                "description": "You can enter an email, which will replace the one registered in the Koywe account data and will be reflected in the automatic email sent to the document recipient.",
                 "example": "email@email.com"
               }
             }
@@ -2402,7 +2402,7 @@
               },
               "seller_id": {
                 "type": "integer",
-                "description": "User ID (ROW) that will be assigned as the seller associated with the document."
+                "description": "User ID (Koywe) that will be assigned as the seller associated with the document."
               },
               "currency_id": {
                 "type": "integer",
@@ -2434,7 +2434,7 @@
               },
               "branch_office_code": {
                 "type": "string",
-                "description": "This field should only be completed for companies that use branches.\nTo issue from the head office, this field should NOT be entered.\nThe code entered must correspond to the 'internal code' entered in ROW."
+                "description": "This field should only be completed for companies that use branches.\nTo issue from the head office, this field should NOT be entered.\nThe code entered must correspond to the 'internal code' entered in Koywe."
               },
               "observations": {
                 "type": "string",
@@ -2442,7 +2442,7 @@
               },
               "deployment_observations": {
                 "type": "integer",
-                "description": "0 = do not include remark in XML or PDF\n1 = include remark in XML and PDF\n2 = include remark in PDF and do NOT include in XML\n3 = include remark in XML and do NOT include in PDF\nIn all cases, regardless of its display, the remark will be saved in ROW and will be visible in the document details on facto.cl.\nIf this option is not entered, the default value is considered to be 1, which will display the remark in the XML and PDF."
+                "description": "0 = do not include remark in XML or PDF\n1 = include remark in XML and PDF\n2 = include remark in PDF and do NOT include in XML\n3 = include remark in XML and do NOT include in PDF\nIn all cases, regardless of its display, the remark will be saved in Koywe and will be visible in the document details on facto.cl.\nIf this option is not entered, the default value is considered to be 1, which will display the remark in the XML and PDF."
               },
               "port_disembarkation": {
                 "type": "string",
@@ -3208,7 +3208,7 @@
           }
         }
       },
-      "Digital_certificatePost": {
+      "Digital_certificate_issuancePost": {
         "type": "object",
         "properties": {
           "certificate_duration": {
@@ -3225,7 +3225,7 @@
           "parent_account_id"
         ]
       },
-      "Digital_certificateResponse": {
+      "Digital_certificate_issuanceResponse": {
         "type": "object",
         "properties": {
           "message": {
@@ -3233,7 +3233,7 @@
             "description": "Digital certificate link successfully generated.",
             "example": "Digital certificate link successfully generated"
           },
-          "certificate_id": {
+          "certificate_issuance_id": {
             "type": "string",
             "description": "ID of the digital certificate link.",
             "example": "7y5wvL7tZ3aGEMnxeSF1"
@@ -3609,10 +3609,10 @@
             }
           }
         },
-      "Digital_certificateResponseGet": {
+      "Digital_certificate_issuanceResponseGet": {
         "type": "object",
         "properties": {
-          "certificate_id": {
+          "certificate_issuance_id": {
             "type": "string",
             "description": "ID of the digital certificate link.",
             "example": "7y5wvL7tZ3aGEMnxeSF1"
