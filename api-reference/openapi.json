@@ -2989,9 +2989,13 @@
             "items": {
               "type": "object",
               "properties": {
+                  "document_type_id": {
+                    "type": "integer",
+                    "description": "Document type of the referenced document."
+                  },
                     "reference_type": {
                       "type": "integer",
-                      "description": "Chile: \n33 = Factura electrónica\n34 = Factura exenta electrónica\n39 = Boleta electrónica\n41 = Boleta exenta electrónica\nOtros documentos que no son documentos\ntributarios electrónicos: (debe usarse código\nreferencia = 5)\n801 = Orden de compra\n802 = Nota de pedido\n803 = Contrato\n804 = Resolución\n805 = Proceso ChileCompra\n806 = Ficha ChileCompra\n807 = DUS\n808 = B/L (Conocimiento de embarque)\n809 = AWB (Air Will Bill)\n810 = MIC/DTA\n811 = Carta de Porte\n812 = Resolución del SNA donde califica\nServicios de Exportación\n813 = Pasaporte\n814 = Certificado de Depósito Bolsa Prod.\nChile.\n815 = Vale de Prenda Bolsa Prod."
+                      "description": "Chile: Otros documentos que no son documentos\ntributarios electrónicos: (debe usarse código\nreferencia = 5)\n801 = Orden de compra\n802 = Nota de pedido\n803 = Contrato\n804 = Resolución\n805 = Proceso ChileCompra\n806 = Ficha ChileCompra\n807 = DUS\n808 = B/L (Conocimiento de embarque)\n809 = AWB (Air Will Bill)\n810 = MIC/DTA\n811 = Carta de Porte\n812 = Resolución del SNA donde califica\nServicios de Exportación\n813 = Pasaporte\n814 = Certificado de Depósito Bolsa Prod.\nChile.\n815 = Vale de Prenda Bolsa Prod."
                     },
                     "reference_number": {
                       "type": "string",
@@ -3047,7 +3051,7 @@
                       }
                     }
                   },
-                  "required": ["reference_type","reference_number","reference_code","description"]
+                  "required": ["reference_number","reference_code","description"]
 
             }
           },
