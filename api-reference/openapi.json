@@ -932,6 +932,34 @@
                         }
                       }
                     }
+                  },
+                  "inventories": {
+                    "type": "object",
+                    "properties": {
+                      "total_available": {
+                        "type": "number"
+                      },
+                      "total_reserved": {
+                        "type": "number"
+                      },
+                      "details": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "product_location_id": {
+                              "type": "string"
+                            },
+                            "available_quantity": {
+                              "type": "number"
+                            },
+                            "reserved_quantity": {
+                              "type": "number"
+                            }
+                          }
+                        }
+                      }
+                    }
                   }
                 },
                 "required": ["name", "status", "product_category_id", "cost", "price"]
@@ -1140,6 +1168,34 @@
                                 "tax_type_id": { "type": "string" },
                                 "tax_percentage": { "type": "number" },
                                 "tax_amount": { "type": "number" }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "inventories": {
+                      "type": "object",
+                      "properties": {
+                        "total_available": {
+                          "type": "number"
+                        },
+                        "total_reserved": {
+                          "type": "number"
+                        },
+                        "details": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "product_location_id": {
+                                "type": "string"
+                              },
+                              "available_quantity": {
+                                "type": "number"
+                              },
+                              "reserved_quantity": {
+                                "type": "number"
                               }
                             }
                           }
