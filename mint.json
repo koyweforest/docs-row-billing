@@ -74,7 +74,7 @@
           ]
         },
         {
-          "group": "\uD83D\uDCDC Digital certificate",
+          "group": "\uD83D\uDCDC Digital certificate Issuance",
           "pages": [
             "api-reference/endpoint/create-a-new-digital-certificate-link",
             "api-reference/endpoint/get-a-specific-digital-certificate-link"
