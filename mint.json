@@ -148,6 +148,17 @@
       ]
     },
     {
+      "group": "Webhooks",
+      "pages": [
+        {
+          "group": "\uD83D\uDD11 Account Certification Update",
+          "pages": [
+            "api-reference/webhook/account-certification-update"
+          ]
+        }
+      ]
+    },
+    {
       "group": "Examples",
       "pages": [
         {

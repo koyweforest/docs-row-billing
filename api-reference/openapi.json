@@ -914,11 +914,11 @@
                       "type": "object",
                       "properties": {
                         "price_list_id": { "type": "integer" },
-                        "unit_price": { "type": "number" },
+                        "unit_net": { "type": "number" },
                         "unit_tax": { "type": "number" },
                         "unit_total": { "type": "number" },
                         "currency_id": { "type": "integer" },
-                        "comission_amount": { "type": "number" },
+                        "sales_commission_percentage": { "type": "number" },
                         "taxes": {
                           "type": "array",
                           "items": {
@@ -969,7 +969,14 @@
         },
         "responses": {
           "201": {
-            "description": "Product created successfully."
+            "description": "Product created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
           }
         }
       },
@@ -1122,87 +1129,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "product_id": { "type": "integer" },
-                    "name": { "type": "string" },
-                    "invoicing_details": { "type": "string" },
-                    "additional_details": { "type": "string" },
-                    "model": { "type": "string" },
-                    "brand": { "type": "string" },
-                    "status": { "type": "integer" },
-                    "sku": { "type": "string" },
-                    "barcode": { "type": "string" },
-                    "measure_unit": { "type": "string" },
-                    "type": { "type": "integer" },
-                    "embedded_quantity_barcode": { "type": "integer" },
-                    "embedded_quantity_barcode_decimals": { "type": "integer" },
-                    "additional_data_1": { "type": "string" },
-                    "additional_data_2": { "type": "string" },
-                    "additional_data_3": { "type": "string" },
-                    "favorite": { "type": "integer" },
-                    "product_category_id": { "type": "integer" },
-                    "cost": {
-                      "type": "object",
-                      "properties": {
-                        "currency_id": { "type": "integer" },
-                        "value": { "type": "number" }
-                      }
-                    },
-                    "price": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "price_list_id": { "type": "integer" },
-                          "unit_price": { "type": "number" },
-                          "unit_tax": { "type": "number" },
-                          "unit_total": { "type": "number" },
-                          "currency_id": { "type": "integer" },
-                          "comission_amount": { "type": "number" },
-                          "taxes": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "tax_type_id": { "type": "string" },
-                                "tax_percentage": { "type": "number" },
-                                "tax_amount": { "type": "number" }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "inventories": {
-                      "type": "object",
-                      "properties": {
-                        "total_available": {
-                          "type": "number"
-                        },
-                        "total_reserved": {
-                          "type": "number"
-                        },
-                        "details": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "product_location_id": {
-                                "type": "string"
-                              },
-                              "available_quantity": {
-                                "type": "number"
-                              },
-                              "reserved_quantity": {
-                                "type": "number"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/Product"
                 }
               }
             }
@@ -1245,7 +1172,9 @@
             "description": "Product updated successfully",
             "content": {
               "application/json": {
-
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
               }
             }
           },
@@ -1847,6 +1776,44 @@
         "responses": {
           "204": {
             "description": "Products category deleted successfully."
+          }
+        }
+      }
+    }
+  },
+  "webhooks": {
+    "account-certification-update": {
+      "post": {
+        "summary": "Ejemplo de Webhook",
+        "description": "Este webhook se activa cuando ocurre un evento específico.",
+        "requestBody": {
+          "description": "Datos enviados al webhook",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "evento": {
+                    "type": "string",
+                    "example": "usuario.creado"
+                  },
+                  "datos": {
+                    "type": "object",
+                    "additionalProperties": true
+                  }
+                },
+                "required": [
+                  "evento",
+                  "datos"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Webhook procesado correctamente"
           }
         }
       }
@@ -3706,6 +3673,11 @@
             "type": "string",
             "description": "Product name"
           },
+          "invoicing_details": { "type": "string",
+            "description": "Optional. Extra information to be included in the long_description of invoices"},
+          "additional_details": { "type": "string",
+            "description": "Optional. Additional information to be used internally"
+          },
           "model": {
             "type": "string",
             "description": "Optional. Product model"
@@ -3722,22 +3694,16 @@
             "type": "string",
             "description": "Internal code that identifies a product or service. If not entered, an automatic number will be assigned"
           },
-          "type": {
-            "type": "integer",
-            "description": "1 = physical product, 2 = service"
-          },
-          "invoicing_long_description": {
-            "type": "string",
-            "description": "Optional. Extra information to be included in the long_description of invoices"
-          },
-          "internal_description": {
-            "type": "string",
-            "description": "Optional. Additional information to be used internally"
-          },
           "barcode": {
             "type": "string",
             "description": "Optional. Barcode that is printed on the product box, usually generated by the supplier"
           },
+          "measure_unit": { "type": "string" },
+          "type": {
+            "type": "integer",
+            "description": "1 = physical product, 2 = service"
+          },
+
           "measuring_unit": {
             "type": "string",
             "description": "Optional. The unit this product is measured in. Example: Kilograms, days, Pounds, etc."
@@ -3759,15 +3725,15 @@
                   "type": "string",
                   "description": "Reference to a price list"
                 },
-                "price_net": {
+                "unit_net": {
                   "type": "number",
                   "description": "Price net of taxes"
                 },
-                "price_taxes": {
+                "unit_taxes": {
                   "type": "number",
                   "description": "Total taxes applicable to the price"
                 },
-                "price_total": {
+                "unit_total": {
                   "type": "number",
                   "description": "Total price"
                 },
@@ -3775,7 +3741,7 @@
                   "type": "string",
                   "description": "Currency ID according to currency table"
                 },
-                "sales_comission_percentage": {
+                "sales_commission_percentage": {
                   "type": "number",
                   "description": "Sales commission percentage"
                 },
@@ -3801,6 +3767,34 @@
                 }
               },
               "required": ["price_list_id", "currency_id"]
+            }
+          },
+          "inventories": {
+            "type": "object",
+            "properties": {
+              "total_available": {
+                "type": "number"
+              },
+              "total_reserved": {
+                "type": "number"
+              },
+              "details": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "product_location_id": {
+                      "type": "string"
+                    },
+                    "available_quantity": {
+                      "type": "number"
+                    },
+                    "reserved_quantity": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
             }
           }
         },
