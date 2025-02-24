@@ -151,7 +151,7 @@
       "group": "Webhooks",
       "pages": [
         {
-          "group": "\uD83D\uDD11 Account Certification Update",
+          "group": "\uD83C\uDFE2 Account",
           "pages": [
             "api-reference/webhook/account-certification-update"
           ]
