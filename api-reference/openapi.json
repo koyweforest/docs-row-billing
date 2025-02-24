@@ -1781,44 +1781,6 @@
       }
     }
   },
-  "webhooks": {
-    "account-certification-update": {
-      "post": {
-        "summary": "Ejemplo de Webhook",
-        "description": "Este webhook se activa cuando ocurre un evento específico.",
-        "requestBody": {
-          "description": "Datos enviados al webhook",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "evento": {
-                    "type": "string",
-                    "example": "usuario.creado"
-                  },
-                  "datos": {
-                    "type": "object",
-                    "additionalProperties": true
-                  }
-                },
-                "required": [
-                  "evento",
-                  "datos"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Webhook procesado correctamente"
-          }
-        }
-      }
-    }
-  },
 "components": {
     "securitySchemes": {
       "bearerAuth": {
