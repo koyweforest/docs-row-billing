@@ -718,9 +718,142 @@
             "bearerAuth": []
           }
         ]
+      },
+      "delete": {
+        "summary": "Delete a specific digital certificate link",
+        "parameters": [
+          {
+            "name": "certificate_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Certificate ID of the created link"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Certificate succesfully deleted"
+          },
+          "400": {
+            "description": "Bad request - invalid input or validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "invalid input or validation error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/digital_certificates": {
+      "get": {
+        "summary": "Get a paginated list of certificates",
+
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_links": {
+                      "type": "object",
+                      "properties": {
+                        "self": {
+                          "type": "string"
+                        },
+                        "first": {
+                          "type": "string"
+                        },
+                        "last": {
+                          "type": "string"
+                        },
+                        "next": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "digital_certificates": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "account_id": {
+                            "type": "string"
+                          },
+                          "certificate_id": {
+                            "type": "string"
+                          },
+                          "certificate_valid_from": {
+                            "type": "string",
+                            "format": "date"
+                          },
+                          "certificate_valid_to": {
+                            "type": "string",
+                            "format": "date"
+                          },
+                          "certificate_name_internal": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "page_count": {
+                      "type": "number"
+                    },
+                    "page_size": {
+                      "type": "number"
+                    },
+                    "total_items": {
+                      "type": "number"
+                    },
+                    "page": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid input or validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "invalid input or validation error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
       "post": {
         "summary": "Create a new digital certificate",
         "requestBody": {
@@ -3295,7 +3428,62 @@
                     "description": "Required for Chile and Mexico. The certificate password"
                   }
                 }
-             }
+             },
+              "account_config": {
+                "type": "object",
+                "properties": {
+                  "rounding_format": {
+                    "type": "number",
+                    "description": "You can select what rounding method to use for totals. 0 = net rounding, 1 = gross rounding",
+                    "default": 0
+                  },
+                  "time_zone":  {
+                    "type": "number",
+                    "description": "Time zone to use for your account. Example: UTC-3",
+                    "default": "UTC+0"
+                  },
+                  "allow_issuance_based_on_stock": {
+                    "type": "number",
+                    "description": "Configuration related to available stock restrictions. 0 = allow invoicing if the stock is available in the sum of all your warehouses. 1 = allow invoicing even if you don't have enough inventory. 2 = only allow invoicing if the stock is available in the selected warehouse",
+                    "default": "0"
+                  },
+                  "show_document_time": {
+                    "type": "number",
+                    "description": "Include the issuance time on the document PDF. 0 = Don't include. 1 = Include",
+                    "default": "0"
+                  },
+                  "adjust_draft_date": {
+                    "type": "number",
+                    "description": "When you issue a draft, update the document date to the current date before issuing. 0 = Don't update. 1 = Update to current date",
+                    "default": 0
+                  },
+                  "sum_up_detail_lines": {
+                    "type": "number",
+                    "description": "If two or more lines make reference to the same product with same price, combine them into one line adding up the quantity. 0 = Don't combine. 1 = Combine",
+                    "default": 0
+                  },
+                  "order_of_added_products": {
+                    "type": "number",
+                    "description": "Order of products in PDF. 0 = Same as JSON. 1 = Last product first",
+                    "default": 0
+                  },
+                  "display_tax_receipt": {
+                    "type": "number",
+                    "description": "Convert additional taxes on receipts. 0 = Keep same gross and increase net and VAT. 1 = Don't include additional tax on receipts. 2 = Include additional tax on receipts.",
+                    "default": 0
+                  },
+                  "stock_reservation_for_quotation": {
+                    "type": "number",
+                    "description": "Quotes cause inventory to become reserved to avoid duplicated sales. 0 = Don't reserve. 1 = Reserve quoted inventory",
+                    "default": 0
+                  },
+                  "cost_greater_than_the_price": {
+                    "type": "number",
+                    "description": "Prevents a product from being sold at a price below its costs. 0 = Allow any price. 1 = Don't allow prices below cost",
+                    "default": 0
+                  }
+                }
+              }
             },
             "required": [
               "country_id",
@@ -3329,37 +3517,74 @@
       "Digital_certificatesPost": {
         "type": "object",
         "properties": {
-          "certificate_duration": {
+          "account_id": {
             "type": "integer",
-            "description": "Duration year of the digital certificate \\\n1 = 1 year\\\n2 = 2 years\\\n3 = 3 years"
+            "description": "ID of the associated account."
           },
-          "parent_account_id": {
-            "type": "integer",
-            "description": "ID of the parent account that is creating the digital certificate link."
+          "certificate_file": {
+            "type": "string",
+            "description": "Base64 encoded PFX file of certificate (Chile)"
+          },
+          "certificate_key": {
+            "type": "string",
+            "description": "Base64 encoded KEY file of certificate (Mexico)"
+          },
+          "certificate_cer": {
+            "type": "string",
+            "description": "Base64 encoded CER file of certificate (Mexico)"
+          },
+          "certificate_password": {
+            "type": "string",
+            "description": "Digital certificate password"
           }
         },
         "required": [
-          "certificate_duration",
-          "parent_account_id"
+          "account_id",
+          "certificate_password"
         ]
       },
       "Digital_certificatesResponse": {
         "type": "object",
         "properties": {
-          "message": {
+          "account_id": {
             "type": "string",
-            "description": "Digital certificate link successfully generated.",
-            "example": "Digital certificate link successfully generated"
+            "description": "ID of the account associate to the digital certificate",
+            "example": "7y5wvL7tZ3aGEMnxeSF1"
           },
-          "certificate_issuance_id": {
+          "certificate_id": {
             "type": "string",
             "description": "ID of the digital certificate link.",
             "example": "7y5wvL7tZ3aGEMnxeSF1"
           },
-          "certificate_generation_link": {
+          "certificate_valid_from": {
             "type": "string",
-            "description": "Link to generate the digital certificate.",
-            "example": "https://certificado.facto.cl/certificado/registro/7y5wvL7tZ3aGEMnxeSF1"
+            "description": "The certificate is valid from this date",
+            "example": "2025-02-18 15:00:00"
+          },
+          "certificate_valid_to": {
+            "type": "string",
+            "description": "The certificate is valid until this date",
+            "example": "2026-02-18 15:00:00"
+          },
+          "certificate_name_internal": {
+            "type": "string",
+            "description": "This is an internal name to be used to identify the certificate",
+            "example": "legal representative certificate"
+          },
+          "certificate_name": {
+            "type": "string",
+            "description": "This is the person name stored on the certificate",
+            "example": "JUAN GOMEZ"
+          },
+          "certificate_tax_id_type": {
+            "type": "string",
+            "description": "The type of tax id that is represented by this digital certificate",
+            "example": "CL-RUT"
+          },
+          "certificate_tax_id_code": {
+            "type": "string",
+            "description": "The tax id code represented by this digital certificate",
+            "example": "12345678-5"
           }
         }
       },
