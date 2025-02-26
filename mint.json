@@ -190,6 +190,7 @@
             "api-reference/examples-colombia/sandbox-environment-credentials",
             "api-reference/examples-colombia/create-a-new-account",
             "api-reference/examples-colombia/create-new-documents",
+            "api-reference/examples-colombia/invoicing-lifecycle",
             "api-reference/examples-colombia/deleting-a-document-draft",
             "api-reference/examples-colombia/table-of-codes"
           ]
@@ -201,6 +202,7 @@
             "api-reference/examples-mexico/sandbox-environment-credentials",
             "api-reference/examples-mexico/create-a-new-account",
             "api-reference/examples-mexico/create-new-documents",
+            "api-reference/examples-mexico/invoicing-lifecycle",
             "api-reference/examples-mexico/create-a-new-payment",
             "api-reference/examples-mexico/cancelling-an-invoice",
             "api-reference/examples-mexico/deleting-a-document-draft",
@@ -214,6 +216,7 @@
             "api-reference/examples-peru/sandbox-environment-credentials",
             "api-reference/examples-peru/create-a-new-account",
             "api-reference/examples-peru/create-new-documents",
+            "api-reference/examples-peru/invoicing-lifecycle",
             "api-reference/examples-peru/deleting-a-document-draft",
             "api-reference/examples-peru/table-of-codes"
           ]
