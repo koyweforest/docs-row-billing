@@ -1,0 +1,83 @@
+---
+title: '📄 Invoicing lifecycle'
+description: ''
+---
+
+# Invoice issuance lifecycle
+Mexico has an synchronic invoicing system, which means that documents will be checked immediately as you
+issue them.
+
+The steps are as follow, you can identify them by using GET /documents and reading the fields.
+
+# GET /documents/\{document_id\}
+
+## 1) Draft
+```json
+{
+    "header": {
+      "document_status" : 0
+    }
+}
+```
+
+## 2) Issued, pending validation
+```json
+{
+    "header": {
+    "document_status" : 1
+    }
+}
+```
+
+The document has all required fields and was issued by our system, it will be sent to the tax authority
+in a few minutes. No action is required on your side.
+
+## 3) Approved by tax authority (SAT)
+```json
+{
+    "header": {
+        "document_status" : 1,
+        "taxbureau_send_status": 1,
+        "taxbureau_send_id": "XXXXXX",
+        "taxbureau_send_date": "AAAA-MM-DD",
+        "taxbureau_validation_status": 3
+    }
+}
+```
+
+The document has completed its cycle succesfully, no further action is required.
+
+
+## 3B) Rejected by tax authority (SAT)
+```json
+{
+    "header": {
+        "document_status" : 1,
+        "taxbureau_send_status": 1,
+        "taxbureau_send_id": "XXXXXX",
+        "taxbureau_send_date": "AAAA-MM-DD",
+        "taxbureau_validation_status": 5,
+        "taxbureau_validation_comments": "XXXXX"
+    }
+}
+```
+
+The document was rejected, you will find further information on the comments field. The document must
+be issued and sent again in this case.
+
+## 4) Document cancelled
+```json
+{
+    "header": {
+        "document_status" : 2,
+        "taxbureau_send_status": 1,
+        "taxbureau_send_id": "XXXXXX",
+        "taxbureau_send_date": "AAAA-MM-DD",
+        "taxbureau_validation_status": 5,
+        "taxbureau_validation_comments": "XXXXX"
+    }
+}
+```
+
+Mexico allows you to directly cancel documents without the need for a credit note in certain cases.
+You will see document_status change to value 2. All other fields will remain the same.
