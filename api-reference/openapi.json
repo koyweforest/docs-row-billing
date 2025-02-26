@@ -671,6 +671,135 @@
         ]
       }
     },
+    "/digital_certificates/{certificate_id}": {
+      "get": {
+        "summary": "Get a specific digital certificate link",
+        "parameters": [
+          {
+            "name": "certificate_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Certificate ID of the created link"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Digital_certificatesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid input or validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "invalid input or validation error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/digital_certificates": {
+      "post": {
+        "summary": "Create a new digital certificate",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Digital_certificatesPost"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Digital certificate link successfully generated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Digital_certificatesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid input or validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "invalid input or validation error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid token or missing authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Invalid or expired token"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error - unexpected error occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/digital_certificate_issuance/{certificate_issuance_id}": {
       "get": {
         "summary": "Get a specific digital certificate link",
@@ -3194,6 +3323,43 @@
             "type": "string",
             "description": "Returns the ID of the created account.",
             "example": "638"
+          }
+        }
+      },
+      "Digital_certificatesPost": {
+        "type": "object",
+        "properties": {
+          "certificate_duration": {
+            "type": "integer",
+            "description": "Duration year of the digital certificate \\\n1 = 1 year\\\n2 = 2 years\\\n3 = 3 years"
+          },
+          "parent_account_id": {
+            "type": "integer",
+            "description": "ID of the parent account that is creating the digital certificate link."
+          }
+        },
+        "required": [
+          "certificate_duration",
+          "parent_account_id"
+        ]
+      },
+      "Digital_certificatesResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Digital certificate link successfully generated.",
+            "example": "Digital certificate link successfully generated"
+          },
+          "certificate_issuance_id": {
+            "type": "string",
+            "description": "ID of the digital certificate link.",
+            "example": "7y5wvL7tZ3aGEMnxeSF1"
+          },
+          "certificate_generation_link": {
+            "type": "string",
+            "description": "Link to generate the digital certificate.",
+            "example": "https://certificado.facto.cl/certificado/registro/7y5wvL7tZ3aGEMnxeSF1"
           }
         }
       },

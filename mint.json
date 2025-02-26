@@ -74,6 +74,15 @@
           ]
         },
         {
+          "group": "\uD83D\uDCDC Digital certificates",
+          "pages": [
+            "api-reference/endpoint/create-a-new-digital-certificate",
+            "api-reference/endpoint/get-a-paginated-list-of-digital-certificates",
+            "api-reference/endpoint/get-a-specific-digital-certificate",
+            "api-reference/endpoint/delete-a-specific-digital-certificate"
+          ]
+        },
+        {
           "group": "\uD83D\uDCDC Digital certificate Issuance",
           "pages": [
             "api-reference/endpoint/create-a-new-digital-certificate-link",
@@ -168,6 +177,7 @@
             "api-reference/examples-chile/sandbox-environment-credentials",
             "api-reference/examples-chile/create-a-new-account",
             "api-reference/examples-chile/create-new-documents",
+            "api-reference/examples-chile/invoicing-lifecycle",
             "api-reference/examples-chile/deleting-a-document-draft",
             "api-reference/examples-chile/create-a-new-digital-certificate-link",
             "api-reference/examples-chile/table-of-codes"
