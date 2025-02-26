@@ -671,6 +671,135 @@
         ]
       }
     },
+    "/digital_certificates/{certificate_id}": {
+      "get": {
+        "summary": "Get a specific digital certificate link",
+        "parameters": [
+          {
+            "name": "certificate_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Certificate ID of the created link"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Digital_certificatesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid input or validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "invalid input or validation error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/digital_certificates": {
+      "post": {
+        "summary": "Create a new digital certificate",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Digital_certificatesPost"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Digital certificate link successfully generated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Digital_certificatesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid input or validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "invalid input or validation error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid token or missing authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Invalid or expired token"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error - unexpected error occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/digital_certificate_issuance/{certificate_issuance_id}": {
       "get": {
         "summary": "Get a specific digital certificate link",
@@ -914,11 +1043,11 @@
                       "type": "object",
                       "properties": {
                         "price_list_id": { "type": "integer" },
-                        "unit_price": { "type": "number" },
+                        "unit_net": { "type": "number" },
                         "unit_tax": { "type": "number" },
                         "unit_total": { "type": "number" },
                         "currency_id": { "type": "integer" },
-                        "comission_amount": { "type": "number" },
+                        "sales_commission_percentage": { "type": "number" },
                         "taxes": {
                           "type": "array",
                           "items": {
@@ -969,7 +1098,14 @@
         },
         "responses": {
           "201": {
-            "description": "Product created successfully."
+            "description": "Product created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
+              }
+            }
           }
         }
       },
@@ -1122,87 +1258,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "product_id": { "type": "integer" },
-                    "name": { "type": "string" },
-                    "invoicing_details": { "type": "string" },
-                    "additional_details": { "type": "string" },
-                    "model": { "type": "string" },
-                    "brand": { "type": "string" },
-                    "status": { "type": "integer" },
-                    "sku": { "type": "string" },
-                    "barcode": { "type": "string" },
-                    "measure_unit": { "type": "string" },
-                    "type": { "type": "integer" },
-                    "embedded_quantity_barcode": { "type": "integer" },
-                    "embedded_quantity_barcode_decimals": { "type": "integer" },
-                    "additional_data_1": { "type": "string" },
-                    "additional_data_2": { "type": "string" },
-                    "additional_data_3": { "type": "string" },
-                    "favorite": { "type": "integer" },
-                    "product_category_id": { "type": "integer" },
-                    "cost": {
-                      "type": "object",
-                      "properties": {
-                        "currency_id": { "type": "integer" },
-                        "value": { "type": "number" }
-                      }
-                    },
-                    "price": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "price_list_id": { "type": "integer" },
-                          "unit_price": { "type": "number" },
-                          "unit_tax": { "type": "number" },
-                          "unit_total": { "type": "number" },
-                          "currency_id": { "type": "integer" },
-                          "comission_amount": { "type": "number" },
-                          "taxes": {
-                            "type": "array",
-                            "items": {
-                              "type": "object",
-                              "properties": {
-                                "tax_type_id": { "type": "string" },
-                                "tax_percentage": { "type": "number" },
-                                "tax_amount": { "type": "number" }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "inventories": {
-                      "type": "object",
-                      "properties": {
-                        "total_available": {
-                          "type": "number"
-                        },
-                        "total_reserved": {
-                          "type": "number"
-                        },
-                        "details": {
-                          "type": "array",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "product_location_id": {
-                                "type": "string"
-                              },
-                              "available_quantity": {
-                                "type": "number"
-                              },
-                              "reserved_quantity": {
-                                "type": "number"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/components/schemas/Product"
                 }
               }
             }
@@ -1245,7 +1301,9 @@
             "description": "Product updated successfully",
             "content": {
               "application/json": {
-
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                }
               }
             }
           },
@@ -3268,6 +3326,43 @@
           }
         }
       },
+      "Digital_certificatesPost": {
+        "type": "object",
+        "properties": {
+          "certificate_duration": {
+            "type": "integer",
+            "description": "Duration year of the digital certificate \\\n1 = 1 year\\\n2 = 2 years\\\n3 = 3 years"
+          },
+          "parent_account_id": {
+            "type": "integer",
+            "description": "ID of the parent account that is creating the digital certificate link."
+          }
+        },
+        "required": [
+          "certificate_duration",
+          "parent_account_id"
+        ]
+      },
+      "Digital_certificatesResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Digital certificate link successfully generated.",
+            "example": "Digital certificate link successfully generated"
+          },
+          "certificate_issuance_id": {
+            "type": "string",
+            "description": "ID of the digital certificate link.",
+            "example": "7y5wvL7tZ3aGEMnxeSF1"
+          },
+          "certificate_generation_link": {
+            "type": "string",
+            "description": "Link to generate the digital certificate.",
+            "example": "https://certificado.facto.cl/certificado/registro/7y5wvL7tZ3aGEMnxeSF1"
+          }
+        }
+      },
       "Digital_certificate_issuancePost": {
         "type": "object",
         "properties": {
@@ -3706,6 +3801,11 @@
             "type": "string",
             "description": "Product name"
           },
+          "invoicing_details": { "type": "string",
+            "description": "Optional. Extra information to be included in the long_description of invoices"},
+          "additional_details": { "type": "string",
+            "description": "Optional. Additional information to be used internally"
+          },
           "model": {
             "type": "string",
             "description": "Optional. Product model"
@@ -3722,22 +3822,16 @@
             "type": "string",
             "description": "Internal code that identifies a product or service. If not entered, an automatic number will be assigned"
           },
-          "type": {
-            "type": "integer",
-            "description": "1 = physical product, 2 = service"
-          },
-          "invoicing_long_description": {
-            "type": "string",
-            "description": "Optional. Extra information to be included in the long_description of invoices"
-          },
-          "internal_description": {
-            "type": "string",
-            "description": "Optional. Additional information to be used internally"
-          },
           "barcode": {
             "type": "string",
             "description": "Optional. Barcode that is printed on the product box, usually generated by the supplier"
           },
+          "measure_unit": { "type": "string" },
+          "type": {
+            "type": "integer",
+            "description": "1 = physical product, 2 = service"
+          },
+
           "measuring_unit": {
             "type": "string",
             "description": "Optional. The unit this product is measured in. Example: Kilograms, days, Pounds, etc."
@@ -3759,15 +3853,15 @@
                   "type": "string",
                   "description": "Reference to a price list"
                 },
-                "price_net": {
+                "unit_net": {
                   "type": "number",
                   "description": "Price net of taxes"
                 },
-                "price_taxes": {
+                "unit_taxes": {
                   "type": "number",
                   "description": "Total taxes applicable to the price"
                 },
-                "price_total": {
+                "unit_total": {
                   "type": "number",
                   "description": "Total price"
                 },
@@ -3775,7 +3869,7 @@
                   "type": "string",
                   "description": "Currency ID according to currency table"
                 },
-                "sales_comission_percentage": {
+                "sales_commission_percentage": {
                   "type": "number",
                   "description": "Sales commission percentage"
                 },
@@ -3801,6 +3895,34 @@
                 }
               },
               "required": ["price_list_id", "currency_id"]
+            }
+          },
+          "inventories": {
+            "type": "object",
+            "properties": {
+              "total_available": {
+                "type": "number"
+              },
+              "total_reserved": {
+                "type": "number"
+              },
+              "details": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "product_location_id": {
+                      "type": "string"
+                    },
+                    "available_quantity": {
+                      "type": "number"
+                    },
+                    "reserved_quantity": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
             }
           }
         },

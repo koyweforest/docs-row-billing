@@ -1,0 +1,123 @@
+---
+title: '🗎 Invoicing lifecycle'
+description: ''
+---
+
+# Invoice issuance lifecycle
+Chile has an asynchronic invoicing system, which means that you can issue a document and send it to the
+customer while the tax authority is still processing it. The effect is a higher speed and avaibility but
+you must properly handle document rejections by fixing and resending rejected documents.
+
+The steps are as follow, you can identify them by using GET /documents and reading the fields.
+
+# GET /documents/\{document_id\}
+
+## 1) Draft
+```json
+{
+    "header": {
+      "document_status" : 0
+    }
+}
+```
+
+## 2) Issued
+```json
+{
+    "header": {
+    "document_status" : 1
+    }
+}
+```
+
+The document has all required fields and was issued by our system, it will be sent to the tax authority
+in a few minutes. No action is required on your side.
+
+## 3) Succesfully Sent to tax authority (SII) and being processed
+```json
+{
+    "header": {
+        "document_status" : 1,
+        "taxbureau_send_status": 1,
+        "taxbureau_send_id": "XXXXXX",
+        "taxbureau_send_date": "AAAA-MM-DD"
+  }
+}
+```
+
+The document was automatically sent to the tax authority. No action is required on your side.
+
+## 3B) Sending rejected by tax authority (SII)
+```json
+{
+    "header": {
+        "document_status" : 1,
+        "taxbureau_send_status": "XXX"
+    }
+}
+```
+
+Send status codes 1XX are temporal errors where we will wait 5 minutes and retry.  No action is required on your side
+in this case.
+
+Send status codes 2XX are permanent errors where no further retries will be made. The document must
+be issued and sent again in this case.
+
+201 = Digital certificate not allowed to send documents
+
+202, 203, 206 = Incorrect data sent
+
+204 = Digital certificate revoked
+
+205 = Company not allowed to send documents
+
+
+## 4) Approved by tax authority
+```json
+{
+    "header": {
+        "document_status" : 1,
+        "taxbureau_send_status": 1,
+        "taxbureau_send_id": "XXXXXX",
+        "taxbureau_send_date": "AAAA-MM-DD",
+        "taxbureau_validation_status": 3
+    }
+}
+```
+
+The document has completed its cycle succesfully, no further action is required.
+
+## 4B) Approved by tax authority with observations
+```json
+{
+    "header": {
+        "document_status" : 1,
+        "taxbureau_send_status": 1,
+        "taxbureau_send_id": "XXXXXX",
+        "taxbureau_send_date": "AAAA-MM-DD",
+        "taxbureau_validation_status": 4,
+        "taxbureau_validation_comments": "XXXXXX"
+    }
+}
+```
+
+The document was accepted but there were some minor issues. You will find additional information on the
+comments field. No further actions is required.
+
+
+## 4C) Rejected by tax authority
+```json
+{
+    "header": {
+        "document_status" : 1,
+        "taxbureau_send_status": 1,
+        "taxbureau_send_id": "XXXXXX",
+        "taxbureau_send_date": "AAAA-MM-DD",
+        "taxbureau_validation_status": 5,
+        "taxbureau_validation_comments": "XXXXX"
+    }
+}
+```
+
+The document was rejected, you will find further information on the comments field. The document must
+be issued and sent again in this case.
