@@ -3,26 +3,21 @@ title: '📨 Account certification update'
 description: ''
 ---
 
-# prueba
-gfdgfgd
+This webhook notification will be triggered for subscriptions under event ACCOUNT.CERTIFICATIONUPDATE.
+It is used to get notifications on new accounts that are being enabled and/or certified through the tax authority.
+Please check each country examples to learn more about statuses ID.
+
+# Webhook notification format
+
+We will notify you to the subscribed URL every time the account certification status changes. We will include the new status an the date when it changed.
+The observations field might include additional information in the cases when issues have arised that might require your attention.
+Please check certification statuses for each country in order to understand how to proceed.
 
 ```json
 {
-    "country_id": 253,
-    "contact_name": "Bruce Wayne",
-    "contact_phone": "+56984105522",
-    "admin_email": "bruce@company.com",
-    "admin_password": "nuevaclave",
-    "registration_legal_name_company": "My company name",
-    "registration_tax_id_code": "16.497.607-6",
-    "registration_tax_id_type": "CL-RUT",
-    "registration_company_size": "MICRO",
-    "registration_company_industry": "1",
-    "registration_type_use": 1,
-    "registration_terms_of_use": 1,
-    "registration_additional_data": {
-        "certificate_file": "MIIZhQIBAzCCGU8GCSqGSIb3DQE...",
-        "certificate_password": "7d800b3dc1eb5fcd6"
-    }
+    "account_id": 330,
+    "certification_status": 80 ,
+    "observations": "<string>",
+    "date": "2025-02-24T19:41:17.822558Z"
 }
 ```
