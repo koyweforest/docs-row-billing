@@ -74,6 +74,15 @@
           ]
         },
         {
+          "group": "\uD83D\uDCDC Digital certificates",
+          "pages": [
+            "api-reference/endpoint/create-a-new-digital-certificate",
+            "api-reference/endpoint/get-a-paginated-list-of-digital-certificates",
+            "api-reference/endpoint/get-a-specific-digital-certificate",
+            "api-reference/endpoint/delete-a-specific-digital-certificate"
+          ]
+        },
+        {
           "group": "\uD83D\uDCDC Digital certificate Issuance",
           "pages": [
             "api-reference/endpoint/create-a-new-digital-certificate-link",
@@ -168,6 +177,7 @@
             "api-reference/examples-chile/sandbox-environment-credentials",
             "api-reference/examples-chile/create-a-new-account",
             "api-reference/examples-chile/create-new-documents",
+            "api-reference/examples-chile/invoicing-lifecycle",
             "api-reference/examples-chile/deleting-a-document-draft",
             "api-reference/examples-chile/create-a-new-digital-certificate-link",
             "api-reference/examples-chile/table-of-codes"
@@ -180,6 +190,7 @@
             "api-reference/examples-colombia/sandbox-environment-credentials",
             "api-reference/examples-colombia/create-a-new-account",
             "api-reference/examples-colombia/create-new-documents",
+            "api-reference/examples-colombia/invoicing-lifecycle",
             "api-reference/examples-colombia/deleting-a-document-draft",
             "api-reference/examples-colombia/table-of-codes"
           ]
@@ -191,6 +202,7 @@
             "api-reference/examples-mexico/sandbox-environment-credentials",
             "api-reference/examples-mexico/create-a-new-account",
             "api-reference/examples-mexico/create-new-documents",
+            "api-reference/examples-mexico/invoicing-lifecycle",
             "api-reference/examples-mexico/create-a-new-payment",
             "api-reference/examples-mexico/cancelling-an-invoice",
             "api-reference/examples-mexico/deleting-a-document-draft",
@@ -204,6 +216,7 @@
             "api-reference/examples-peru/sandbox-environment-credentials",
             "api-reference/examples-peru/create-a-new-account",
             "api-reference/examples-peru/create-new-documents",
+            "api-reference/examples-peru/invoicing-lifecycle",
             "api-reference/examples-peru/deleting-a-document-draft",
             "api-reference/examples-peru/table-of-codes"
           ]
@@ -221,5 +234,6 @@
   "footerSocials": {
     "x": "https://x.com/koywe_latam",
     "linkedin": "https://www.linkedin.com/company/koywe/"
+
   }
 }
