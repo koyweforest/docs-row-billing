@@ -2,22 +2,24 @@
 title: '📨 Account certification update'
 description: ''
 ---
+## Description of the event ACCOUNT.CERTIFICATIONUPDATE
 
 This webhook notification will be triggered for subscriptions under event ACCOUNT.CERTIFICATIONUPDATE.
 It is used to get notifications on new accounts that are being enabled and/or certified through the tax authority.
 Please check each country examples to learn more about statuses ID.
 
-# Webhook notification format
+## Webhook notification format
 
 We will notify you to the subscribed URL every time the account certification status changes. We will include the new status an the date when it changed.
 The observations field might include additional information in the cases when issues have arised that might require your attention.
 Please check certification statuses for each country in order to understand how to proceed.
 
+- event_id: **ACCOUNT_CERTIFICATIONUPDATE**
 ```json
 {
     "account_id": 330,
     "certification_status": 80 ,
     "observations": "<string>",
-    "date": "2025-02-24T19:41:17.822558Z"
+    "date": "2025-02-24 19:41:17"
 }
 ```

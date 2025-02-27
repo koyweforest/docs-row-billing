@@ -153,6 +153,15 @@
             "api-reference/endpoint/update-a-specific-product-price-list",
             "api-reference/endpoint/delete-a-specific-product-price-list"
           ]
+        },
+        {
+          "group": "\uD83D\uDCE7 Webhook subscriptions",
+          "pages": [
+            "api-reference/endpoint/create-a-new-webhook-subscription",
+            "api-reference/endpoint/get-a-paginated-list-of-webhook-subscriptions",
+            "api-reference/endpoint/get-a-specific-webhook-subscription",
+            "api-reference/endpoint/delete-a-specific-webhook-subscription"
+          ]
         }
       ]
     },

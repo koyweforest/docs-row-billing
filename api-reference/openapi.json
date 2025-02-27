@@ -2041,6 +2041,295 @@
           }
         }
       }
+    },
+    "/webhook_subscriptions/{webhook_subscription_id}": {
+      "get": {
+        "summary": "Get a specific webhook subscription",
+        "parameters": [
+          {
+            "name": "webhook_subscription_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Webhook subscription ID of the created subscription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Webhook_subscriptionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid input or validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "invalid input or validation error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete a specific webhook subscription",
+        "parameters": [
+          {
+            "name": "webhook_subscription_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Webhook subscription ID of the created subscription"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Subscription succesfully deleted"
+          },
+          "400": {
+            "description": "Bad request - invalid input or validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "invalid input or validation error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/webhook_subscriptions": {
+      "get": {
+        "summary": "Get a paginated list of webhook subscriptions",
+
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_links": {
+                      "type": "object",
+                      "properties": {
+                        "self": {
+                          "type": "string"
+                        },
+                        "first": {
+                          "type": "string"
+                        },
+                        "last": {
+                          "type": "string"
+                        },
+                        "next": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "webhook_subscriptions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "account_id": {
+                            "type": "string",
+                            "description": "ID of the associated account"
+                          },
+                          "webhook_subscription_id": {
+                            "type": "string",
+                            "description": "ID of the webhook subscription"
+                          },
+                          "event_id": {
+                            "type": "string",
+                            "format": "date",
+                            "description": "ID of the subscribed event.",
+                            "example": "ACCOUNT.CERTIFICATIONUPATE"
+                          },
+                          "subscription_creation_date": {
+                            "type": "string",
+                            "format": "date"
+                          },
+                          "subscription_output_type": {
+                            "type": "string",
+                            "description": "Output to be used for the webhook",
+                            "example": "APINOTIFICATION"
+                          },
+                          "callback_url": {
+                            "type": "string",
+                            "description": "URL to be notified of the events",
+                            "example": "https://company.com/script.php"
+                          },
+                          "callback_username": {
+                            "type": "string",
+                            "description": "Username to be sent to the callback URL"
+                          },
+                          "callback_password": {
+                            "type": "string",
+                            "description": "Password to be sent to the callback URL"
+                          },
+                          "user_id": {
+                            "type": "string",
+                            "description": "User ID associated to the subscription. Not used on API"
+                          },
+                          "product_location_id": {
+                            "type": "string",
+                            "description": "Location associated to the products events"
+                          }
+                        }
+                      }
+                    },
+                    "page_count": {
+                      "type": "number"
+                    },
+                    "page_size": {
+                      "type": "number"
+                    },
+                    "total_items": {
+                      "type": "number"
+                    },
+                    "page": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid input or validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "invalid input or validation error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create a new digital certificate",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Webhook_subscriptionPost"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Digital certificate link successfully generated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Webhook_subscriptionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid input or validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "invalid input or validation error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid token or missing authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Invalid or expired token"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error - unexpected error occurred",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
     }
   },
 "components": {
@@ -3585,6 +3874,88 @@
             "type": "string",
             "description": "The tax id code represented by this digital certificate",
             "example": "12345678-5"
+          }
+        }
+      },
+      "Webhook_subscriptionPost": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string",
+            "description": "Account ID of the associated account"
+          },
+          "callback_url": {
+            "type": "string",
+            "description": "URL to be notified",
+            "example": "https://server.com/myscript.php"
+          },
+          "callback_username": {
+            "type": "string",
+            "description": "Username to be sent to the notification URL"
+          },
+          "callback_password": {
+            "type": "string",
+            "description": "Password to be sent to the notification URL"
+          },
+          "event_id": {
+            "type": "string",
+            "description": "ID of the event that you are subscribing to. Valid values: ACCOUNT.CERTIFICATIONUPDATE"
+          }
+        }
+      },
+      "Webhook_subscriptionResponse": {
+        "type": "object",
+        "properties": {
+          "account_id": {
+            "type": "string",
+            "description": "Account ID of the associated account"
+          },
+          "webhook_subscription_id": {
+            "type": "string",
+            "description": "ID of the webhook subscription"
+          },
+          "webhook_data": {
+            "type": "object",
+            "properties": {
+              "event_id": {
+                "type": "string",
+                "description": "Name of the event that you are subscribing to. Valid values: ACCOUNT.CERTIFICATIONUPDATE"
+              },
+              "subscription_creation_date": {
+                "type": "string",
+                "format": "date",
+                "example": "2025-02-24T19:41:17.822558Z"
+              },
+              "subscription_output_type": {
+                "type": "string",
+                "format": "Format to be used to notify. Valid values: APINOTIFICATION",
+                "example": "APINOTIFICATION"
+              },
+              "callback_url": {
+                "type": "string",
+                "description": "URL to be notified",
+                "example": "https://server.com/myscript.php"
+              },
+              "callback_username": {
+                "type": "string",
+                "description": "Username to be sent to the notification URL"
+              },
+              "callback_password": {
+                "type": "string",
+                "description": "Password to be sent to the notification URL"
+              },
+
+              "user_id": {
+                "type": "string",
+                "description": "User ID that created the subscription from the platform. Does not apply to API",
+                "example": "2"
+              },
+              "product_location_id": {
+                "type": "string",
+                "description": "Warehouse ID for events associatedd with inventory",
+                "example": "44"
+              }
+            }
           }
         }
       },
