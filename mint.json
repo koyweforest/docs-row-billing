@@ -45,7 +45,8 @@
       "group": "Quickstart",
       "pages": [
         "introduction",
-        "api-reference/introduction"
+        "api-reference/introduction",
+        "api-reference/sandbox-environment-credentials"
       ]
     },
     {
