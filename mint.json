@@ -172,7 +172,8 @@
         {
           "group": "\uD83C\uDFE2 Account",
           "pages": [
-            "api-reference/webhook/account-certification-update"
+            "api-reference/webhook/account-certification-update",
+            "api-reference/webhook/document-status-received-update"
           ]
         }
       ]
