@@ -2,9 +2,9 @@
 title: '📨 Document status received'
 description: ''
 ---
-## Description of the event DOCUMENTRECEIVED.STATUSUPDATE
+## Description of the event INBOXDOCUMENT.STATUSUPDATE
 
-This webhook notification will be triggered for subscriptions under the event DOCUMENTRECEIVED.STATUSUPDATE.
+This webhook notification will be triggered for subscriptions under the event INBOXDOCUMENT.STATUSUPDATE.
 It is used to receive notifications about documents that have been received and their status updates.
 
 ## Webhook notification format
@@ -12,7 +12,7 @@ It is used to receive notifications about documents that have been received and 
 We will notify you at the subscribed URL every time the received document status changes. We will include the new status and the date when it changed.
 Please check document statuses for each country to understand how to proceed.
 
-- event_id: **DOCUMENTRECEIVED.STATUSUPDATE**
+- event_id: **INBOXDOCUMENT.STATUSUPDATE**
 ```json
 {
   "inbox_document_id": 123,
