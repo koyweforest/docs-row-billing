@@ -7,6 +7,13 @@ description: ''
 This webhook notification will be triggered for subscriptions under the event DOCUMENTRECEIVED.STATUSUPDATE.
 It is used to receive notifications about documents that have been received and their status updates.
 
+This webhook is related to the /inbox_documents endpoint
+
+## Event triggers
+
+- A document was received from a supplier
+- A received document changed its approval status
+
 ## Webhook notification format
 
 We will notify you at the subscribed URL every time the received document status changes. We will include the new status and the date when it changed.

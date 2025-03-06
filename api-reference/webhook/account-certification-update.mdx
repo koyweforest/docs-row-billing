@@ -8,6 +8,13 @@ This webhook notification will be triggered for subscriptions under event ACCOUN
 It is used to get notifications on new accounts that are being enabled and/or certified through the tax authority.
 Please check each country examples to learn more about statuses ID.
 
+This webhook is related to the /accounts
+
+## Event triggers
+
+- Each time an account is created with a new certification status
+- Each time an account change its certification status
+
 ## Webhook notification format
 
 We will notify you to the subscribed URL every time the account certification status changes. We will include the new status an the date when it changed.

@@ -558,7 +558,7 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "data": {
+                    "inbox_documents": {
                       "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/InboxDocument"
@@ -655,7 +655,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Document"
+                  "$ref": "#/components/schemas/InboxDocument"
                 }
               }
             }

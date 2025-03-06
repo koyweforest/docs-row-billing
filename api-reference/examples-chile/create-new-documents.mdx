@@ -219,6 +219,256 @@ you have no nominative information, you can use the generic tax id 66666666-6.
 }
 ```
 
+## Bill of Lading (Guía de despacho)
+Bills of lading are used in addition to invoices when moving inventory within the same company warehouses,
+or to/from a customer address.
+
+* Endpoint: https://api-billing.koywe.com/V1/documents
+* Method: POST
+* Required headers:
+* Content-Type: application/json
+* Authorization: Bearer \<token\>
+* Accept: \*/\*
+
+```json
+{
+  "header": {
+    "account_id": 141,
+    "document_type_id": "54",
+    "received_issued_flag": 1,
+    "issue_date": "2025-03-04",
+    "receiver_tax_id_code": "76399932-7",
+    "receiver_tax_id_type": "CL-RUT",
+    "receiver_legal_name": "ESCUELA KEMPER URGATE",
+    "receiver_address": "Av providencia 1456",
+    "receiver_district": "Providencia",
+    "receiver_city": "Santiago",
+    "receiver_country_id": "253",
+    "receiver_phone": "<string>",
+    "receiver_activity": "Venta insumos",
+    "payment_conditions": "0",
+    "currency_id": 39,
+    "guide_type": 1,
+    "transfer_type": 1
+
+  },
+  "details": [
+    {
+      "quantity": 1,
+      "sku": "aa111",
+      "line_description": "Prueba Koywe",
+      "unit_measure": "UN",
+      "unit_price": 1500,
+      "long_description": "Esta es una linea de prueba",
+      "modifier_amount": -100,
+      "total_taxes": 266,
+      "modifier_percentage": 0,
+      "total_amount_line": 1624,
+      "taxes": [
+        {
+          "tax_type_id": "387",
+          "tax_percentage": 19,
+          "tax_amount": 266
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "net_amount": 1400,
+    "taxes_amount": 266,
+    "total_amount": 1666
+  }
+}
+```
+
+
+## Exports Invoice (Factura de exportación)
+When you sell to other countries, you are required in Chile to issue a export invoice. The format is similar
+but it also allows
+
+* Endpoint: https://api-billing.koywe.com/V1/documents
+* Method: POST
+* Required headers:
+* Content-Type: application/json
+* Authorization: Bearer \<token\>
+* Accept: \*/\*
+
+```json
+{
+  "header": {
+    "account_id": 141,
+    "document_type_id": "46",
+    "received_issued_flag": 1,
+    "issue_date": "2025-03-04",
+    "receiver_tax_id_code": "222333444",
+    "receiver_tax_id_type": "MX-RFC",
+    "receiver_legal_name": "ESCUELA KEMPER URGATE",
+    "receiver_address": "Av providencia 1456",
+    "receiver_district": "Providencia",
+    "receiver_city": "Santiago",
+    "receiver_country_id": "80",
+    "receiver_phone": "<string>",
+    "receiver_activity": "Venta insumos",
+    "payment_conditions": "0",
+    "exchange_rate_value": 934.58,
+    "currency_id": 5,
+    "sale_modality": 1,
+    "sale_clause": 1
+  },
+  "details": [
+    {
+      "quantity": 1,
+      "sku": "aa111",
+      "line_description": "Prueba Koywe",
+      "unit_measure": "UN",
+      "unit_price": 1500,
+      "long_description": "Esta es una linea de prueba",
+      "modifier_amount": -100,
+      "total_taxes": 0,
+      "modifier_percentage": 0,
+      "total_amount_line": 1400,
+      "taxes": [
+      ]
+    }
+  ],
+  "totals": {
+    "net_amount": 1400,
+    "taxes_amount": 0,
+    "total_amount": 1400
+  }
+}
+```
+
+## Exports Credit note (Nota de crédito de exportación)
+If you want to cancel an export invoice, you need to use this special kind of document.
+
+* Endpoint: https://api-billing.koywe.com/V1/documents
+* Method: POST
+* Required headers:
+* Content-Type: application/json
+* Authorization: Bearer \<token\>
+* Accept: \*/\*
+
+```json
+{
+  "header": {
+    "account_id": 141,
+    "document_type_id": "48",
+    "received_issued_flag": 1,
+    "issue_date": "2025-03-04",
+    "receiver_tax_id_code": "222333444",
+    "receiver_tax_id_type": "MX-RFC",
+    "receiver_legal_name": "ESCUELA KEMPER URGATE",
+    "receiver_address": "Av providencia 1456",
+    "receiver_district": "Providencia",
+    "receiver_city": "Santiago",
+    "receiver_country_id": "80",
+    "receiver_phone": "<string>",
+    "receiver_activity": "Venta insumos",
+    "payment_conditions": "0",
+    "exchange_rate_value": 934.58,
+    "currency_id": 5,
+    "sale_modality": 1,
+    "sale_clause": 1
+  },
+  "details": [
+    {
+      "quantity": 1,
+      "sku": "aa111",
+      "line_description": "Prueba Koywe",
+      "unit_measure": "UN",
+      "unit_price": 1500,
+      "long_description": "Esta es una linea de prueba",
+      "modifier_amount": -100,
+      "total_taxes": 0,
+      "modifier_percentage": 0,
+      "total_amount_line": 1400,
+      "taxes": [
+      ]
+    }
+  ],
+  "references": [
+    {
+        "document_type_id": 46,
+        "reference_number": "139",
+        "reference_code": 1,
+        "description": "Anulacion",
+        "reference_date": "2025-03-04"
+    }
+  ],
+  "totals": {
+    "net_amount": 1400,
+    "taxes_amount": 0,
+    "total_amount": 1400
+  }
+}
+```
+
+## Exports Debit note (Nota de débito de exportación)
+If you want to cancel an export invoice, you need to use this special kind of document.
+
+* Endpoint: https://api-billing.koywe.com/V1/documents
+* Method: POST
+* Required headers:
+* Content-Type: application/json
+* Authorization: Bearer \<token\>
+* Accept: \*/\*
+
+```json
+{
+  "header": {
+    "account_id": 141,
+    "document_type_id": "47",
+    "received_issued_flag": 1,
+    "issue_date": "2025-03-04",
+    "receiver_tax_id_code": "222333444",
+    "receiver_tax_id_type": "MX-RFC",
+    "receiver_legal_name": "ESCUELA KEMPER URGATE",
+    "receiver_address": "Av providencia 1456",
+    "receiver_district": "Providencia",
+    "receiver_city": "Santiago",
+    "receiver_country_id": "80",
+    "receiver_phone": "<string>",
+    "receiver_activity": "Venta insumos",
+    "payment_conditions": "0",
+    "exchange_rate_value": 934.58,
+    "currency_id": 5,
+    "sale_modality": 1,
+    "sale_clause": 1
+  },
+  "details": [
+    {
+      "quantity": 1,
+      "sku": "aa111",
+      "line_description": "Prueba Koywe",
+      "unit_measure": "UN",
+      "unit_price": 1500,
+      "long_description": "Esta es una linea de prueba",
+      "modifier_amount": -100,
+      "total_taxes": 0,
+      "modifier_percentage": 0,
+      "total_amount_line": 1400,
+      "taxes": [
+      ]
+    }
+  ],
+  "references": [
+    {
+        "document_type_id": 46,
+        "reference_number": "139",
+        "reference_code": 1,
+        "description": "csmbio vslor",
+        "reference_date": "2025-03-04"
+    }
+  ],
+  "totals": {
+    "net_amount": 1400,
+    "taxes_amount": 0,
+    "total_amount": 1400
+  }
+}
+```
+
 
 <CardGroup cols={1}>
     <Card
