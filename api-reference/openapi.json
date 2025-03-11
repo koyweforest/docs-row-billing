@@ -1358,10 +1358,16 @@
                     "properties": {
                       "product_id": { "type": "integer" },
                       "name": { "type": "string" },
+                      "model": { "type": "string" },
+                      "brand": { "type": "string" },
                       "status": { "type": "integer" },
                       "product_category_id": { "type": "integer" },
                       "type": { "type": "string" },
-                      "sku": { "type": "string" }
+                      "additional_data_1": { "type": "string" },
+                      "additional_data_2": { "type": "string" },
+                      "additional_data_3": { "type": "string" },
+                      "favorite": { "type": "string" },
+                      "sku": { "type": "string" },
                     }
                   }
                 }
