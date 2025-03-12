@@ -1,0 +1,87 @@
+---
+title: '📦 Managing products'
+description: ''
+---
+
+## Create new products
+Products can be anything you buy or sell, it could be merchandise or services. A product can have an
+available quantity on multiple warehouses and show different prices based on price lists.
+
+* Endpoint: https://api-billing.koywe.com/V1/products
+* Method: POST
+* Required headers:
+* Content-Type: application/json
+* Authorization: Bearer \<token\>
+* Accept: \*/\*
+
+```json
+{
+   "name": "papas fritas lays",
+   "invoicing_details": "",
+   "additional_details": "",
+   "model": "",
+   "brand": "",
+   "status": "1",
+   "sku": "33",
+   "measure_unit": null,
+   "type": "1",
+   "embedded_quantity_barcode": null,
+   "embedded_quantity_barcode_decimals": null,
+   "additional_data_1": "aaa",
+   "additional_data_2": "bbb",
+   "additional_data_3": "ccc",
+   "favorite": 1,
+   "product_category_id": null,
+   "cost":    {
+      "currency_id": 39,
+      "value": 2344
+   },
+   "price": [
+    {
+          "price_list_id": "1",
+          "unit_net": 1680.672269,
+          "unit_tax": 319.327731,
+          "unit_total": 2000,
+          "currency_id": "39",
+          "sales_commission_percentage": null,
+          "taxes": [
+                {
+                  "tax_type_id": "387",
+                  "tax_percentage": 19,
+                  "tax_amount": 319.327731
+                }
+
+          ]
+       }
+    ],
+   "inventories":    {
+   	"details": [
+   			{
+   				"product_location_id": 1,
+   				"available_quantity": 25
+   			}
+   	],
+      "total_available": 25,
+      "total_reserved": 0
+   }
+}
+```
+
+
+## Create new product categories
+Products can optionally belong to a category. Categories can also have a hierarchy by having a parent category.
+
+* Endpoint: https://api-billing.koywe.com/V1/product_categories
+* Method: POST
+* Required headers:
+* Content-Type: application/json
+* Authorization: Bearer \<token\>
+* Accept: \*/\*
+
+```json
+{
+	"account_id": 39,
+	"name": "categoria ejemplo API 3",
+	"parent_product_category_id": null
+}
+```

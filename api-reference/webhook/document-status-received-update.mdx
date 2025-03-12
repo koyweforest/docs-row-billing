@@ -1,0 +1,39 @@
+---
+title: '📨 Document status received'
+description: ''
+---
+## Description of the event INBOXDOCUMENT.STATUSUPDATE
+
+This webhook notification will be triggered for subscriptions under the event INBOXDOCUMENT.STATUSUPDATE.
+It is used to receive notifications about documents that have been received and their status updates.
+
+This webhook is related to the /inbox_documents endpoint
+
+## Event triggers
+
+- A document was received from a supplier
+- A received document changed its approval status
+
+## Webhook notification format
+
+We will notify you at the subscribed URL every time the received document status changes. We will include the new status and the date when it changed.
+Please check document statuses for each country to understand how to proceed.
+
+- event_id: **INBOXDOCUMENT.STATUSUPDATE**
+```json
+{
+  "inbox_document_id": 123,
+  "country": "CL",
+  "document_id": 123,
+  "account_id": 123,
+  "issuer_name": "ACME S.A.",
+  "issuer_tax_id_code": "12345678-9",
+  "document_number": 1001,
+  "document_type_id": 33,
+  "inbox_document_status": 200,
+  "receive_date": "2025-01-28T10:32:00Z",
+  "updated_at": "2025-01-28T12:15:30Z",
+  "event_type": "document_received",
+  "reception_confirmation_status": 1
+}
+```

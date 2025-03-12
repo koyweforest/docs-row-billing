@@ -558,7 +558,7 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "data": {
+                    "inbox_documents": {
                       "type": "array",
                       "items": {
                         "$ref": "#/components/schemas/InboxDocument"
@@ -655,7 +655,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Document"
+                  "$ref": "#/components/schemas/InboxDocument"
                 }
               }
             }
@@ -1358,10 +1358,16 @@
                     "properties": {
                       "product_id": { "type": "integer" },
                       "name": { "type": "string" },
+                      "model": { "type": "string" },
+                      "brand": { "type": "string" },
                       "status": { "type": "integer" },
                       "product_category_id": { "type": "integer" },
                       "type": { "type": "string" },
-                      "sku": { "type": "string" }
+                      "additional_data_1": { "type": "string" },
+                      "additional_data_2": { "type": "string" },
+                      "additional_data_3": { "type": "string" },
+                      "favorite": { "type": "string" },
+                      "sku": { "type": "string" },
                     }
                   }
                 }
@@ -4427,11 +4433,6 @@
             "type": "integer",
             "description": "1 = physical product, 2 = service"
           },
-
-          "measuring_unit": {
-            "type": "string",
-            "description": "Optional. The unit this product is measured in. Example: Kilograms, days, Pounds, etc."
-          },
           "embedded_quantity_barcode": {
             "type": "boolean",
             "description": "Optional. This field is used to identify when a product can be sold using embedded quantity barcodes. 0 = not a quantity barcode product. 1 = quantity barcode enabled. 0 by default"
@@ -4439,6 +4440,18 @@
           "embedded_quantity_barcode_decimals": {
             "type": "integer",
             "description": "Optional. Decimals associated with the quantity barcode. 0 by default"
+          },
+          "additional_data_1": {
+            "type": "string",
+            "description": "Optional. Any additional information you need regarding the product"
+          },
+          "additional_data_2": {
+            "type": "string",
+            "description": "Optional. Any additional information you need regarding the product"
+          },
+          "additional_data_3": {
+            "type": "string",
+            "description": "Optional. Any additional information you need regarding the product"
           },
           "prices": {
             "type": "array",

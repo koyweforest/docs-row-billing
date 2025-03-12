@@ -172,7 +172,8 @@
         {
           "group": "\uD83C\uDFE2 Account",
           "pages": [
-            "api-reference/webhook/account-certification-update"
+            "api-reference/webhook/account-certification-update",
+            "api-reference/webhook/document-status-received-update"
           ]
         }
       ]
@@ -189,6 +190,7 @@
             "api-reference/examples-chile/create-new-documents",
             "api-reference/examples-chile/invoicing-lifecycle",
             "api-reference/examples-chile/deleting-a-document-draft",
+            "api-reference/examples-chile/managing-products",
             "api-reference/examples-chile/create-a-new-digital-certificate-link",
             "api-reference/examples-chile/table-of-codes"
           ]
