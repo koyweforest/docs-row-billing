@@ -172,8 +172,19 @@
         {
           "group": "\uD83C\uDFE2 Account",
           "pages": [
-            "api-reference/webhook/account-certification-update",
-            "api-reference/webhook/document-status-received-update"
+            "api-reference/webhook/account-certification-update"
+          ]
+        },
+        {
+          "group": "\uD83D\uDCE9 Inbox",
+          "pages": [
+            "api-reference/webhook/inbox-status-update"
+          ]
+        },
+        {
+          "group": "\uD83D\uDCDD Documents",
+          "pages": [
+            "api-reference/webhook/document-status-update"
           ]
         }
       ]
