@@ -1175,7 +1175,7 @@
                     "items": {
                       "type": "object",
                       "properties": {
-                        "price_list_id": { "type": "integer" },
+                        "product_price_list_id": { "type": "integer" },
                         "unit_net": { "type": "number" },
                         "unit_tax": { "type": "number" },
                         "unit_total": { "type": "number" },
@@ -4458,7 +4458,7 @@
             "items": {
               "type": "object",
               "properties": {
-                "price_list_id": {
+                "product_price_list_id": {
                   "type": "string",
                   "description": "Reference to a price list"
                 },
@@ -4503,7 +4503,7 @@
                   }
                 }
               },
-              "required": ["price_list_id", "currency_id"]
+              "required": ["product_price_list_id", "currency_id"]
             }
           },
           "inventories": {
@@ -4540,7 +4540,7 @@
       "PriceList": {
         "type": "object",
         "properties": {
-          "price_list_id": {
+          "product_price_list_id": {
             "type": "string",
             "description": "Unique identifier for the price list"
           },
@@ -4549,7 +4549,7 @@
             "description": "Name of the price list, e.g., wholesale, retail"
           }
         },
-        "required": ["price_list_id", "price_list_name"]
+        "required": ["product_price_list_id", "price_list_name"]
       },
       "Transfer": {
         "type": "object",
