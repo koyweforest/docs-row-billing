@@ -1,0 +1,48 @@
+---
+title: '📨 Document status'
+description: ''
+---
+## Description of the event DOCUMENT.STATUSUPDATE
+
+This webhook notification will be triggered for subscriptions under the event DOCUMENT.STATUSUPDATE.
+It is used to receive notifications about documents that have been sent to the tax bureau and their status updates.
+
+This webhook is related to the /documents endpoint
+
+## Event triggers
+
+- Synchronous countries (issuance and sending happen at the same time)
+    - A document changed from draft to issued (this includes tax bureau sending information)
+
+- Asynchronous countries (issuance and sending happen separately)
+    - A document changed from draft to issued (no tax bureau sending information is included yet)
+    - A document already issued was sent to the tax bureau
+    - A document already sent to the tax bureau was accepted/rejected
+
+## Webhook notification format
+
+We will notify you at the subscribed URL every time there is a trigger. We will include the new status and the date when it changed.
+Please check document statuses for each country to understand how to proceed.
+
+- event_id: **DOCUMENT.STATUSUPDATE**
+```json
+{
+    "document_id": 123,
+    "account_id": 123,
+    "document_status" : 1,
+    "taxbureau_send_status": 1,
+    "taxbureau_send_id": "XXXXXX",
+    "taxbureau_send_date": "AAAA-MM-DD",
+    "taxbureau_validation_status": 5,
+    "taxbureau_validation_comments": "XXXXX"
+}
+```
+
+# Document lifecycle for each country
+
+Below you will find the lists of document statuses for each of the countries available in our API.
+
+* [Document status in Chile (asynchronous)](/api-reference/examples-chile/invoicing-lifecycle)
+* [Document status in Colombia (synchronous)](/api-reference/examples-colombia/invoicing-lifecycle)
+* [Document status in Mexico (synchronous)](/api-reference/examples-mexico/invoicing-lifecycle)
+* [Document status in Peru (synchronous)](/api-reference/examples-peru/invoicing-lifecycle)
